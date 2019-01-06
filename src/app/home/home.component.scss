@@ -1,0 +1,52 @@
+$blue: #071148;
+
+.home-page {
+  background-color: $blue;
+
+  > div {
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+      img {
+        padding: 2rem 0;
+      }
+  }
+
+  .home-tb-pad {
+    padding: 2rem 5rem;
+
+    .center-rouded {
+      .center-rouded-image-1 {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        background-image: url('https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg');
+        background-repeat: no-repeat;
+        border-radius: 50% !important;
+      }
+      .center-rouded-image-2 {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        background-image: url('https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg');
+        background-repeat: no-repeat;
+        border-radius: 50% !important;
+      }
+      .center-rouded-image-3 {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        background-image: url('https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Apartments-1-300x300.jpg');
+        background-repeat: no-repeat;
+        border-radius: 50% !important;
+      }
+
+      button {
+        margin-top: 1rem;
+      }
+    }
+
+  }
+}
