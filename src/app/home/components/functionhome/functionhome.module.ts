@@ -7,7 +7,10 @@ import { HeaderComponent } from './../header/header.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [FunctionhomeComponent, HeaderComponent],
+  declarations: [
+    FunctionhomeComponent,
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     FunctionHomeRoutingModule,

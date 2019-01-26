@@ -1,4 +1,9 @@
 $topnav-background-color: #222;
+.main-header {
+  width: 1040px;
+  margin: 0 auto;
+  background-color: $topnav-background-color;
+}
 :host {
     .navbar {
         background-color: $topnav-background-color;
@@ -21,6 +26,13 @@ $topnav-background-color: #222;
               margin-right: 25px;
             }
         }
+    }
+    .fixed-top {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
     }
     .messages {
         width: 300px;

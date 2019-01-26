@@ -5,7 +5,11 @@ import { FunctionhomeComponent } from './functionhome.component';
 const routes: Routes = [
     {
         path: '',
-        component: FunctionhomeComponent
+        component: FunctionhomeComponent,
+        children: [
+            { path: '', redirectTo: 'section', pathMatch: 'prefix' },
+            { path: 'section', loadChildren: './section/section.module#SectionModule' }
+        ]
     }
 ];
 
