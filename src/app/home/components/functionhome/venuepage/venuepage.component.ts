@@ -3,11 +3,11 @@ import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-section',
-  templateUrl: './section.component.html',
-  styleUrls: ['./section.component.scss']
+  selector: 'app-venuepage',
+  templateUrl: './venuepage.component.html',
+  styleUrls: ['./venuepage.component.scss']
 })
-export class SectionComponent implements OnInit {
+export class VenuepageComponent implements OnInit {
 
   constructor(private translate: TranslateService, public router: Router) {
 
@@ -15,10 +15,6 @@ export class SectionComponent implements OnInit {
 
   ngOnInit() {
 
-  }
-
-  gotoVenuepage() {
-    this.router.navigate(['/dashboard']);
   }
 
 }
