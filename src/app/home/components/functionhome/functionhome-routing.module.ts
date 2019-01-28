@@ -8,7 +8,8 @@ const routes: Routes = [
         component: FunctionhomeComponent,
         children: [
             { path: '', redirectTo: 'section', pathMatch: 'prefix' },
-            { path: 'section', loadChildren: './section/section.module#SectionModule' }
+            { path: 'section', loadChildren: './section/section.module#SectionModule' },
+            { path: 'venuepage', loadChildren: './venuepage/venuepage.module#VenuepageModule' }
         ]
     }
 ];

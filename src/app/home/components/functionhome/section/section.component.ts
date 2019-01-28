@@ -18,7 +18,7 @@ export class SectionComponent implements OnInit {
   }
 
   gotoVenuepage() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home/functionhalls/venuepage']);
   }
 
 }

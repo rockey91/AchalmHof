@@ -14,4 +14,17 @@
 body {
   margin: 0 auto;
   background-color: #999999;
+  
+  .section-container {
+    padding: 20px;
+    width: 1040px;
+    margin: 0 auto;
+    background-color: #fefefe;
+    min-height: 100vh;
+
+    > div {
+      padding: 0;
+    }
+  }
+
 }
