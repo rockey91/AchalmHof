@@ -14,7 +14,7 @@
 body {
   margin: 0 auto;
   background-color: #999999;
-  
+
   .section-container {
     padding: 20px;
     width: 1040px;
@@ -25,6 +25,19 @@ body {
     > div {
       padding: 0;
     }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .bordered-box {
+    border: 1px solid #222;
+    border-radius: 4px;
+  }
+
+  .margin-bottom {
+    margin-bottom: 10px;
   }
 
 }
