@@ -5,9 +5,15 @@
   }
   .venues-list {
     margin: 20px 0 0;
+    .cus-pad-right {
+      padding-right: 5px;
+    }
     img {
       cursor: pointer;
       width: 100%;
+    }
+    img.cus-height {
+      height: 400px;
     }
   }
 }
