@@ -1,10 +1,41 @@
 .section-container {
-  padding: 20px;
-  width: 1040px;
+  padding: 35px;
+  width: 100%;
   margin: 0 auto;
   background-color: #fefefe;
   min-height: 100vh;
-
+  .p {
+    margin-top:10px;
+  }
+  .h6-title {
+    border-top:double
+  }
+  .cus-h1 {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+  .enquire {
+    margin-bottom: 12px
+  }
+  .table-style {
+    display: table;
+    padding-bottom: 15px;
+  }
+  .bordered-box {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+  }
+  .venue-details {
+    background: #e9e9e9;
+    margin:20px auto;
+    padding: 10px;
+  }
+  .maps{
+    background: #e9e9e9;
+    margin:20px auto;
+    padding: 10px;
+  }
   > div {
     padding: 0;
   }
@@ -16,4 +47,21 @@
     margin: 20px 0;
   }
 
+}
+
+.modal-dialog {
+    max-width: 75% !important;
+    margin: 30px auto;
+}
+.modal-ul {
+  list-style-position: outside;
+  li {
+    font-size: 20px;
+    font-weight: 600;
+    padding:10px;
+    color:#07384B;
+  }
+}
+.no-link {
+  color:#afafaf;
 }

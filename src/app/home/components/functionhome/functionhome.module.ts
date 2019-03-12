@@ -5,11 +5,13 @@ import { FunctionHomeRoutingModule } from './functionhome-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './../header/header.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from './../footer/footer.component';
 
 @NgModule({
   declarations: [
     FunctionhomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit,OnChanges, NgModule, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-venuepage',
@@ -8,18 +9,41 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./venuepage.component.scss']
 })
 export class VenuepageComponent implements OnInit {
-
+  closeResult:any;
+  isSubmitSuccess:boolean = false;
   imageUrlArray: any = [
     'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
     'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
   ];
 
-  constructor(private translate: TranslateService, public router: Router) {
+  constructor(private translate: TranslateService, public router: Router,private modalService: NgbModal) {
 
   }
 
   ngOnInit() {
 
   }
+
+  open(content) {
+      this.modalService.open(content, {}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return  `with: ${reason}`;
+      }
+    }
+
+    submitEnquiry(modal) {
+      this.isSubmitSuccess = true;
+    }
 
 }
