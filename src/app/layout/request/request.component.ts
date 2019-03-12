@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 
 @Component({
-    selector: 'app-tables',
-    templateUrl: './tables.component.html',
-    styleUrls: ['./tables.component.scss'],
+    selector: 'app-request',
+    templateUrl: './request.component.html',
+    styleUrls: ['./request.component.scss'],
     animations: [routerTransition()]
 })
-export class TablesComponent implements OnInit {
+export class RequestComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}

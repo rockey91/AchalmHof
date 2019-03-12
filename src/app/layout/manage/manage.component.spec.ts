@@ -1,19 +1,19 @@
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { TablesComponent } from './tables.component';
-import { TablesModule } from './tables.module';
+import { ManageComponent } from './manage.component';
+import { ManageModule } from './manage.module';
 
-describe('TablesComponent', () => {
+describe('ManageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ TablesModule, RouterTestingModule ],
+      imports: [ ManageModule, RouterTestingModule ],
     })
     .compileComponents();
   }));
 
   it('should create', () => {
-    const fixture = TestBed.createComponent(TablesComponent);
+    const fixture = TestBed.createComponent(ManageComponent);
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
