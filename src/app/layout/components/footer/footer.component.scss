@@ -1,18 +1,9 @@
 $topnav-background-color: #222;
-.main-header {
-  width: 100%;
-  margin: 0 auto;
-  background-color: $topnav-background-color;
-}
 :host {
     .navbar {
         background-color: $topnav-background-color;
         .navbar-brand {
             color: #fff;
-            img {
-              width: 149px;
-              height: 50px;
-            }
         }
         .nav-item > a {
             color: #999;
@@ -20,19 +11,6 @@ $topnav-background-color: #222;
                 color: #fff;
             }
         }
-        .ah-nav-item {
-            margin: 0 10px;
-            &:nth-child(3) {
-              margin-right: 25px;
-            }
-        }
-    }
-    .fixed-top {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1030;
     }
     .messages {
         width: 300px;

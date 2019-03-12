@@ -3,40 +3,165 @@
     <div class="col-8">
       <div class="row">
         <div class="col-12">
-          <span>
-            <strong>Venue:</strong>
+          <h1 class="cus-h1">
+            <strong> Venue 1: </strong>
             Innovative Complex, Balsamiq Street, Mumbai
-          </span>
+          </h1>
         </div>
         <div class="col-12" style="height: 350px">
           <slideshow [imageUrls]="imageUrlArray"></slideshow>
         </div>
-        <div class="col-12 bordered-box" style="height: 350px">
-          Venue specifications and other details...
+        <div class="col-12">
+          <div class="venue-details" style="height: 350px">
+            <p class="p">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate vel.
+            </p>
+            <ul>
+              <li> Overview </li>
+              <li> Facilities </li>
+              <li> Features </li>
+              <li> Technical Equipment </li>
+              <li> Event Type Allowed </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
     <div class="col-4">
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-primary full-width" type="button" name="button">Inquire</button>
-        </div>
-        <div class="col-12">
-          <div class="bordered-box" style="height: 200px">
-            A video of the video...
+          <button class="btn btn-primary full-width enquire" type="button" name="button" (click)="open(marketing)"> Inquire </button>
+
+          <ng-template #marketing let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title"> <img src="assets/images/pop-up-marketing-icon.png" width="80px" /> Venue1 : Adress / Location </h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <form novalidate #f="ngForm" (ngSubmit)="submitEnquiry(f.value)" class="tab-info tab-content">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Name  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="text" name="Name" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Event Type  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <select class="form-control" name="Event_Type">
+                            <option value=""></option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Event Date  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="date" name="Event_Date" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Number Of Guests  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="number" name="Guests" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Mobile Number  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="number" name="Guests" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Email Address  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="email" name="Name" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5">Captcha / Email Verification  <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="email" name="Name" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Subject <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <input type="text" name="Name" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-5"> Message <span class="pull-right"> : </span> </label>
+                        <div class="col-md-7">
+                          <textarea name="Message" class="form-control" rows="3" cols="80"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-md-12 align-right">
+                  <hr />
+                  <button class="btn btn-default btn-primary save pull-right" type="submit"> Save </button>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="isSubmitSuccess">
+                <div class="col-md-12 align-right" >
+                    <h6> Congratulations. Your enquiry request has submitted succesfully.You will get an Email
+                    shortly. Please note your request number 1234 for future reference </h6>
+                </div>
+              </div>
+            </form>
           </div>
+        </ng-template>
+      </div>
+      <div class="col-12 table-style">
+        <div class="bordered-box" style="height: 250px">
+          A video of the video...
         </div>
-        <div class="col-12">
-          <div class="bordered-box" style="height: 200px">
-            Maps to the location...
-          </div>
+      </div>
+      <div class="col-12 table-style">
+        <div class="bordered-box" style="height: 150px">
+          Venue address and contact <br/> details are displayed here.
         </div>
-        <div class="col-12">
-          <div class="bordered-box" style="height: 200px">
-            Feedback and FAQs
-          </div>
+      </div>
+      <div class="col-12 table-style">
+        <div class="maps" style="height:250px">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5131540.295065959!2d5.965949926802549!3d51.09674495268414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479a721ec2b1be6b%3A0x75e85d6b8e91e55b!2sGermany!5e0!3m2!1sen!2sin!4v1552396762282"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   </div>
+  <div class="col-12 table-style">
+    <div class="bordered-box" style="height: 90px">
+      Feedback and FAQs
+    </div>
+  </div>
+</div>
 </div>

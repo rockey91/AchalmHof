@@ -35,7 +35,7 @@
 // Shell div to position the modal with bottom padding
 .modal-dialog {
   position: relative;
-  width: auto;
+  width:75% !important;
   margin: $modal-dialog-margin;
   // allow clicks to pass through for custom click handling to close modal
   pointer-events: none;
@@ -147,7 +147,7 @@
 @include media-breakpoint-up(sm) {
   // Automatically set modal's width for larger viewports
   .modal-dialog {
-    max-width: $modal-md;
+    max-width: 75% !important;
     margin: $modal-dialog-margin-y-sm-up auto;
   }
 
@@ -159,10 +159,10 @@
     @include box-shadow($modal-content-box-shadow-sm-up);
   }
 
-  .modal-sm { max-width: $modal-sm; }
+  .modal-sm { max-width: 75% !important; }
 
 }
 
 @include media-breakpoint-up(lg) {
-  .modal-lg { max-width: $modal-lg; }
+  .modal-lg { max-width: 75% !important; }
 }
