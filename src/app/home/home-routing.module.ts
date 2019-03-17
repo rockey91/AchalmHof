@@ -10,10 +10,6 @@ const routes: Routes = [
     {
         path: 'functionhalls',
         loadChildren: './components/functionhome/functionhome.module#FunctionhomeModule'
-    },
-    {
-        path: 'admin',
-        loadChildren: './components/admin/admin.module#AdminModule'
     }
 ];
 

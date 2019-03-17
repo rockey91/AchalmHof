@@ -9,7 +9,8 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'section', pathMatch: 'prefix' },
             { path: 'section', loadChildren: './section/section.module#SectionModule' },
-            { path: 'venuepage', loadChildren: './venuepage/venuepage.module#VenuepageModule' }
+            { path: 'venuepage', loadChildren: './venuepage/venuepage.module#VenuepageModule' },
+            { path: 'fhadmin', loadChildren: './fhadmin/fhadmin.module#FHAdminModule' }
         ]
     }
 ];
