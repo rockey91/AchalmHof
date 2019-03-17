@@ -14,10 +14,37 @@
                     HOME
                   </a>
                 </li>
-                <li class="nav-item ah-nav-item">
+                <!-- <li class="nav-item ah-nav-item">
                   <a class="nav-link" href="/home/functionhalls/section">
                     VENUES
                   </a>
+                </li> -->
+                <li class="nav-item dropdown" ngbDropdown>
+                    <a class="nav-link" href="javascript:void(0)" [routerLink]="['/home/functionhalls/section']" ngbDropdownToggle>
+                        VENUES <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu-right messages venues" ngbDropdownMenu>
+                        <li class="media venue1">
+                            <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
+                              <div class="media-body">
+                                  <h5 class="mt-0 mb-1">
+                                    Venue 1
+                                  </h5>
+                                  <p class="last">Address / Location - 1</p>
+                              </div>
+                            </a>
+                        </li>
+                        <li class="media venue2">
+                          <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">
+                                  Venue 2
+                                </h5>
+                                <p class="last">Address / Location - 2</p>
+                            </div>
+                          </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item ah-nav-item">
                   <a class="nav-link" href="#">
