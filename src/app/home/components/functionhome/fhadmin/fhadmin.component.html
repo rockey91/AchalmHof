@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Request Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -56,6 +56,7 @@
     </div>
   </div>
 </div>
+
 
 <section>
   <ngb-tabset>
@@ -133,39 +134,270 @@
                 <div class="col col-xl-12 col-lg-12">
                     <div class="card mb-12">
                         <div class="card-header">
-                            Basic example
+                            Meetings
                         </div>
                         <div class="card-body table-responsive">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <!-- Manage Add/Edit Meeting modal -->
+                              <div class="modal fade" id="manageMeeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"> Add New Meeting </h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Name </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <input type="text"  class="form-control" name="name" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Date </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                              <input type="date"  class="form-control" name="date" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Location </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <input type="text" class="form-control" name="name" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Time </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                              <input type="date" class="form-control" name="date" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Message </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <input type="text" class="form-control" name="name" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" (click)="sendReply()" data-dismiss="modal"> Add </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#manageMeeting">
+                                Add Meeting
+                              </button>
+                            </div>
+                            <div class="col-md-12">
+                              <table class="table">
+                                  <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th> PC Name </th>
+                                      <th> Date </th>
+                                      <th> Time </th>
+                                      <th> Location </th>
+                                      <th> Message </th>
+                                      <th> Action </th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td> 10.30 AM  </td>
+                                      <td> </td>
+                                      <td>  </td>
+                                      <td>
+                                        <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
+                                      <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()">  <i class="fa fa-trash" >  </i></button></td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td> 10.30 AM  </td>
+                                      <td> </td>
+                                      <td>  </td>
+                                      <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
+
+                                      <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()">  <i class="fa fa-trash">  </i></button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td> 10.30 AM  </td>
+                                      <td> </td>
+                                      <td>  </td>
+                                      <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
+                                        <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()"> <i class="fa fa-trash">  </i></button>
+                                      </td>
+                                  </tr>
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <!-- Manage Add/Edit Meeting modal -->
+                              <div class="modal fade" id="manageEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"> Add New Event </h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Name </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <input type="text"  class="form-control" name="name" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for="">Event Date </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                              <input type="date"  class="form-control" name="date" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Event Type </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <select class="form-control" name="eventType">
+                                                 <option value="BirthDay"> Birth Day </option>
+                                                 <option value="BirthDay"> Birth Day </option>
+                                                 <option value="BirthDay"> Birth Day </option>
+
+                                               </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-6">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <label for=""> Message </label>
+                                              <span class="pull-right">:</span>
+                                            </div>
+                                            <div class="col-8">
+                                               <input type="text" class="form-control" name="name" value="">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" (click)="sendReply()" data-dismiss="modal"> Add </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#manageEvent">
+                                Add Event
+                              </button>
+                            </div>
+                            <div class="col-md-12">
+                              <table class="table">
+                                  <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th> PC Name </th>
+                                      <th> Event Type </th>
+                                      <th> Event Date </th>
+                                      <th> Message </th>
+                                      <th> Action </th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td>   </td>
+                                      <td>  </td>
+                                      <td>
+                                        <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
+                                      <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash" >  </i></button></td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td> </td>
+                                      <td>  </td>
+                                      <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
+
+                                      <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash">  </i></button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td> ABC </td>
+                                      <td> 29-Oct-2019 </td>
+                                      <td> </td>
+                                      <td>  </td>
+                                      <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
+                                        <button class="cus-btn" type="button" name="button" (click)="deleteEvent()"> <i class="fa fa-trash">  </i></button>
+                                      </td>
+                                  </tr>
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
