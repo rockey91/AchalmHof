@@ -9,11 +9,49 @@
         </button>
       </div>
       <div class="modal-body">
-        label1: {{ selectedRequest.label1 }}
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-4">
+                <label for="">Request #</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-8">
+                {{ selectedRequest.reqNo }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-4">
+                <label for="">Event Type</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-8">
+                {{ selectedRequest.eventType }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-4">
+                <label for="">Event Date</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-8">
+                {{ selectedRequest.eventDate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reply-text">
+            <textarea name="replyText" value="" placeholder="<reply message>" rows="4" cols="80" [(ngModel)]="replyText">
+            </textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="sendReply()" data-dismiss="modal">Send Reply</button>
       </div>
     </div>
   </div>
@@ -28,9 +66,9 @@
             <div class="row">
                 <div class="col col-xl-12 col-lg-12">
                     <div class="card mb-12">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             Request Details
-                        </div>
+                        </div> -->
                         <div class="card-body table-responsive">
                             <table class="table">
                                 <thead>

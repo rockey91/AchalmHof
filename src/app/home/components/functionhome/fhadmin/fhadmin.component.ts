@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FHAdminComponent implements OnInit {
 
+  replyText: string = "";
+
   constructor() { }
 
   selectedRequest: any = {};
@@ -17,10 +19,14 @@ export class FHAdminComponent implements OnInit {
 
   showMoreDetails( index ): void {
     this.selectedRequest = {
-      label1: index,
-      label2: 'value2',
-      label3: 'value3'
+      reqNo: index,
+      eventType: 'Birthday',
+      eventDate: '12-Oct-2019'
     }
+  }
+
+  sendReply() {
+    alert(this.replyText);
   }
 
 }
