@@ -26,10 +26,6 @@ export class FHAdminComponent implements OnInit {
   }
 
   deleteMeeting() {
-    var deleteMeeting = confirm("are you sure!. You want to delete this meeting info request from the calendar")
-  }
-
-  deleteMeeting() {
     var deleteEvent= confirm("are you sure!. You want to delete this event info request from the calendar")
   }
 
