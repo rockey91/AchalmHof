@@ -1,7 +1,8 @@
 import { Component, Input, OnInit,OnChanges, NgModule, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { InquireRequestsService } from '../../../../../shared';
 
 @Component({
   selector: 'app-venuepage',
@@ -16,7 +17,12 @@ export class VenuepageComponent implements OnInit {
     'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
   ];
 
-  constructor(private translate: TranslateService, public router: Router,private modalService: NgbModal) {
+  constructor(
+    private translate: TranslateService,
+    public router: Router,
+    private modalService: NgbModal,
+    private inquireRequestsService: InquireRequestsService
+  ) {
 
   }
 
@@ -43,7 +49,20 @@ export class VenuepageComponent implements OnInit {
     }
 
     submitEnquiry(modal) {
+
       this.isSubmitSuccess = true;
+
+      this.inquireRequestsService.postInquireRequest(modal)
+      .then(
+        (response) =>{
+            alert(response.message);
+        },
+        (error) => {
+            alert(error);
+            console.log(error);
+        }
+      );
+
     }
 
 }
