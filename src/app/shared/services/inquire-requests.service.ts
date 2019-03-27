@@ -29,7 +29,7 @@ export class InquireRequestsService {
     .then(response => {
       return response;
     })
-    .catch(this.handleError);
+    .catch();
 
   }
 

@@ -2,7 +2,7 @@ import { Component, Input, OnInit,OnChanges, NgModule, CUSTOM_ELEMENTS_SCHEMA, V
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { InquireRequestsService } from '../../../../../shared';
+import { InquireRequestsService } from '../../../../shared';
 
 @Component({
   selector: 'app-venuepage',
@@ -10,6 +10,7 @@ import { InquireRequestsService } from '../../../../../shared';
   styleUrls: ['./venuepage.component.scss']
 })
 export class VenuepageComponent implements OnInit {
+
   closeResult:any;
   isSubmitSuccess:boolean = false;
   imageUrlArray: any = [
@@ -55,7 +56,7 @@ export class VenuepageComponent implements OnInit {
       this.inquireRequestsService.postInquireRequest(modal)
       .then(
         (response) =>{
-            alert(response.message);
+            // alert(response.message);
         },
         (error) => {
             alert(error);

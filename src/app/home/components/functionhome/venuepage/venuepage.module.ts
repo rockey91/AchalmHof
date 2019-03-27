@@ -7,7 +7,7 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 
 import { VenuepageRoutingModule } from './venuepage-routing.module';
 import { VenuepageComponent } from './venuepage.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -17,6 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         NgbDropdownModule,
         SlideshowModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule.forRoot()
     ],
     declarations: [VenuepageComponent]
