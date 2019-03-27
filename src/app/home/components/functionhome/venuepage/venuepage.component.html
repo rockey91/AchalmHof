@@ -40,7 +40,9 @@
               </button>
             </div>
             <div class="modal-body">
-
+              <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
+                Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number 1234 for future communication reference.
+              </div>
               <form novalidate #f="ngForm" (ngSubmit)="submitEnquiry(f.value)" class="tab-info tab-content">
                 <div class="row">
                   <div class="col-md-6">
@@ -127,16 +129,11 @@
               <div class="row">
                 <div class="col-md-12 align-right">
                   <hr />
-                  <button class="btn btn-default btn-primary save pull-right" type="submit"> Save </button>
+                  <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
+                  <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
                 </div>
               </div>
 
-              <div class="row" *ngIf="isSubmitSuccess">
-                <div class="col-md-12 align-right" >
-                    <h6> Congratulations. Your enquiry request has submitted succesfully.You will get an Email
-                    shortly. Please note your request number 1234 for future reference </h6>
-                </div>
-              </div>
             </form>
           </div>
         </ng-template>
