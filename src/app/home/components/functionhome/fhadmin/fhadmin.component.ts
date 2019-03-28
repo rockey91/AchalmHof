@@ -32,11 +32,7 @@ export class FHAdminComponent implements OnInit {
   }
 
   showMoreDetails( index ): void {
-    this.selectedRequest = {
-      reqNo: index,
-      eventType: 'Birthday',
-      eventDate: '12-Oct-2019'
-    }
+    this.selectedRequest = this.requestsList[index];
   }
 
   deleteMeeting() {
@@ -44,18 +40,26 @@ export class FHAdminComponent implements OnInit {
   }
 
   sendReply(accepted) {
-    if ( accepted ) {
-      this.inquireRequestsService.updateRequest()
-      .then(
-        (response) =>{
+
+    this.inquireRequestsService.updateRequest({
+      id: this.selectedRequest.id,
+      request_status: accepted ? 'admin_accepted' : 'admin_rejected'
+    })
+    .then(
+      (response) =>{
+        if ( accepted ) {
           alert("Your response with portal credentials is shared with PC to schedule the appointment.");
-        },
-        (error) => {
-            // alert(error);
-            console.log(error);
+        } else {
+          alert("Your response rejecting the request is shared with PC.");
         }
-      );
-    }
+
+      },
+      (error) => {
+          // alert(error);
+          console.log(error);
+      }
+    );
+
   }
 
 }

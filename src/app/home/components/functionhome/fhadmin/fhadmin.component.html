@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Request Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,22 +13,22 @@
           <div class="col-6">
             <div class="row">
               <div class="col-4">
-                <label for="">Request #</label>
+                <label for="">#</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-8">
-                {{ selectedRequest.reqNo }}
+                {{ selectedRequest.id }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
               <div class="col-4">
-                <label for="">Event Type</label>
+                <label for="">PC Name</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-8">
-                {{ selectedRequest.eventType }}
+                {{ selectedRequest.pc_name }}
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@
                     <td>{{ req.email_address }}</td>
                     <td>{{ req.subject }}</td>
                     <td>
-                      <i class="fa fa-fw fa-bars" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#exampleModal"></i>
+                      <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
                     </td>
                   </tr>
               </tbody>
