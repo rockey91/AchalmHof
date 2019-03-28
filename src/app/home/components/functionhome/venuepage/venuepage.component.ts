@@ -18,6 +18,8 @@ export class VenuepageComponent implements OnInit {
     'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
   ];
 
+  requestId: number = null;
+
   constructor(
     private translate: TranslateService,
     public router: Router,
@@ -53,13 +55,16 @@ export class VenuepageComponent implements OnInit {
 
       this.isSubmitSuccess = true;
 
+      modal.venue_id = '1';
+      modal.request_status = 'pc_requested';
+
       this.inquireRequestsService.postInquireRequest(modal)
       .then(
         (response) =>{
-            // alert(response.message);
+            this.requestId = response[0].data.req_id[0];
         },
         (error) => {
-            alert(error);
+            // alert(error);
             console.log(error);
         }
       );

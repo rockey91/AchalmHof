@@ -22,7 +22,7 @@ export class VenuesService {
     let params = new HttpParams();
 
     return this.httpClient.get(
-        'http://127.0.0.1:3100/basicDetails/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFBSU4wMzk4IiwiZGF0ZXRpbWUiOiJUdWUgTWFyIDE5IDIwMTkgMjI6Mjk6MDcgR01UKzA1MzAgKEluZGlhIFN0YW5kYXJkIFRpbWUpIiwidXNlcnJvbGUiOjEsImlhdCI6MTU1MzAxNDc0OH0.h05FHyxA2AwuIIwoqSxCzMoTI-9ziNujSN2EXi5JxcM', {
+        'http://127.0.0.1:3100/ahapi/getRequests', {
           params: params
         }
     )

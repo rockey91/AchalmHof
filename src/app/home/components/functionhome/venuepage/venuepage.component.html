@@ -41,7 +41,7 @@
             </div>
             <div class="modal-body">
               <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
-                Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number 1234 for future communication reference.
+                Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number <strong>{{ requestId }}</strong> for future communication reference.
               </div>
               <form novalidate #f="ngForm" (ngSubmit)="submitEnquiry(f.value)" class="tab-info tab-content">
                 <div class="row">
@@ -50,7 +50,7 @@
                       <div class="row">
                         <label class="col-md-5"> Name  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="Name" class="form-control" ngModel>
+                          <input type="text" name="pc_name" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -58,8 +58,10 @@
                       <div class="row">
                         <label class="col-md-5"> Event Type  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <select class="form-control" name="Event_Type" ngModel>
-                            <option value=""></option>
+                          <select class="form-control" name="event_type" ngModel>
+                            <option value="1">Birthday</option>
+                            <option value="1">Wedding</option>
+                            <option value="1">Anniversary</option>
                           </select>
                         </div>
                       </div>
@@ -68,7 +70,7 @@
                       <div class="row">
                         <label class="col-md-5"> Event Date  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="date" name="Event_Date" class="form-control" ngModel>
+                          <input type="date" name="event_date" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -76,7 +78,7 @@
                       <div class="row">
                         <label class="col-md-5"> Number Of Guests  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="GuestsCount" class="form-control" ngModel>
+                          <input type="number" name="guests_count" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -84,7 +86,7 @@
                       <div class="row">
                         <label class="col-md-5"> Mobile Number  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="MobileNumber" class="form-control" ngModel>
+                          <input type="number" name="mobile_number" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -94,15 +96,15 @@
                       <div class="row">
                         <label class="col-md-5"> Email Address  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="email" name="Email" class="form-control" ngModel>
+                          <input type="email" name="email_address" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5">Captcha / Email Verification  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5">Captcha<span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="email" name="Captcha" class="form-control" ngModel>
+                          <input type="email" name="captcha" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -111,7 +113,7 @@
                       <div class="row">
                         <label class="col-md-5"> Subject <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="Subject" class="form-control" ngModel>
+                          <input type="text" name="subject" class="form-control" ngModel>
                         </div>
                       </div>
                     </div>
@@ -120,7 +122,7 @@
                       <div class="row">
                         <label class="col-md-5"> Message <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <textarea name="Message" class="form-control" ngModel rows="3" cols="80"></textarea>
+                          <textarea name="message" class="form-control" ngModel rows="3" cols="80"></textarea>
                         </div>
                       </div>
                     </div>
