@@ -6,7 +6,9 @@ import { FHAdminComponent } from './fhadmin.component';
 import { FHAdminRoutingModule } from './fhadmin-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-
+// import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   declarations: [
     FHAdminComponent
@@ -18,7 +20,12 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    // FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
