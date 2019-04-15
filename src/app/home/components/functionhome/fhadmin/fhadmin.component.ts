@@ -46,6 +46,13 @@ const colors: any = {
 export class FHAdminComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
+  requestsList: any = [];
+  meetingList: any = [];
+  eventList: any = [];
+
+  meetingId: number = null;
+  eventId: number = null;
+
  view: CalendarView = CalendarView.Month;
 
  CalendarView = CalendarView;
@@ -118,7 +125,9 @@ export class FHAdminComponent implements OnInit {
 
  activeDayIsOpen: boolean = true;
 
- constructor(private modal: NgbModal) {}
+ constructor(private modal: NgbModal,
+   private inquireRequestsService: InquireRequestsService
+) {}
 
  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
    if (isSameMonth(date, this.viewDate)) {
@@ -188,15 +197,67 @@ export class FHAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.inquireRequestsService.getInquireRequestsList()
-    // .then(
-    //   (response) =>{
-    //     this.requestsList = response[0].data.data;
-    //   },
-    //   (error) => {
-    //       // alert(error);
-    //       console.log(error);
-    //   }
-    // );
+     this.inquireRequestsService.getInquireRequestsList()
+     .then(
+       (response) =>{
+         this.requestsList = response;
+      },
+      (error) => {
+           alert(error);
+          console.log(error);
+      }
+   );
+
+   this.inquireRequestsService.getMeetingList()
+   .then(
+     (response) =>{
+       this.meetingList = response;
+    },
+    (error) => {
+         alert(error);
+        console.log(error);
+    }
+  );
+
+  this.inquireRequestsService.getEventList()
+  .then(
+    (response) =>{
+      this.eventList = response;
+   },
+   (error) => {
+        alert(error);
+       console.log(error);
+   }
+ );
+
   }
+
+  submitMeeting(modal) {
+
+    this.inquireRequestsService.postMeetingRequest(modal)
+    .then(
+      (response) =>{
+          this.meetingId = response[0].data.req_id[0];
+      },
+      (error) => {
+          // alert(error);
+          console.log(error);
+      }
+    );
+  }
+
+  submitEvent(modal) {
+
+    this.inquireRequestsService.postEventRequest(modal)
+    .then(
+      (response) =>{
+          this.eventId = response[0].data.req_id[0];
+      },
+      (error) => {
+          // alert(error);
+          console.log(error);
+      }
+    );
+  }
+
 }

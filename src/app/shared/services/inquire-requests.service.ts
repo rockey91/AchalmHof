@@ -21,7 +21,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://127.0.0.1:3100/ahapi/addRequest',
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/saveUserDetails',
         model,
         this.httpOptions
     )
@@ -30,7 +30,6 @@ export class InquireRequestsService {
       return response;
     })
     .catch();
-
   }
 
   getInquireRequestsList(){
@@ -38,23 +37,81 @@ export class InquireRequestsService {
     let params = new HttpParams();
 
     return this.httpClient.get(
-        'http://127.0.0.1:3100/ahapi/getRequests', {
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/getListOfRegisteredUsers', {
           params: params
         }
     )
     .toPromise()
     .then(response => {
       return response;
-
-      // return [
-      //   'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
-      //   'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
-      // ];
     })
     .catch(error => {
       console.log(error);
     });
+  }
 
+  getMeetingList(){
+
+    let params = new HttpParams();
+    return this.httpClient.get(
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/meeting/getListOfMeeting', {
+          params: params
+        }
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  postMeetingRequest(model){
+
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.httpClient.post(
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/meeting/saveMeetingDetails',
+        model,
+        this.httpOptions
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch();
+  }
+
+  getEventList(){
+
+    let params = new HttpParams();
+    return this.httpClient.get(
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/event/getListOfRegisteredEvents', {
+          params: params
+        }
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  postEventRequest(model){
+
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.httpClient.post(
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/event/saveEventDetails',
+        model,
+        this.httpOptions
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch();
   }
 
   updateRequest(modelData: {}) {
