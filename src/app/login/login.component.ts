@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
 
         if ( formData.username === 'admin' ) {
           localStorage.setItem('isAdmin', 'true');
+        } else {
+          localStorage.setItem('pcname', formData.username);
         }
     }
 }

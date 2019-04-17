@@ -116,7 +116,7 @@ export class InquireRequestsService {
 
   updateRequest(modelData: {}) {
     const headers = new Headers({'Content-Type': 'application/json'});
-    let url = 'http://127.0.0.1:3100/ahapi/updateRequest';
+    let url = 'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/event/saveEventDetails';
     return this.httpClient.put(
       url,
       modelData,

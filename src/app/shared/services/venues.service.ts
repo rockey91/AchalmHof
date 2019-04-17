@@ -22,7 +22,7 @@ export class VenuesService {
     let params = new HttpParams();
 
     return this.httpClient.get(
-        'http://127.0.0.1:3100/ahapi/getRequests', {
+        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/getListOfRegisteredUsers', {
           params: params
         }
     )

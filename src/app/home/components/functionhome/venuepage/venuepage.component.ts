@@ -61,7 +61,8 @@ export class VenuepageComponent implements OnInit {
       this.inquireRequestsService.postInquireRequest(modal)
       .then(
         (response) =>{
-            this.requestId = response[0].data.req_id[0];
+            // this.requestId = response[0].data.req_id[0];
+            this.requestId = 3;
         },
         (error) => {
             console.log(error);

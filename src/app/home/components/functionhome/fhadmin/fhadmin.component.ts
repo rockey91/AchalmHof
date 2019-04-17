@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
-import { InquireRequestsService } from '../../../../shared';
+import { InquireRequestsService, GlobalService } from '../../../../shared';
 import { OptionsInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -131,7 +131,8 @@ export class FHAdminComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
-    private inquireRequestsService: InquireRequestsService
+    private inquireRequestsService: InquireRequestsService,
+    private globalService: GlobalService
   ) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -203,8 +204,15 @@ export class FHAdminComponent implements OnInit {
   ngOnInit() {
     this.inquireRequestsService.getInquireRequestsList()
     .then(
-      (response) =>{
-        this.requestsList = response;
+      (response:any = []) =>{
+        if ( this.globalService.isAdmin() ) {
+          this.requestsList = response;
+        } else {
+          let pcname = this.globalService.getPCName();
+          this.requestsList = response.filter(obj => {
+            return pcname === obj.name;
+          });
+        }
       },
       (error) => {
         alert(error);
@@ -214,8 +222,15 @@ export class FHAdminComponent implements OnInit {
 
     this.inquireRequestsService.getMeetingList()
     .then(
-      (response) =>{
-        this.meetingList = response;
+      (response:any = []) =>{
+        if ( this.globalService.isAdmin() ) {
+          this.meetingList = response;
+        } else {
+          let pcname = this.globalService.getPCName();
+          this.meetingList = response.filter(obj => {
+            return pcname === obj.Name;
+          });
+        }
       },
       (error) => {
         alert(error);
@@ -225,8 +240,15 @@ export class FHAdminComponent implements OnInit {
 
     this.inquireRequestsService.getEventList()
     .then(
-      (response) =>{
-        this.eventList = response;
+      (response:any = []) =>{
+        if ( this.globalService.isAdmin() ) {
+          this.eventList = response;
+        } else {
+          let pcname = this.globalService.getPCName();
+          this.eventList = response.filter(obj => {
+            return pcname === obj.name;
+          });
+        }
       },
       (error) => {
         alert(error);
@@ -240,7 +262,7 @@ export class FHAdminComponent implements OnInit {
 
     this.inquireRequestsService.postMeetingRequest(modal)
     .then(
-      (response) =>{
+      (response:any = []) =>{
         this.meetingId = response[0].data.req_id[0];
       },
       (error) => {

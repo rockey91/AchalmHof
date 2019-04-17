@@ -21,4 +21,8 @@ export class GlobalService {
     return localStorage.getItem('isAdmin') === 'true';
   }
 
+  getPCName(){
+    return localStorage.getItem('pcname');
+  }
+
 }
