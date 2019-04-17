@@ -6,7 +6,17 @@ section {
     margin-top:5px;
   }
 }
+.cus-container-fluid {
+  padding: 15px;
+  height: 100vh;
+  background: #fff;
+}
 
+.card {
+  border: 0px;
+  background: #f7f6f4;
+  margin-top: -2px;
+}
 .form-control {
   overflow: hidden;
 }

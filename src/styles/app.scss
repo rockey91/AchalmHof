@@ -42,3 +42,57 @@ body {
   }
 
 }
+table {
+    margin-top: 4px;
+    thead {
+        th {
+            font-size: 11px;
+            text-align: center;
+            paddding:3px !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-transform: uppercase;
+            background: #0b7d9c;
+            border: 1px solid #f1e7e7;
+            color: #fff;
+        }
+    }
+    tbody {
+        background: #fff;
+        tr {
+            font-size: 12px;
+            text-align: center;
+            td {
+              input.form-control {
+                padding: 5px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 13px;
+              }
+            }
+        }
+    }
+}
+.btn-primary {
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    background: #0b7d9c;
+}
+.btn-danger {
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.cal-header {
+  background: #0b7d9c;
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.cal-month-view .cal-cell-row .cal-cell:hover, .cal-month-view .cal-cell.cal-has-events.cal-open {
+    background-color: #417d49;
+}
+.cal-month-view .cal-day-cell {
+    min-height: 75px;
+}
