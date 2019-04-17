@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <!-- <div class="row">
+        <div class="row">
           <div class="col-6">
             <div class="row">
               <div class="col-4">
@@ -43,7 +43,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="reply-text">
           <textarea name="replyText" value="" placeholder="<reply message>" rows="4" cols="80" [(ngModel)]="replyText">
           </textarea>
@@ -84,10 +84,11 @@
                     <th>Mobile Number</th>
                     <th>Email Address</th>
                     <th>Subject</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr *ngFor="let req of requestsList; let i = index;">
+                  <tr *ngFor="let req of requestsList; let i = index;">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ req.pc_name }}</td>
                     <td>{{ req.event_type }}</td>
@@ -99,7 +100,7 @@
                     <td>
                       <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
                     </td>
-                  </tr> -->
+                  </tr>
                 </tbody>
               </table>
             </div>

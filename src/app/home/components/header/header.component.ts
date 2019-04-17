@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AuthGuard } from '../../../shared';
+import { AuthGuard, GlobalService } from '../../../shared';
 
 @Component({
     selector: 'app-header',
@@ -17,7 +17,8 @@ export class HeaderComponent implements OnInit {
     constructor(
       private translate: TranslateService,
       public router: Router,
-      private authGuard: AuthGuard
+      private authGuard: AuthGuard,
+      public globalService: GlobalService
     ) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
@@ -62,6 +63,7 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
+        localStorage.removeItem('isAdmin');
     }
 
     changeLang(language: string) {

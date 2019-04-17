@@ -24,8 +24,6 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
 
     this.venuesService.getVenuesList().then(result => {
-      console.log(result);
-      // this.venuesList = result;
 
       this.venuesList = [
         'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',

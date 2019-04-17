@@ -44,6 +44,11 @@ const colors: any = {
   styleUrls: ['./fhadmin.component.scss']
 })
 export class FHAdminComponent implements OnInit {
+
+  replyText: string = "";
+  requestsList: any = [];
+  selectedRequest: any = {};
+
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
  view: CalendarView = CalendarView.Month;
@@ -118,7 +123,10 @@ export class FHAdminComponent implements OnInit {
 
  activeDayIsOpen: boolean = true;
 
- constructor(private modal: NgbModal) {}
+ constructor(
+   private modal: NgbModal,
+   private inquireRequestsService: InquireRequestsService
+ ) {}
 
  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
    if (isSameMonth(date, this.viewDate)) {
@@ -188,15 +196,41 @@ export class FHAdminComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.inquireRequestsService.getInquireRequestsList()
-    // .then(
-    //   (response) =>{
-    //     this.requestsList = response[0].data.data;
-    //   },
-    //   (error) => {
-    //       // alert(error);
-    //       console.log(error);
-    //   }
-    // );
+    this.inquireRequestsService.getInquireRequestsList()
+    .then(
+      (response) =>{
+        this.requestsList = response[0].data.data;
+      },
+      (error) => {
+
+      }
+    );
+
   }
+
+  showMoreDetails( index ): void {
+    this.selectedRequest = this.requestsList[index];
+  }
+
+  sendReply(accepted) {
+
+    this.inquireRequestsService.updateRequest({
+      id: this.selectedRequest.id,
+      request_status: accepted ? 'admin_accepted' : 'admin_rejected'
+    })
+    .then(
+      (response) =>{
+        if ( accepted ) {
+          alert("Your response with portal credentials is shared with PC to schedule the appointment.");
+        } else {
+          alert("Your response rejecting the request is shared with PC.");
+        }
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 }

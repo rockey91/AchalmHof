@@ -22,7 +22,11 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-    onLoggedin() {
+    onLoggedin(formData) {
         localStorage.setItem('isLoggedin', 'true');
+
+        if ( formData.username === 'admin' ) {
+          localStorage.setItem('isAdmin', 'true');
+        }
     }
 }

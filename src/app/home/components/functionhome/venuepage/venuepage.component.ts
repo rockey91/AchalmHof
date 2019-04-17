@@ -64,7 +64,6 @@ export class VenuepageComponent implements OnInit {
             this.requestId = response[0].data.req_id[0];
         },
         (error) => {
-            // alert(error);
             console.log(error);
         }
       );
