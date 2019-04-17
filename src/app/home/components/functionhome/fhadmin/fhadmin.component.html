@@ -12,34 +12,45 @@
         <div class="row">
           <div class="col-6">
             <div class="row">
-              <div class="col-4">
-                <label for="">#</label>
-                <span class="pull-right">:</span>
-              </div>
-              <div class="col-8">
-                {{ selectedRequest.id }}
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col-4">
+              <div class="col-6">
                 <label for="">PC Name</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-8">
-                {{ selectedRequest.pc_name }}
+              <div class="col-6">
+                {{ selectedRequest.name }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-4">
+              <div class="col-6">
+                <label for=""> Event Type </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.eventType }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
                 <label for="">Event Date</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-8">
+              <div class="col-6">
                 {{ selectedRequest.eventDate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">No Of Guests </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.noOfGuests }}
               </div>
             </div>
           </div>
