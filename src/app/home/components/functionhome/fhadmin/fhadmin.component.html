@@ -90,13 +90,13 @@
                 <tbody>
                   <tr *ngFor="let req of requestsList; let i = index;">
                     <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ req.pc_name }}</td>
-                    <td>{{ req.event_type }}</td>
-                    <td>{{ req.event_date }}</td>
-                    <td>{{ req.guests_count }}</td>
-                    <td>{{ req.mobile_number }}</td>
-                    <td>{{ req.email_address }}</td>
-                    <td>{{ req.subject }}</td>
+                    <td>{{ req.name }}</td>
+                    <td>{{ req.eventType }}</td>
+                    <td>{{ req.eventDate }}</td>
+                    <td>{{ req.noOfGuests }}</td>
+                    <td>{{ req.mobileNumber }}</td>
+                    <td>{{ req.emailId }}</td>
+                    <td>{{ req.eventSubject }}</td>
                     <td>
                       <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
                     </td>
@@ -132,6 +132,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
+                          <form novalidate #f="ngForm" (ngSubmit)="submitMeeting(f.value)" class="tab-info tab-content">
                           <div class="row">
                             <div class="col-6">
                               <div class="row">
@@ -140,7 +141,7 @@
                                   <span class="pull-right">:</span>
                                 </div>
                                 <div class="col-8">
-                                  <input type="text"  class="form-control" name="name" value="">
+                                  <input type="text"  class="form-control" name="name" value="" ngModel>
                                 </div>
                               </div>
                             </div>
@@ -151,7 +152,7 @@
                                   <span class="pull-right">:</span>
                                 </div>
                                 <div class="col-8">
-                                  <input type="date"  class="form-control" name="date" value="">
+                                  <input type="date"  class="form-control" name="date" value="" ngModel>
                                 </div>
                               </div>
                             </div>
@@ -162,7 +163,7 @@
                                   <span class="pull-right">:</span>
                                 </div>
                                 <div class="col-8">
-                                  <input type="text" class="form-control" name="name" value="">
+                                  <input type="text" class="form-control" name="name" value="" ngModel>
                                 </div>
                               </div>
                             </div>
@@ -173,7 +174,7 @@
                                   <span class="pull-right">:</span>
                                 </div>
                                 <div class="col-8">
-                                  <input type="date" class="form-control" name="date" value="">
+                                  <input type="date" class="form-control" name="date" value="" ngModel>
                                 </div>
                               </div>
                             </div>
@@ -184,15 +185,16 @@
                                   <span class="pull-right">:</span>
                                 </div>
                                 <div class="col-8">
-                                  <input type="text" class="form-control" name="name" value="">
+                                  <input type="text" class="form-control" name="name" value="" ngModel>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" (click)="sendReply()" data-dismiss="modal"> Add </button>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary"  type="submit" data-dismiss="modal"> Add </button>
+                          </div>
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -216,17 +218,18 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td> ABC </td>
-                        <td> 29-Oct-2019 </td>
-                        <td> 10.30 AM  </td>
-                        <td> </td>
-                        <td>  </td>
-                        <td>
-                          <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
-                          <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()">  <i class="fa fa-trash" >  </i></button></td>
-                        </tr>
+                        <tr *ngFor="let meeting of meetingList; let i = index;">
+                         <th scope="row">{{ i + 1 }}</th>
+                         <td>{{ meeting.Name }}</td>
+                         <td>{{ meeting.Date }}</td>
+                         <td>{{ meeting.Time }}</td>
+                         <td>{{ meeting.Location }}</td>
+                         <td>{{ meeting.message }}</td>
+                         <td>
+                           <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
+                           <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()">  <i class="fa fa-trash" >  </i></button>
+                         </td>
+                         </tr>
                       </tbody>
                     </table>
                   </div>
@@ -245,6 +248,7 @@
                             </button>
                           </div>
                           <div class="modal-body">
+                            <form novalidate #f="ngForm" (ngSubmit)="submitEvent(f.value)" class="tab-info tab-content">
                             <div class="row">
                               <div class="col-6">
                                 <div class="row">
@@ -253,7 +257,7 @@
                                     <span class="pull-right">:</span>
                                   </div>
                                   <div class="col-8">
-                                    <input type="text"  class="form-control" name="name" value="">
+                                    <input type="text"  class="form-control" name="name" value="" ngModel>
                                   </div>
                                 </div>
                               </div>
@@ -264,7 +268,7 @@
                                     <span class="pull-right">:</span>
                                   </div>
                                   <div class="col-8">
-                                    <input type="date"  class="form-control" name="date" value="">
+                                    <input type="date"  class="form-control" name="date" value="" ngModel>
                                   </div>
                                 </div>
                               </div>
@@ -275,7 +279,7 @@
                                     <span class="pull-right">:</span>
                                   </div>
                                   <div class="col-8">
-                                    <select class="form-control" name="eventType">
+                                    <select class="form-control" name="eventType" ngModel>
                                       <option value="BirthDay"> Birth Day </option>
                                       <option value="BirthDay"> Birth Day </option>
                                       <option value="BirthDay"> Birth Day </option>
@@ -291,20 +295,20 @@
                                     <span class="pull-right">:</span>
                                   </div>
                                   <div class="col-8">
-                                    <input type="text" class="form-control" name="name" value="">
+                                    <input type="text" class="form-control" name="message" value="" ngModel>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" (click)="sendReply()" data-dismiss="modal"> Add </button>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" type="submit" data-dismiss="modal"> Add </button>
+                            </div>
+                            </form>
                           </div>
                         </div>
                       </div>
                     </div>
-
                     <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#manageEvent">
                       Add Event
                     </button>
@@ -322,37 +326,17 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td> ABC </td>
-                          <td> 29-Oct-2019 </td>
-                          <td>   </td>
-                          <td>  </td>
-                          <td>
-                            <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
-                            <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash" >  </i></button></td>
-                          </tr>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td> ABC </td>
-                            <td> 29-Oct-2019 </td>
-                            <td> </td>
-                            <td>  </td>
-                            <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
-
-                              <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash">  </i></button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td> ABC </td>
-                            <td> 29-Oct-2019 </td>
-                            <td> </td>
-                            <td>  </td>
-                            <td><i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
-                              <button class="cus-btn" type="button" name="button" (click)="deleteEvent()"> <i class="fa fa-trash">  </i></button>
-                            </td>
-                          </tr>
+                        <tr *ngFor="let event of eventList; let i = index;">
+                         <th scope="row">{{ i + 1 }}</th>
+                         <td>{{ event.name }}</td>
+                         <td>{{ event.eventType }}</td>
+                         <td>{{ event.eventDate }}</td>
+                         <td>{{ event.message }}</td>
+                         <td>
+                           <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
+                           <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash" >  </i></button>
+                         </td>
+                         </tr>
                         </tbody>
                       </table>
                     </div>

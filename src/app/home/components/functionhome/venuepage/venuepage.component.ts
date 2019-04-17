@@ -67,7 +67,6 @@ export class VenuepageComponent implements OnInit {
             console.log(error);
         }
       );
-
     }
 
 }

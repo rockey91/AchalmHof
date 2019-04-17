@@ -1,6 +1,6 @@
 {
 "/api":{
-"target": "http://localhost:8080",
+"target": "http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com",
 "secure": false
 }
 }
