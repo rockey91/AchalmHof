@@ -12,4 +12,7 @@ public interface AppointmentService {
 	public AppointmentResponse getAppointmentByName(String name);
 	
 	public AppointmentResponse saveAppointmentDetails(AppointmentRequest appointmentRequest);
+	
+	public List<AppointmentResponse> saveAllAppointmentDetails(List<AppointmentRequest> appointmentRequest);
+
 }

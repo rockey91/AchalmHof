@@ -25,6 +25,11 @@ public class AppointmentController {
 		@Autowired
 		private AppointmentService appointmentService;
 		
+	    @RequestMapping("/hello")
+	    String hello() {
+	        return "Hello World!";
+	    }
+	    
 		@RequestMapping("/getListOfAppointments")
 		public List<AppointmentResponse> geAllAppointmentDetails(){
 			LOGGER.info("Controller: getting list of appointment started");
@@ -45,6 +50,14 @@ public class AppointmentController {
 		public AppointmentResponse saveUserDetails(@Valid @RequestBody AppointmentRequest request){
 			LOGGER.info("Controller: saving Appointment Details started");
 			AppointmentResponse registereduser = appointmentService.saveAppointmentDetails(request);
+			LOGGER.info("Controller: saving Appointment Details ended");
+			return registereduser;
+		}
+		
+		@RequestMapping(value= "/saveAllAppointmentDetails" , method = RequestMethod.POST)
+		public List<AppointmentResponse> saveAllUserDetails(@Valid @RequestBody List<AppointmentRequest> request){
+			LOGGER.info("Controller: saving Appointment Details started");
+			List<AppointmentResponse> registereduser = appointmentService.saveAllAppointmentDetails(request);
 			LOGGER.info("Controller: saving Appointment Details ended");
 			return registereduser;
 		}

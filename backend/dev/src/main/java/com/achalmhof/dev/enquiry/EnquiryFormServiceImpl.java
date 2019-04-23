@@ -1,14 +1,20 @@
 package com.achalmhof.dev.enquiry;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.achalmhof.dev.email.EmailService;
+import com.achalmhof.dev.model.EmailRequest;
+import com.achalmhof.dev.model.EmailResponse;
+import com.achalmhof.dev.model.EnquireReplyRequest;
 import com.achalmhof.dev.model.EnquiryRequest;
 import com.achalmhof.dev.model.EnquiryResponse;
 import com.achalmhof.dev.repository.EnquiryRepository;
@@ -21,6 +27,9 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
 
     private EnquiryRepository enquiryRepository;
 
+	@Autowired
+	EmailService emailService;
+	
     /**
      * @param projectDetailRepository
      *            the projectDetailRepository to set
@@ -29,6 +38,7 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
     public void setEnquiryRepository(EnquiryRepository enquiryRepository) {
         this.enquiryRepository = enquiryRepository;
     }
+    
 	@Override
 	public List<EnquiryResponse> getListofUsers() {
 		LOGGER.info("Service : get List of users started");
@@ -44,6 +54,7 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
 				registeredDetail.setEventType(enquiry.getEventType());
 				registeredDetail.setMobileNumber(enquiry.getMobileNumber());
 				registeredDetail.setNoOfGuests(enquiry.getNoOfGuests());
+				registeredDetail.setEnquireId(enquiry.getId());
 				registeredUserDetails.add(registeredDetail);
 			});
 		}
@@ -63,6 +74,7 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
 			registeredUser.setEventType(enquiredDetails.getEventType());
 			registeredUser.setMobileNumber(enquiredDetails.getMobileNumber());
 			registeredUser.setNoOfGuests(enquiredDetails.getNoOfGuests());
+			registeredUser.setEnquireId(enquiredDetails.getId());
 		}
 		LOGGER.info("Service : get registered user by name ended");
 		return registeredUser;
@@ -71,13 +83,7 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
 	public EnquiryResponse saveUserDetails(EnquiryRequest enquiryRequest) {
 		LOGGER.info("Service : saving user details started");
 		EnquiryDetails enquiredUser =  new EnquiryDetails();
-		enquiredUser.setName(enquiryRequest.getName());
-		enquiredUser.setEmailId(enquiryRequest.getEmailId());
-		enquiredUser.setEventDate(enquiryRequest.getEventDate());
-		enquiredUser.setEventSubject(enquiryRequest.getEventSubject());
-		enquiredUser.setEventType(enquiryRequest.getEventType());
-		enquiredUser.setMobileNumber(enquiryRequest.getMobileNumber());
-		enquiredUser.setNoOfGuests(enquiryRequest.getNoOfGuests());
+		BeanUtils.copyProperties(enquiryRequest, enquiredUser);
 		EnquiryDetails savedDetails = enquiryRepository.save(enquiredUser);
 		EnquiryResponse registeredUser = new EnquiryResponse();
 		if(null != savedDetails){
@@ -88,9 +94,25 @@ public class EnquiryFormServiceImpl implements EnquiryFormService{
 			registeredUser.setEventType(savedDetails.getEventType());
 			registeredUser.setMobileNumber(savedDetails.getMobileNumber());
 			registeredUser.setNoOfGuests(savedDetails.getNoOfGuests());
+			registeredUser.setRequestStatus(enquiryRequest.getRequestStatus());
+			registeredUser.setVenueId(enquiryRequest.getVenueId());
+			registeredUser.setMessage("Your Enquiry request has saved succesfully");
 		}
 		LOGGER.info("Service : saving user details ended");
 		return registeredUser;
+	}
+	@Override
+	public EmailResponse sendEnquiryResponse(EnquireReplyRequest enquireReplyRequest) throws IOException {
+		LOGGER.info("Controller: sending email started");
+		EmailRequest emailRequest = new EmailRequest();
+		emailRequest.setContent("Your request has been accepted");
+		EnquiryDetails enquiredDetails = enquiryRepository.getOne(enquireReplyRequest.getId());
+		emailRequest.setFrom("nikhilsuryam.g08@gmail.com");
+		emailRequest.setSubject("Function Hall Enquiry");
+		emailRequest.setToEmail("satish.g08@gmail.com");
+		EmailResponse emailResponse = emailService.sendEmail(emailRequest);
+		LOGGER.info("Controller: sending email ended");
+		return emailResponse;
 	}
 
 }

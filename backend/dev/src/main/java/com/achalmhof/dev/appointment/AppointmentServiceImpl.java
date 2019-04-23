@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -30,6 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         this.appointmentRepository = appointmentRepository;
     }
 	@Override
+	@Cacheable(value = "appointmentcache")
 	public List<AppointmentResponse> getListofAppointments() {
 		LOGGER.info("Service : get List of appointments started");
 		List<AppointmentDetails> appointmentDetails = appointmentRepository.findAll();
@@ -63,15 +67,12 @@ public class AppointmentServiceImpl implements AppointmentService{
 		LOGGER.info("Service : get appointment by name ended");
 		return appointmentInfo;
 	}
+	
 	@Override
 	public AppointmentResponse saveAppointmentDetails(AppointmentRequest appointmentRequest) {
 		LOGGER.info("Service : save appointment details started");
 		AppointmentDetails appointment =  new AppointmentDetails();
-		appointment.setName(appointmentRequest.getName());
-		appointment.setLocation(appointmentRequest.getLocation());
-		appointment.setMessage(appointmentRequest.getMessage());
-		appointment.setDate(appointmentRequest.getDate());
-		appointment.setTime(appointmentRequest.getTime());
+		BeanUtils.copyProperties(appointmentRequest, appointment);
 		AppointmentDetails savedDetails = appointmentRepository.save(appointment);
 		AppointmentResponse savedAppointment = new AppointmentResponse();
 		if(null != savedDetails){
@@ -81,6 +82,34 @@ public class AppointmentServiceImpl implements AppointmentService{
 			savedAppointment.setDate(savedDetails.getDate());
 			savedAppointment.setTime(savedDetails.getTime());
 		}
+		LOGGER.info("Service : save appointment details ended");
+		return savedAppointment;
+	}
+	
+	@Override
+	@CachePut(value = "appointmentcache")
+	public List<AppointmentResponse> saveAllAppointmentDetails(List<AppointmentRequest> appointmentRequest) {
+		LOGGER.info("Service : save appointment details started");
+		List<AppointmentDetails> appointmentlist =  new ArrayList<>();
+		for(AppointmentRequest appointment : appointmentRequest){
+			AppointmentDetails appointmentDetails = new AppointmentDetails();
+			BeanUtils.copyProperties(appointment, appointmentDetails);
+			appointmentlist.add(appointmentDetails);
+		}
+		List<AppointmentDetails> savedDetails = appointmentRepository.saveAll(appointmentlist);
+		List<AppointmentResponse> savedAppointment = new ArrayList<>();
+		if(!CollectionUtils.isEmpty(savedDetails)){
+			savedDetails.forEach(saved -> {
+				AppointmentResponse savedResponse = new AppointmentResponse();
+				savedResponse.setName(saved.getName());
+				savedResponse.setLocation(saved.getLocation());
+				savedResponse.setMessage(saved.getMessage());
+				savedResponse.setDate(saved.getDate());
+				savedResponse.setTime(saved.getTime());
+				savedAppointment.add(savedResponse);
+			});
+		}
+
 		LOGGER.info("Service : save appointment details ended");
 		return savedAppointment;
 	}

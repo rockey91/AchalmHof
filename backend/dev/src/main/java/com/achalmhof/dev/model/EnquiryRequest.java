@@ -6,20 +6,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnquiryRequest {
 
-	@JsonProperty("name")
+	@JsonProperty("pc_name")
 	private String name;
-	@JsonProperty("emailId")
+	@JsonProperty("email_address")
 	private String emailId;
-	@JsonProperty("eventType")
+	@JsonProperty("event_type")
 	private String eventType;
-	@JsonProperty("eventDate")
+	@JsonProperty("event_date")
 	private String eventDate;
-	@JsonProperty("eventSubject")
+	@JsonProperty("subject")
 	private String eventSubject;
-	@JsonProperty("noOfGuests")
+	@JsonProperty("guests_count")
 	private int noOfGuests;
-	@JsonProperty("mobileNumber")
+	@JsonProperty("mobile_number")
 	private String mobileNumber;
+	@JsonProperty("message")
+	private String message;
+	@JsonProperty("request_status")
+	private String requestStatus;
+	@JsonProperty("venue_id")
+	private String venueId;
 
 	/**
 	 * @return the name
@@ -105,15 +111,51 @@ public class EnquiryRequest {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	/**
+	 * @return the requestStatus
+	 */
+	public String getRequestStatus() {
+		return requestStatus;
+	}
+	/**
+	 * @param requestStatus the requestStatus to set
+	 */
+	public void setRequestStatus(String requestStatus) {
+		this.requestStatus = requestStatus;
+	}
+	/**
+	 * @return the venueId
+	 */
+	public String getVenueId() {
+		return venueId;
+	}
+	/**
+	 * @param venueId the venueId to set
+	 */
+	public void setVenueId(String venueId) {
+		this.venueId = venueId;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "RegistrationRequest [name=" + name + ", emailId=" + emailId + ", eventType=" + eventType
-				+ ", eventDate=" + eventDate + ", eventSubject=" + eventSubject + ", noOfGuests=" + noOfGuests
-				+ ", mobileNumber=" + mobileNumber + "]";
+		return "EnquiryRequest [name=" + name + ", emailId=" + emailId + ", eventType=" + eventType + ", eventDate="
+				+ eventDate + ", eventSubject=" + eventSubject + ", noOfGuests=" + noOfGuests + ", mobileNumber="
+				+ mobileNumber + ", message=" + message + ", requestStatus=" + requestStatus + ", venueId=" + venueId
+				+ "]";
 	}
-	
 	
 }

@@ -1,5 +1,6 @@
 package com.achalmhof.dev.enquiry;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.achalmhof.dev.model.EmailResponse;
+import com.achalmhof.dev.model.EnquireReplyRequest;
 import com.achalmhof.dev.model.EnquiryRequest;
 import com.achalmhof.dev.model.EnquiryResponse;
 
@@ -48,5 +51,13 @@ public class EnquiryFormController{
 		EnquiryResponse registereduser = enquiryFormService.saveUserDetails(request);
 		LOGGER.info("Controller: saving User Details ended");
 		return registereduser;
+	}
+	
+	@RequestMapping(value = "/sendEnquireReply", method = RequestMethod.POST)
+	public EmailResponse sendEnquireReply(@Valid @RequestBody EnquireReplyRequest request) throws IOException{
+		LOGGER.info("Controller: sending enquire reply for request started");
+		EmailResponse emailResponse = enquiryFormService.sendEnquiryResponse(request);
+		LOGGER.info("Controller: sending enquire reply for request ended");
+		return emailResponse;
 	}
 }
