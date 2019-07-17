@@ -5,7 +5,8 @@
 /out-tsc
 
 # dependencies
-/node_modules
+Front-End/node_modules
+Back-End/node_modules
 package-lock.json
 
 # IDEs and editors
@@ -41,3 +42,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# logs
+Back-End/logs
