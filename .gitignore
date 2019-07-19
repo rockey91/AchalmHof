@@ -45,3 +45,5 @@ Thumbs.db
 
 # logs
 Back-End/logs
+Front-End/node_modules/*
+Back-End/node_modules/*
