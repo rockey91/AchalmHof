@@ -3,16 +3,13 @@
 var app = require('express')();
 var helmet = require('helmet');
 var compression = require('compression');
-var bodyParser = require('body-parser');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
-
-var access = require('./var.js');
+var global = require('./global.js');
 var loginRoutes = require('./routes/login');
 
-access.achalmDatabBaseConnection();
 require('console-stamp')(console, '[yyyy-mm-dd HH:MM:ss.l]');
 
 app.use(helmet());
@@ -38,7 +35,7 @@ app.use(function (req, res, next) {
 app.use('/', loginRoutes);
 
 let nowDateTime = new Date();
-http.createServer(app).listen(3100, function() {
+http.createServer(app).listen(4100, function() {
   console.log(`App listening with http on port 3100. Started at ${nowDateTime}`);
 });
 

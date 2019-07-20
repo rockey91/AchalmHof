@@ -1,10 +1,9 @@
 'use strict';
 const routes = require('express').Router();
-var access = require('../../var.js');
-access.achalmDatabBaseConnection();
+var global = require('../../global.js');
 
 routes.use(bodyParser.json());
-routes.use(function (req, res, next) {
+routes.use(function (req, res, next){
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
   // Request methods you wish to allow
@@ -22,15 +21,23 @@ routes.use(function (req, res, next) {
 
 // Authenticate the user.
 routes.post('/authenticate', function (req, res) {
-  // var date = new Date();
-  // knex.select('role')
-  // .from('users')
-  // .where('username', username)
-  // .timeout(10000, {cancel: true})
-  // .map(function (row) { return row; })
-  // .then(function(data = []) {
-  //
-  // });
+
+  console.log(req.body);
+
+  knex.select('*')
+  .from('users')
+  .where('username', req.body.username)
+  .timeout(10000, {cancel: true})
+  .map(function (row) { return row; })
+  .then(function(data = []) {
+
+    global.sendResponse(req, res, {
+      status: 200,
+      data: data
+    });
+
+  });
+
 });
 
 module.exports = routes;
