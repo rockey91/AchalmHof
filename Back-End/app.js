@@ -8,7 +8,11 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 var global = require('./global.js');
-var loginRoutes = require('./routes/login');
+var usersRoutes = require('./routes/users');
+var venuesRoutes = require('./routes/venues');
+var inqReqsRoutes = require('./routes/inquireRequests');
+var admCalRoutes = require('./routes/adminCalendar');
+var pcCalRoutes = require('./routes/pcCalendar');
 
 require('console-stamp')(console, '[yyyy-mm-dd HH:MM:ss.l]');
 
@@ -32,11 +36,16 @@ app.use(function (req, res, next) {
 });
 
 //  Connect all our routes to our application
-app.use('/', loginRoutes);
+app.use('/', usersRoutes);
+app.use('/', venuesRoutes);
+app.use('/', inqReqsRoutes);
+app.use('/', admCalRoutes);
+app.use('/', pcCalRoutes);
 
+
+/* Below block of code for starting API */
 let nowDateTime = new Date();
 http.createServer(app).listen(4100, function() {
   console.log(`App listening with http on port 3100. Started at ${nowDateTime}`);
 });
-
 /* Above block of code for starting API */

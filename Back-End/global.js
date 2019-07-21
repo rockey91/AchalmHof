@@ -16,7 +16,7 @@ knex = require('knex')({
     user : 'root',
     password : 'test@123',
     database : 'achalm_hof',
-    timezone: 'IST'
+    timezone: 'UTC'
   },
   pool: { min: 0, max: 7 }
 });
