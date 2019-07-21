@@ -14,7 +14,7 @@ knex = require('knex')({
   connection: {
     host : mysqlHost,
     user : 'root',
-    password : 'test@123',
+    password : '@ff19E$P',
     database : 'achalm_hof',
     timezone: 'UTC'
   },
@@ -25,7 +25,7 @@ knex = require('knex')({
 con = mysql.createConnection({
   host : mysqlHost,
   user: "root",
-  password: "test@123",
+  password: "@ff19E$P",
   database : 'achalm_hof',
   multipleStatements: true,
   connectionLimit: 15,

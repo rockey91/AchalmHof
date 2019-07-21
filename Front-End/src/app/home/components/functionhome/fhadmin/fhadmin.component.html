@@ -516,7 +516,7 @@
               <td>
                 <input
                 class="form-control"
-                type="text"
+                type="date"
                 mwlFlatpickr
                 [(ngModel)]="event.start"
                 (ngModelChange)="refresh.next()"
@@ -528,7 +528,7 @@
               <td>
                 <input
                 class="form-control"
-                type="text"
+                type="date"
                 mwlFlatpickr
                 [(ngModel)]="event.end"
                 (ngModelChange)="refresh.next()"
@@ -538,6 +538,9 @@
                 />
               </td>
               <td>
+                <button class="btn btn-danger" (click)="saveEvent(event)">
+                  Save
+                </button>
                 <button class="btn btn-danger" (click)="deleteEvent(event)">
                   Delete
                 </button>
