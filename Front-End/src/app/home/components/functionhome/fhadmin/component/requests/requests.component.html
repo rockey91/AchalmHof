@@ -1,0 +1,113 @@
+<!-- Request Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">PC Name</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.name }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for=""> Event Type </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.eventType }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">Event Date</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.eventDate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">No Of Guests </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.noOfGuests }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reply-text">
+          <textarea name="replyText" value="" placeholder="<reply message>" rows="4" cols="80" [(ngModel)]="replyText">
+          </textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(false)" data-dismiss="modal">Reject</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(true)" data-dismiss="modal">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-xl-12 col-lg-12">
+    <div class="card mb-12">
+      <!-- <div class="card-header">
+      Request Details
+    </div> -->
+    <div class="card-body table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>PC Name</th>
+            <!-- id, pc_name, event_type, event_date, guests_count, mobile_number, email_address, captcha, subject, message, venue_id, request_status, id, id -->
+            <th>Event Type</th>
+            <th>Event Date</th>
+            <th>Guests #</th>
+            <th>Mobile Number</th>
+            <th>Email Address</th>
+            <th>Subject</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let req of requestsList; let i = index;">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ req.name }}</td>
+            <td>{{ req.eventType }}</td>
+            <td>{{ req.eventDate }}</td>
+            <td>{{ req.noOfGuests }}</td>
+            <td>{{ req.mobileNumber }}</td>
+            <td>{{ req.emailId }}</td>
+            <td>{{ req.eventSubject }}</td>
+            <td>
+              <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
