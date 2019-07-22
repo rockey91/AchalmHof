@@ -111,7 +111,7 @@ export class CalendarViewComponent implements OnInit {
   //   }
   // ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
   constructor(
     private modal: NgbModal,
     private calendarService: CalendarService,
