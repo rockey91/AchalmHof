@@ -31,8 +31,8 @@
         <img src="https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg" class="rounded cus-height" alt="Venue 2" (click)="gotoVenuepage()">
       </div> -->
       <div class="col-6" *ngFor="let venue of venuesList; let i = index;">
-        <h5 class="venue-h5"> Venue {{i + 1}} </h5>
-        <img src="{{venue}}" class="rounded cus-height" alt="Venue {{i + 1}}" (click)="gotoVenuepage()">
+        <h5 class="venue-h5"> {{venue.name}} </h5>
+        <img src="{{venue.name}}" class="rounded cus-height" alt="{{venue.name}}" (click)="gotoVenuepage()">
       </div>
     </div>
   </div>
