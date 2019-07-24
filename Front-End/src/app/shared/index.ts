@@ -1,4 +1,4 @@
-export * from './modules';
-export * from './pipes/shared-pipes.module';
+export * from './global';
 export * from './guard';
+export * from './modules';
 export * from './services';

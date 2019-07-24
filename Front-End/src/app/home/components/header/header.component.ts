@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { VenuesService } from '../../../shared';
 
-import { AuthGuard, GlobalService } from '../../../shared';
+import { AuthGuard,Globals } from '../../../shared';
 
 @Component({
     selector: 'app-header',
@@ -10,40 +11,45 @@ import { AuthGuard, GlobalService } from '../../../shared';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+    name: string =  '' ;
+    role = 0;
+    username: string =  '' ;
+    isAdmin : boolean = false;
     public pushRightClass: string;
     public userLoggedIn: boolean = false;
+
+    venuesList: any = [];
 
     constructor(
       private translate: TranslateService,
       public router: Router,
       private authGuard: AuthGuard,
-      public globalService: GlobalService
+      private globals: Globals,
+      private venuesService: VenuesService
     ) {
-
-        this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
-        this.translate.setDefaultLang('en');
-        const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
-
-        this.router.events.subscribe(val => {
-            if (
-                val instanceof NavigationEnd &&
-                window.innerWidth <= 992 &&
-                this.isToggled()
-            ) {
-                this.toggleSidebar();
-            }
-        });
+        this.role = this.globals.getLoginUserRole();
+        this.name =  this.globals.getLoginUserFullName() ;
+        this.username =  this.globals.getLoginUsername() ;
     }
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
-
-        if( this.authGuard.isLoggedin() ) {
-          this.userLoggedIn = true;
-        }
-
+        if(this.globals.getLoginStatus()) {
+              this.userLoggedIn = true;
+          }
+          else {
+              this.userLoggedIn = false;
+          }
+         if(this.role == 1) {
+             this.isAdmin = true;
+         }
+         else {
+             this.isAdmin = false;
+         }
+         this.venuesService.getVenuesData().then(result => {
+           console.log("venues list in header", result);
+           this.venuesList = result;
+         });
     }
 
     isToggled(): boolean {
@@ -62,9 +68,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
-        localStorage.removeItem('isAdmin');
-        localStorage.removeItem('pcname');
+        this.globals.logout();
     }
 
     changeLang(language: string) {
