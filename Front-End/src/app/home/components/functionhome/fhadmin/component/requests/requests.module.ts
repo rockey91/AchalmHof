@@ -6,8 +6,6 @@ import { RequestsComponent } from './requests.component';
 import { RequestsRoutingModule } from './requests-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   declarations: [
     RequestsComponent
@@ -19,12 +17,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
-    // FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    })
+    NgbModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
