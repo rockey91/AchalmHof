@@ -46,6 +46,6 @@ app.use('/', pcCalRoutes);
 /* Below block of code for starting API */
 let nowDateTime = new Date();
 http.createServer(app).listen(4100, function() {
-  console.log(`App listening with http on port 3100. Started at ${nowDateTime}`);
+  console.log(`App listening with http on port 4100. Started at ${nowDateTime}`);
 });
 /* Above block of code for starting API */

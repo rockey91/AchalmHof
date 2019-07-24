@@ -21,7 +21,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/saveUserDetails',
+        'http://127.0.0.1:4100/ah-api/addInquireRequest',
         model,
         this.httpOptions
     )

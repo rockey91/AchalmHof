@@ -10,7 +10,6 @@ import { InquireRequestsService } from '../../../../shared';
   styleUrls: ['./venuepage.component.scss']
 })
 export class VenuepageComponent implements OnInit {
-
   closeResult:any;
   isSubmitSuccess:boolean = false;
   imageUrlArray: any = [
@@ -53,21 +52,49 @@ export class VenuepageComponent implements OnInit {
 
     submitEnquiry(modal) {
 
-      this.isSubmitSuccess = true;
-
       modal.venue_id = '1';
       modal.request_status = 'pc_requested';
+      console.log(modal);
 
+      if(modal.created_by) {
+        modal = {
+          "pc_name": modal.pc_name,
+          "event_type": modal.event_type,
+          "event_date": modal.event_date,
+          "guests_count": modal.guests_count,
+          "mobile_number": modal.mobile_number,
+          "email_address": modal.email_address,
+          "subject": modal.subject,
+          "message": modal.message,
+          "venue_id": modal.venue_id,
+          "request_status": modal.request_status,
+          "request_comments": modal.pc_name,
+          "created_at" : new Date()
+        }
+      }
+      else {
+        modal = {
+          "pc_name": modal.pc_name,
+          "event_type": modal.event_type,
+          "event_date": modal.event_date,
+          "guests_count": modal.guests_count,
+          "mobile_number": modal.mobile_number,
+          "email_address": modal.email_address,
+          "subject": modal.subject,
+          "message": modal.message,
+          "venue_id": modal.venue_id,
+          "request_status" : 1,
+          "created_at" : new Date()
+        }
+      }
       this.inquireRequestsService.postInquireRequest(modal)
       .then(
         (response) =>{
-            // this.requestId = response[0].data.req_id[0];
-            this.requestId = 3;
+            this.isSubmitSuccess = true;
         },
         (error) => {
             console.log(error);
         }
       );
     }
-
 }
