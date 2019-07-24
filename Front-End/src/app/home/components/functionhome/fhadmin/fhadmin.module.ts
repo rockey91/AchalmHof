@@ -6,12 +6,11 @@ import { FHAdminComponent } from './fhadmin.component';
 import { FHAdminRoutingModule } from './fhadmin-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { RequestsComponent } from './component/requests/requests.component';
 import { ManageComponent } from './component/manage/manage.component';
-import { CalendarViewComponent } from './component/calendar/calendar.component'
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarViewComponent } from './component/calendar/calendar.component';
+
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -28,13 +27,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    CalendarModule,
-    DateAdapter,
-    // FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    })
+    FullCalendarModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

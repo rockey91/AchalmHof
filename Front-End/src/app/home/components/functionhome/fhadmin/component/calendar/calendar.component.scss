@@ -1,28 +1,11 @@
-section {
 
-}
-.modal-body {
-  .row {
-    margin-top:5px;
-  }
-}
-.cus-container-fluid {
-  padding: 15px;
-  height: 100vh;
-  background: #fff;
+.app-top {
+  margin: 0 0 3em;
 }
 
-.card {
-  border: 0px;
-  background: #f7f6f4;
-  margin-top: -2px;
+.app-calendar {
+  margin: 0 auto;
+  max-width: 900px;
 }
-.form-control {
-  overflow: hidden;
-}
-.cus-btn {
-  margin-left:5px
-}
-.btn-icon {
-  margin-right:10px;
-}
+
+// NOTE: the fullcalendar stylesheets are included in the app's global styles.scss
