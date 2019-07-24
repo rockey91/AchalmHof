@@ -23,18 +23,18 @@
                     <a class="nav-link" href="javascript:void(0)" [routerLink]="['/home/functionhalls/section']" ngbDropdownToggle>
                         VENUES <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu-right messages venues" ngbDropdownMenu>
+                    <ul class="dropdown-menu-right messages venues" ngbDropdownMenu *ngFor="let venue of venuesList; let i = index;">
                         <li class="media venue1">
                             <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
                               <div class="media-body">
                                   <h5 class="mt-0 mb-1">
-                                    Venue 1
+                                    {{venue.name}}
                                   </h5>
-                                  <p class="last">Address / Location - 1</p>
+                                  <p class="last">{{venue.address}}</p>
                               </div>
                             </a>
                         </li>
-                        <li class="media venue2">
+  <!--                      <li class="media venue2">
                           <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">
@@ -43,7 +43,7 @@
                                 <p class="last">Address / Location - 2</p>
                             </div>
                           </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <!-- <li class="nav-item ah-nav-item">

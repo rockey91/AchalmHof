@@ -67,6 +67,29 @@ routes.get('/ah-api/getVenue', function (req, res) {
 
 });
 
+//Get all Venues
+routes.get('/ah-api/getAllVenues', function (req, res) {
+
+  console.log(req.query);
+
+  knex.select("*")
+  .from("venues")
+  .timeout(10000, {cancel: true})
+  .map(function (row) { return row; })
+  .then(function(venuesList = []){
+
+    global.sendResponse(req, res, {
+      status: 200,
+      data: venuesList
+    });
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+});
+
 // Update a venue.
 routes.put('/ah-api/updateVenue', function (req, res) {
 

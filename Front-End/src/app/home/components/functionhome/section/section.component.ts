@@ -25,10 +25,7 @@ export class SectionComponent implements OnInit {
 
     this.venuesService.getVenuesList().then(result => {
 
-      this.venuesList = [
-        'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
-        'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
-      ]
+      this.venuesList = result;
     });
 
   }
