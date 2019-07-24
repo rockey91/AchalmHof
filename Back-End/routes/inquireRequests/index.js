@@ -50,7 +50,6 @@ routes.get('/ah-api/getInquireRequest', function (req, res) {
 
   knex.select("*")
   .from("inquire_requests")
-  .where('pc_name', req.query.pc_name)
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
   .then(function(venuesList = []){

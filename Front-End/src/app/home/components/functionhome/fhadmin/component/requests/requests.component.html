@@ -17,7 +17,7 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-6">
-                {{ selectedRequest.name }}
+                {{ selectedRequest.pc_name }}
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-6">
-                {{ selectedRequest.eventType }}
+                {{ selectedRequest.event_type }}
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-6">
-                {{ selectedRequest.eventDate }}
+                {{ selectedRequest.event_date }}
               </div>
             </div>
           </div>
@@ -50,13 +50,13 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-6">
-                {{ selectedRequest.noOfGuests }}
+                {{ selectedRequest.guests_count }}
               </div>
             </div>
           </div>
         </div>
         <div class="reply-text">
-          <textarea name="replyText" value="" placeholder="<reply message>" rows="4" cols="80" [(ngModel)]="replyText">
+          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText">
           </textarea>
         </div>
       </div>
@@ -81,7 +81,6 @@
           <tr>
             <th>#</th>
             <th>PC Name</th>
-            <!-- id, pc_name, event_type, event_date, guests_count, mobile_number, email_address, captcha, subject, message, venue_id, request_status, id, id -->
             <th>Event Type</th>
             <th>Event Date</th>
             <th>Guests #</th>
@@ -89,18 +88,20 @@
             <th>Email Address</th>
             <th>Subject</th>
             <th>Actions</th>
+            <th>Comments</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let req of requestsList; let i = index;">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ req.name }}</td>
-            <td>{{ req.eventType }}</td>
-            <td>{{ req.eventDate }}</td>
-            <td>{{ req.noOfGuests }}</td>
-            <td>{{ req.mobileNumber }}</td>
-            <td>{{ req.emailId }}</td>
-            <td>{{ req.eventSubject }}</td>
+            <td>{{ req.pc_name }}</td>
+            <td>{{ req.event_type }}</td>
+            <td>{{ req.event_date }}</td>
+            <td>{{ req.guests_count }}</td>
+            <td>{{ req.mobile_number }}</td>
+            <td>{{ req.email_address }}</td>
+            <td>{{ req.subject }}</td>
+            <td>{{ req.request_comments }}</td>
             <td>
               <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
             </td>
