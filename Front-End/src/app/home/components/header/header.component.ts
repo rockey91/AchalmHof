@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { VenuesService } from '../../../shared';
 
 import { AuthGuard,Globals } from '../../../shared';
 
@@ -17,11 +18,14 @@ export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     public userLoggedIn: boolean = false;
 
+    venuesList: any = [];
+
     constructor(
       private translate: TranslateService,
       public router: Router,
       private authGuard: AuthGuard,
       private globals: Globals,
+      private venuesService: VenuesService
     ) {
         this.role = this.globals.getLoginUserRole();
         this.name =  this.globals.getLoginUserFullName() ;
@@ -42,6 +46,10 @@ export class HeaderComponent implements OnInit {
          else {
              this.isAdmin = false;
          }
+         this.venuesService.getVenuesData().then(result => {
+           console.log("venues list in header", result);
+           this.venuesList = result;
+         });
     }
 
     isToggled(): boolean {
