@@ -69,7 +69,6 @@ routes.get('/ah-api/getInquireRequest', function (req, res) {
 // Update a inquire request.
 routes.put('/ah-api/updateInquireRequest', function (req, res) {
 
-  console.log(req.body);
   req.body.last_updated_at = knex.fn.now();
 
   knex("inquire_requests")

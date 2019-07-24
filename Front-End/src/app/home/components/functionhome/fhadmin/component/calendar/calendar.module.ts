@@ -6,7 +6,6 @@ import { CalendarViewComponent } from './calendar.component';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   declarations: [

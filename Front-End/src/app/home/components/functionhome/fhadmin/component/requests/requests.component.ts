@@ -124,19 +124,19 @@ export class RequestsComponent implements OnInit {
     this.selectedRequest = this.requestsList[index];
   }
 
-  sendReply(accepted) {
+  sendReply(data, acceptance) {
     this.inquireRequestsService.updateRequest({
-      id: this.selectedRequest.id,
-      request_status: accepted ? 'admin_accepted' : 'admin_rejected'
+      id: data.id,
+      request_status: acceptance ? 'admin_accepted' : 'admin_rejected',
+      last_updated_by : this.username
     })
     .then(
-      (response) =>{
-        if ( accepted ) {
+      (response) => {
+        if ( acceptance ) {
           alert("Your response with portal credentials is shared with PC to schedule the appointment.");
         } else {
           alert("Your response rejecting the request is shared with PC.");
         }
-
       },
       (error) => {
         console.log(error);

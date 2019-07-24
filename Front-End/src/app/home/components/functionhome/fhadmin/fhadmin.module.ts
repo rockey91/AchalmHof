@@ -11,6 +11,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { RequestsComponent } from './component/requests/requests.component';
 import { ManageComponent } from './component/manage/manage.component';
 import { CalendarViewComponent } from './component/calendar/calendar.component'
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { CalendarViewComponent } from './component/calendar/calendar.component'
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
+    CalendarModule,
+    DateAdapter,
     // FlatpickrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
