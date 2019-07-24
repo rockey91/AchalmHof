@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,7 +9,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard, VenuesService } from './shared';
+import { AuthGuard, VenuesService,AuthenticateService, Globals } from './shared';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -24,6 +25,7 @@ export const createTranslateLoader = (http: HttpClient) => {
 @NgModule({
     imports: [
         CommonModule,
+        HttpModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -39,7 +41,9 @@ export const createTranslateLoader = (http: HttpClient) => {
     declarations: [AppComponent],
     providers: [
       AuthGuard,
-      VenuesService
+      VenuesService,
+      Globals,
+      AuthenticateService
     ],
     bootstrap: [AppComponent]
 })

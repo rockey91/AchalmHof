@@ -21,7 +21,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/saveUserDetails',
+        'http://127.0.0.1:4100/ah-api/addInquireRequest',
         model,
         this.httpOptions
     )
@@ -32,12 +32,12 @@ export class InquireRequestsService {
     .catch();
   }
 
-  getInquireRequestsList(){
+  getInquireRequestsList(pcName){
 
     let params = new HttpParams();
-
+    params = params.append('pc_name',pcName);
     return this.httpClient.get(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/enquiry/getListOfRegisteredUsers', {
+        'http://127.0.0.1:4100/ah-api/getInquireRequest', {
           params: params
         }
     )
