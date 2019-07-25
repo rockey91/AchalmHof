@@ -22,14 +22,6 @@
   </div>
   <div class="col-12 venues-list">
     <div class="row">
-      <!-- <div class="col-6 cus-pad-right">
-        <h5 class="venue-h5"> Venue 1 </h5>
-        <img src="https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg" class="rounded cus-height" alt="Venue 1" (click)="gotoVenuepage()">
-      </div>
-      <div class="col-6">
-        <h5 class="venue-h5"> Venue 2 </h5>
-        <img src="https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg" class="rounded cus-height" alt="Venue 2" (click)="gotoVenuepage()">
-      </div> -->
       <div class="col-6" *ngFor="let venue of venuesList; let i = index;">
         <h5 class="venue-h5"> Venue {{i + 1}} </h5>
         <img src="{{venue}}" class="rounded cus-height" alt="Venue {{i + 1}}" (click)="gotoVenuepage()">
