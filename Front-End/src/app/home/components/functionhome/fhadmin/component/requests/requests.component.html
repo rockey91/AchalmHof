@@ -62,8 +62,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" (click)="sendReply(false)" data-dismiss="modal">Reject</button>
-        <button type="button" class="btn btn-success" (click)="sendReply(true)" data-dismiss="modal">Accept</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)">Reject</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)">Accept</button>
       </div>
     </div>
   </div>
