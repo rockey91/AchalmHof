@@ -36,6 +36,7 @@ export class VenuepageComponent implements OnInit {
   }
 
   open(content) {
+    this.isSubmitSuccess = false;
     this.modalService.open(content, {}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -54,7 +55,6 @@ export class VenuepageComponent implements OnInit {
   }
 
   submitEnquiry(modal) {
-
     modal.venue_id = '1';
     modal.request_status = 'pc_requested';
     console.log(modal);

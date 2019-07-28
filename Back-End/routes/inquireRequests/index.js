@@ -1,6 +1,7 @@
 'use strict';
 const routes = require('express').Router();
 var global = require('../../global.js');
+const emailsender = require('../../emailsender.js');
 
 routes.use(bodyParser.json());
 routes.use(function (req, res, next){
@@ -23,11 +24,21 @@ routes.use(function (req, res, next){
 routes.post('/ah-api/addInquireRequest', function (req, res) {
 
   console.log(req.body);
+
   req.body.created_at = knex.fn.now();
 
   knex("inquire_requests")
   .insert(req.body)
-  .then(function(response = 0){
+  .then(function(response = 0) {
+    var mailData = {
+      'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
+      'to' : "yogesh24.ds@gmail.com",
+      'cc' : "",
+      'subject': 'AchalmOf: Inquire Status',
+      'html': 'Hi <br> <br> '+req.body.subject+'. <br> <br>  Regards<br>' + 'Development Team'.link("yogesh.shanmukhappa@affineanalytics.com")
+    }
+
+    emailsender.sendEmail(mailData,{});
 
     global.sendResponse(req, res, {
       status: 200,
@@ -35,7 +46,6 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
         response: response
       }
     });
-
   })
   .catch(function (error) {
     console.log(error);
@@ -45,9 +55,6 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
 
 // Get a inquire request.
 routes.get('/ah-api/getInquireRequest', function (req, res) {
-
-  console.log(req.query);
-
   knex.select("*")
   .from("inquire_requests")
   .timeout(10000, {cancel: true})
@@ -68,51 +75,57 @@ routes.get('/ah-api/getInquireRequest', function (req, res) {
 
 // Update a inquire request.
 routes.put('/ah-api/updateInquireRequest', function (req, res) {
-
   req.body.last_updated_at = knex.fn.now();
-
-  knex("inquire_requests")
-  .update(req.body)
-  .where("id", req.body.id)
-  .then(function(response = 0){
-
+  var result = {};
+  var updateData = {
+    id: req.body.id,
+    request_status: req.body.request_status,
+    last_updated_by : req.body.username
+  }
+  knex.transaction(function (t) {
+    knex("inquire_requests")
+    .update(updateData)
+    .where("id", req.body.id)
+    .then(function(response = 0){
+      var defPwd = req.body.mobile_number + "@achalm";
+      return knex('users')
+      .transacting(t)
+      .insert({
+        username: req.body.email_address,
+        password: defPwd,
+        role: 2,
+        status: 1,
+        created_at: knex.fn.now(),
+        created_by: req.body.username
+      }).
+      then(function(response){
+        console.log("Details saved to users table.");
+        var mailData = {
+          'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
+          'to' : req.body.email_address,
+          'cc' : "",
+          'subject': 'AchalmOf: Inquire Status Approved : User Credentials',
+          'html': 'Hi <br> <br> Please find the below login credentials to access AchalmOf <br> <br> Username : '+req.body.email_address+'. <br> <br> Password : '+defPwd+'<br><br>  Regards<br>' + 'Development Team'.link("yogesh.shanmukhappa@affineanalytics.com")
+        }
+        emailsender.sendEmail(mailData,{});
+      })
+    })
+    .then(t.commit)
+    .catch(t.rollback)
+  })
+  .then(function (success) {
+    // result.data = req.body;
+    // result.result = 'success';
+    // result.message = 'Inquire status updated successfully!';
+    // res.setHeader('Content-Type', 'application/json');
     global.sendResponse(req, res, {
       status: 200,
-      data: {
-        response: response
-      }
+      data: success
     });
-
   })
   .catch(function (error) {
     console.log(error);
   });
-
-});
-
-// Delete a inquire request.
-routes.delete('/ah-api/deleteInquireRequest', function (req, res) {
-
-  console.log(req.body);
-  req.body.deleted_at = knex.fn.now();
-
-  knex("inquire_requests")
-  .update(req.body)
-  .where("id", req.body.id)
-  .then(function(response = 0){
-
-    global.sendResponse(req, res, {
-      status: 200,
-      data: {
-        response: response
-      }
-    });
-
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
 });
 
 module.exports = routes;
