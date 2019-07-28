@@ -92,11 +92,6 @@ export class Globals {
     return userToken;
   }
 
-  // Get the list of employee role users to give resourcing access.
-  getPesonalResAccList(): string[]{
-    return this.pesonalResAccList;
-  }
-
   isHRUser(): boolean {
     return this.getLoginUserRole() === 2;
   }

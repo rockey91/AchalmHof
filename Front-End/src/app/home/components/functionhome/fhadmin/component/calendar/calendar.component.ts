@@ -85,15 +85,18 @@ export class CalendarViewComponent implements OnInit {
 
     console.log(modal);
 
-    // this.inquireRequestsService.postInquireRequest(modal)
-    // .then(
-    //   (response) =>{
-    //     this.isSubmitSuccess = true;
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    modal["admin_user_id"] = 1;
+    modal["created_by"] = 1;
+
+    this.calendarService.postAdminCalendarRequest(modal)
+    .then(
+      (response) =>{
+        this.isSubmitSuccess = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 
