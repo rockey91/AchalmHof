@@ -1,29 +1,14 @@
-import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CalendarService, GlobalService } from '../../../../../../shared';
+import { CalendarService, GlobalService, Globals } from '../../../../../../shared';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
 
 @Component({
   selector: 'app-calendar',
@@ -33,6 +18,7 @@ const colors: any = {
 export class CalendarViewComponent implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
+  @ViewChild('exampleModal1') modal1: Element
 
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
@@ -40,46 +26,22 @@ export class CalendarViewComponent implements OnInit {
   calendarEvents: EventInput[] = [
     { title: 'Event Now', start: new Date() }
   ];
+  closeResult: any;
+  startTime: any;
+  endTime: any;
 
   constructor(
     private modal: NgbModal,
     private calendarService: CalendarService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private modalService: NgbModal,
+    private globals: Globals
   ) {}
 
   ngOnInit() {
-
-    // this.calendarService.getAdminCalendarList()
-    // .then(
-    //   (response:any = []) => {
-    //     var data = response.data;
-    //     var calData = []
-    //     if ( data && data.length ) {
-    //       for(var i = 0; i<data.length; i++) {
-    //         calData.push({
-    //           start:addHours(startOfDay(data[i].schedule_start_time), 2),
-    //           end: addHours(startOfDay(data[i].schedule_end_time),2),
-    //           title: data[i].schedule_title,
-    //           color: '#aaa',
-    //           actions: this.actions,
-    //           allDay: true,
-    //           resizable: {
-    //             beforeStart: true,
-    //             afterEnd: true
-    //           },
-    //           draggable: true
-    //         })
-    //       }
-    //     }
-    //     this.events = calData;
-    //     console.log(this.events)
-    //   },
-    //   (error) => {
-    //     alert(error);
-    //     console.log(error);
-    //   }
-    // );
-
+    let today = new Date();
+    this.startTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
+    this.endTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
   }
 
   toggleVisible() {
@@ -95,14 +57,44 @@ export class CalendarViewComponent implements OnInit {
     calendarApi.gotoDate('2000-01-01'); // call a method on the Calendar object
   }
 
-  handleDateClick(arg) {
-    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
-        title: 'New Event',
-        start: arg.date,
-        allDay: arg.allDay
-      })
+  handleDateClick(arg, content) {
+
+    if ( arg ) {
+      console.log(arg);
+
     }
+
+    this.modalService.open(content, {}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+  addEvent(modal) {
+
+    console.log(modal);
+
+    // this.inquireRequestsService.postInquireRequest(modal)
+    // .then(
+    //   (response) =>{
+    //     this.isSubmitSuccess = true;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+
   }
 
 }

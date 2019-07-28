@@ -11,6 +11,8 @@ import { ManageComponent } from './component/manage/manage.component';
 import { CalendarViewComponent } from './component/calendar/calendar.component';
 
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+// import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    FullCalendarModule
+    FullCalendarModule,
+    // OwlDateTimeModule,
+    // OwlNativeDateTimeModule,
+    // BrowserAnimationsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

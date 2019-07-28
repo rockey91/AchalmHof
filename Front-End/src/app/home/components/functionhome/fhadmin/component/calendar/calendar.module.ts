@@ -7,8 +7,6 @@ import { CalendarRoutingModule } from './calendar-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
-
 @NgModule({
   declarations: [
     CalendarViewComponent
@@ -20,8 +18,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
-    FullCalendarModule
+    NgbModule.forRoot()
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
