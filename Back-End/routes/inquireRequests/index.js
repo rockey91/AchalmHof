@@ -23,8 +23,6 @@ routes.use(function (req, res, next){
 // Add a inquire request.
 routes.post('/ah-api/addInquireRequest', function (req, res) {
 
-  console.log(req.body);
-
   req.body.created_at = knex.fn.now();
 
   knex("inquire_requests")
@@ -59,11 +57,11 @@ routes.get('/ah-api/getInquireRequest', function (req, res) {
   .from("inquire_requests")
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
-  .then(function(venuesList = []){
-
+  .then(function(inquireList = []){
+    console.log(inquireList);
     global.sendResponse(req, res, {
       status: 200,
-      data: venuesList
+      data: inquireList
     });
 
   })

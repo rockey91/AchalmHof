@@ -47,7 +47,7 @@ export class RequestsComponent implements OnInit {
         } else {
           let pcname = this.username;
           this.requestsList = response.data.filter(obj => {
-            return this.username === obj.name;
+            return this.username === obj.email_address;
           });
         }
       },
