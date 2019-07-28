@@ -54,13 +54,18 @@ export class InquireRequestsService {
 
     let params = new HttpParams();
     return this.httpClient.get(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/meeting/getListOfMeeting', {
+        'http://127.0.0.1:4100/ah-api/getMeetingRequest', {
           params: params
         }
     )
     .toPromise()
     .then(response => {
-      return response;
+      console.log("response", response);
+      if ( response && response["data"] ) {
+        return response["data"];
+      } else {
+        return response;
+      }
     })
     .catch(error => {
       console.log(error);
@@ -71,7 +76,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/meeting/saveMeetingDetails',
+        'http://127.0.0.1:4100/ah-api/addMeetingRequest',
         model,
         this.httpOptions
     )
@@ -86,13 +91,18 @@ export class InquireRequestsService {
 
     let params = new HttpParams();
     return this.httpClient.get(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/event/getListOfRegisteredEvents', {
+        'http://127.0.0.1:4100/ah-api/getEventRequest', {
           params: params
         }
     )
     .toPromise()
     .then(response => {
-      return response;
+      console.log("response", response);
+      if ( response && response["data"] ) {
+        return response["data"];
+      } else {
+        return response;
+      }
     })
     .catch(error => {
       console.log(error);
@@ -103,7 +113,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://springbootappaws-env-2.jaquftzyxt.ap-south-1.elasticbeanstalk.com/event/saveEventDetails',
+        'http://127.0.0.1:4100/ah-api/addEventRequest',
         model,
         this.httpOptions
     )

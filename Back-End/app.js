@@ -13,6 +13,8 @@ var venuesRoutes = require('./routes/venues');
 var inqReqsRoutes = require('./routes/inquireRequests');
 var admCalRoutes = require('./routes/adminCalendar');
 var pcCalRoutes = require('./routes/pcCalendar');
+var admMetRoutes = require('./routes/adminMeetings');
+var admEventRoutes = require('./routes/eventDetails');
 
 require('console-stamp')(console, '[yyyy-mm-dd HH:MM:ss.l]');
 
@@ -41,6 +43,8 @@ app.use('/', venuesRoutes);
 app.use('/', inqReqsRoutes);
 app.use('/', admCalRoutes);
 app.use('/', pcCalRoutes);
+app.use('/', admMetRoutes);
+app.use('/', admEventRoutes);
 
 
 /* Below block of code for starting API */
