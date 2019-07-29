@@ -29,6 +29,7 @@ export class CalendarViewComponent implements OnInit {
   closeResult: any;
   startTime: any;
   endTime: any;
+  isSubmitSuccess: boolean = false;
 
   constructor(
     private modal: NgbModal,
