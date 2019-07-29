@@ -30,6 +30,7 @@ export class CalendarViewComponent implements OnInit {
   startTime: any;
   endTime: any;
   isSubmitSuccess: boolean = false;
+  userRole: number = 0;
 
   constructor(
     private modal: NgbModal,
@@ -43,6 +44,7 @@ export class CalendarViewComponent implements OnInit {
     let today = new Date();
     this.startTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
     this.endTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
+    this.userRole = this.globals.getLoginUserRole();
   }
 
   toggleVisible() {
@@ -60,16 +62,22 @@ export class CalendarViewComponent implements OnInit {
 
   handleDateClick(arg, content) {
 
-    if ( arg ) {
-      console.log(arg);
+    if ( arg.allDay && this.userRole && this.userRole !== 1 ) {
+
+      let calendarApi = this.calendarComponent.getApi();
+      calendarApi.changeView('timeGridDay');
+      calendarApi.setOption('slotDuration', "00:45:00");
+
+    } else {
+
+      this.modalService.open(content, {}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
 
     }
 
-    this.modalService.open(content, {}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
   }
 
   private getDismissReason(reason: any): string {
