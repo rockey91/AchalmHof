@@ -18,13 +18,43 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 export class CalendarViewComponent implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
-  @ViewChild('exampleModal1') modal1: Element
+  @ViewChild('closeGoToDate') closeGoToDate: any;
 
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
-  calendarWeekends = true;
+  calendarWeekends = false;
   calendarEvents: EventInput[] = [
-    { title: 'Event Now', start: new Date() }
+    {
+      id:    'available_hours',
+      start: '2015-1-13T8:00:00',
+      end:   '2015-1-13T19:00:00',
+      rendering: 'background'
+    },
+    {
+      id:    'work',
+      start: '2015-1-13T10:00:00',
+      end:   '2015-1-13T16:00:00',
+      constraint: 'available_hours'
+    }
+  ];
+  calendarBusinessHours: any = [
+    {
+      daysOfWeek: [ 0 ], // Monday - Thursday
+      startTime: '00:00', // a start time (10am in this example)
+      endTime: '00:00', // an end time (6pm in this example)
+    },
+    {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      daysOfWeek: [ 1, 2, 3, 4 ], // Monday - Thursday
+      startTime: '09:00', // a start time (10am in this example)
+      endTime: '12:00', // an end time (6pm in this example)
+    },
+    {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      daysOfWeek: [ 1, 2, 3, 4 ], // Monday - Thursday
+      startTime: '14:00', // a start time (10am in this example)
+      endTime: '18:00', // an end time (6pm in this example)
+    }
   ];
   closeResult: any;
   startTime: any;
@@ -55,28 +85,46 @@ export class CalendarViewComponent implements OnInit {
     this.calendarWeekends = !this.calendarWeekends;
   }
 
-  gotoPast() {
-    let calendarApi = this.calendarComponent.getApi();
-    calendarApi.gotoDate('2000-01-01'); // call a method on the Calendar object
+  gotoPast(content) {
+
+    this.modalService.open(content, {}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
   }
 
   handleDateClick(arg, content) {
 
-    if ( arg.allDay && this.userRole && this.userRole !== 1 ) {
-
+    if ( arg.allDay ) {
       let calendarApi = this.calendarComponent.getApi();
       calendarApi.changeView('timeGridDay');
-      calendarApi.setOption('slotDuration', "00:45:00");
-
+      calendarApi.gotoDate( arg.dateStr + "T09:00:00Z" );
+      calendarApi.setOption('slotDuration', "00:30:00");
     } else {
-
       this.modalService.open(content, {}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
-
     }
+
+    // if ( arg.allDay && this.userRole && this.userRole !== 1 ) {
+    //
+    //   let calendarApi = this.calendarComponent.getApi();
+    //   calendarApi.changeView('timeGridDay');
+    //   calendarApi.setOption('slotDuration', "00:30:00");
+    //
+    // } else {
+    //
+    //   this.modalService.open(content, {}).result.then((result) => {
+    //     this.closeResult = `Closed with: ${result}`;
+    //   }, (reason) => {
+    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    //   });
+    //
+    // }
 
   }
 
@@ -107,6 +155,14 @@ export class CalendarViewComponent implements OnInit {
       }
     );
 
+  }
+
+  goToDateEvent(modal) {
+    let calendarApi = this.calendarComponent.getApi();
+    let calendarApi = this.calendarComponent.getApi();
+    calendarApi.changeView('timeGridDay');
+    calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
+    this.closeGoToDate.click();
   }
 
 }
