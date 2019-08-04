@@ -5,6 +5,7 @@ express = require('express');
 mysql = require('mysql');
 bodyParser = require('body-parser');
 bcrypt = require('bcrypt');
+crypto = require('crypto');
 
 // local database viariable
 mysqlHost = '127.0.0.1';
