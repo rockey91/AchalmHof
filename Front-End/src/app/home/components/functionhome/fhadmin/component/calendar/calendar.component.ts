@@ -18,7 +18,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 export class CalendarViewComponent implements OnInit {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
-  @ViewChild('closeGoToDate') closeGoToDate: any;
+  @ViewChild('closeGoToDate') closeGoToDate: ElementRef<HTMLElement>;
 
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
@@ -61,6 +61,11 @@ export class CalendarViewComponent implements OnInit {
   endTime: any;
   isSubmitSuccess: boolean = false;
   userRole: number = 0;
+  minimumTime: any = "09:00:00";
+  maximumTime: any = "18:00:00";
+  validRange: any = {
+    start: '2019-08-15'
+  }
 
   constructor(
     private modal: NgbModal,
@@ -72,8 +77,9 @@ export class CalendarViewComponent implements OnInit {
 
   ngOnInit() {
     let today = new Date();
-    this.startTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
-    this.endTime = this.globals.getFullDateTime(new Date()).replace(" ", "T");
+    let tomorrow = new Date();
+    tomorrow.setDate( today.getDate() + 1 );
+    this.validRange.start = this.globals.getFullDateTime( tomorrow ).substr(0, 10);
     this.userRole = this.globals.getLoginUserRole();
   }
 
@@ -103,28 +109,19 @@ export class CalendarViewComponent implements OnInit {
       calendarApi.gotoDate( arg.dateStr + "T09:00:00Z" );
       calendarApi.setOption('slotDuration', "00:30:00");
     } else {
-      this.modalService.open(content, {}).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
+      let startTimeHours = Number(arg.dateStr.substr(11, 2));
+      let startTimeMinutes = Number(arg.dateStr.substr(11, 2));
+      let startTimeInMins = (startTimeHours * 60) + startTimeMinutes;
+      if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
+        this.startTime = arg.dateStr.substr(0, 19);
+        this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
+        this.modalService.open(content, {}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }
     }
-
-    // if ( arg.allDay && this.userRole && this.userRole !== 1 ) {
-    //
-    //   let calendarApi = this.calendarComponent.getApi();
-    //   calendarApi.changeView('timeGridDay');
-    //   calendarApi.setOption('slotDuration', "00:30:00");
-    //
-    // } else {
-    //
-    //   this.modalService.open(content, {}).result.then((result) => {
-    //     this.closeResult = `Closed with: ${result}`;
-    //   }, (reason) => {
-    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //   });
-    //
-    // }
 
   }
 
@@ -147,7 +144,7 @@ export class CalendarViewComponent implements OnInit {
 
     this.calendarService.postAdminCalendarRequest(modal)
     .then(
-      (response) =>{
+      (response) => {
         this.isSubmitSuccess = true;
       },
       (error) => {
@@ -161,7 +158,13 @@ export class CalendarViewComponent implements OnInit {
     let calendarApi = this.calendarComponent.getApi();
     calendarApi.changeView('timeGridDay');
     calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
-    this.closeGoToDate.click();
+    //
+    // let el: HTMLElement = this.closeGoToDate.nativeElement;
+    // el.click();
+  }
+
+  selectAllow(start, end, jsEvent, view) {
+
   }
 
 }
