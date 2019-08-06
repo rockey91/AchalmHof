@@ -159,7 +159,6 @@ export class CalendarViewComponent implements OnInit {
 
   goToDateEvent(modal) {
     let calendarApi = this.calendarComponent.getApi();
-    let calendarApi = this.calendarComponent.getApi();
     calendarApi.changeView('timeGridDay');
     calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
     this.closeGoToDate.click();
