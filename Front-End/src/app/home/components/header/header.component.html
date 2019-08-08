@@ -23,9 +23,9 @@
                     <a class="nav-link" href="javascript:void(0)" [routerLink]="['/home/functionhalls/section']" ngbDropdownToggle>
                         VENUES <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu-right messages venues" ngbDropdownMenu *ngFor="let venue of venuesList; let i = index;">
-                        <li class="media venue1">
-                            <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
+                    <ul class="dropdown-menu-right messages venues" ngbDropdownMenu>
+                        <li class="media venue1" *ngFor="let venue of venuesList; let i = index;">
+                            <a href="javascript:void(0)"   (click)="gotoVenuepage(venue.id)">
                               <div class="media-body">
                                   <h5 class="mt-0 mb-1">
                                     {{venue.name}}
@@ -34,23 +34,8 @@
                               </div>
                             </a>
                         </li>
-  <!--                      <li class="media venue2">
-                          <a href="#" [routerLink]="['/home/functionhalls/venuepage']">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">
-                                  Venue 2
-                                </h5>
-                                <p class="last">Address / Location - 2</p>
-                            </div>
-                          </a>
-                        </li> -->
                     </ul>
                 </li>
-                <!-- <li class="nav-item ah-nav-item">
-                  <a class="nav-link" href="#">
-                    CONTACT
-                  </a>
-                </li> -->
                 <li *ngIf="!userLoggedIn" class="nav-item">
                   <a class="nav-link" [routerLink]="['/login']">
                     LOGIN

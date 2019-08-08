@@ -46,10 +46,13 @@ export class HeaderComponent implements OnInit {
          else {
              this.isAdmin = false;
          }
-         this.venuesService.getVenuesData().then(result => {
-           console.log("venues list in header", result);
+         this.venuesService.getVenuesList().then(result => {
            this.venuesList = result;
          });
+    }
+
+    gotoVenuepage(venueId) {
+      this.router.navigate(['/home/functionhalls/venuepage/'+venueId]);
     }
 
     isToggled(): boolean {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit,OnChanges, NgModule, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { InquireRequestsService, VenuesService } from '../../../../shared';
@@ -16,12 +16,19 @@ export class VenuepageComponent implements OnInit {
     'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
     'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
   ];
-  venuesList: any = [];
+  venue: any = {
+    name: "",
+    address: "",
+    contact_number: "",
+    location_link: ""
+  };
   requestId: number = null;
+  venueId :any;
 
   constructor(
     private translate: TranslateService,
     public router: Router,
+    private route: ActivatedRoute,
     private modalService: NgbModal,
     private inquireRequestsService: InquireRequestsService,
     private venuesService: VenuesService
@@ -30,8 +37,16 @@ export class VenuepageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.venuesService.getVenuesList().then(result => {
-      this.venuesList = result;
+    this.route.params.subscribe(params => {
+       this.venueId = params['id'];
+       this.getVenueDetails(this.venueId);
+    });
+  }
+
+  getVenueDetails(id) {
+    console.log({'test here' : id});
+    this.venuesService.getVenueData(id).then(result => {
+      this.venue = result[0];
     });
   }
 

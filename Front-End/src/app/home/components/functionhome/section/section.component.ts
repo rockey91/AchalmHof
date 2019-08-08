@@ -22,16 +22,13 @@ export class SectionComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.venuesService.getVenuesList().then(result => {
-
       this.venuesList = result;
     });
-
   }
 
-  gotoVenuepage() {
-    this.router.navigate(['/home/functionhalls/venuepage']);
+  gotoVenuepage(venueId) {
+    this.router.navigate(['/home/functionhalls/venuepage/'+venueId]);
   }
 
 }

@@ -2,29 +2,32 @@
   <div class="col-8">
     <h5> Function Hall </h5>
     <p class="p">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+Unsere große Festscheune ist mir ihren 375qm² sehr großzügig gestaltet und kann für viele verschiedene Anlässe genutzt werden. Neben Bankettbestuhlung an Rund- so wie Tafeltischen können zudem Schulungen Tagungen und verschiedenste Feierlichkeiten veranstaltet werden. Bei entsprechendem Wetter ist es zudem möglich, Ihre Veranstaltung wie etwa eine freie Trauung in den Herrlichen Außenbereich zu verlegen. In diesem ist ein Naturteich sowie einem Spielplatz für die kleinen Gäste vorhanden.</p>
   </div>
   <div class="col-4 news-feed">
     <h6 class="h6-title"> Interesting Stuff </h6>
     <ul class="cus-ul">
       <li>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Fest Installierte Ambientbeleuchtung im Innen- sowie Außenbereich
       </li>
       <li>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Vorbereitungsküche, Geschirr und Beteck vorhanden
       </li>
       <li>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Naturumgeben
       </li>
-
+      <li>Kinderspielplatz			</li>
+      <li> Beamer + Leinwand			</li>
+      <li>Kühlmöglichkeiten 			 </li>
+      <li>Großzügiger Außenbereich mit Naturteich			 </li>
+      <li>Kraftstrom vorhanden			 </li>
     </ul>
   </div>
   <div class="col-12 venues-list">
     <div class="row">
-      <div class="col-6" *ngFor="let venue of venuesList; let i = index;">
-        <h5 class="venue-h5"> Venue {{i + 1}} </h5>
-        <img src="{{venue}}" class="rounded cus-height" alt="Venue {{i + 1}}" (click)="gotoVenuepage()">
+      <div class="col-6" *ngFor="let list of venuesList; let i = index;">
+        <h5 class="venue-h5"> {{list.name}} </h5>
+        <img src="{{list.images}}" class="rounded cus-height" alt="Venue {{i + 1}}" (click)="gotoVenuepage(list.id)">
       </div>
     </div>
   </div>

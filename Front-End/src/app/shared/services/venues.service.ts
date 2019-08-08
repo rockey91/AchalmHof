@@ -18,36 +18,31 @@ export class VenuesService {
   }
 
   getVenuesList(){
-
-    let params = new HttpParams();
-
-    return this.httpClient.get(
-      'http://localhost:4100/ah-api/getAllVenues', {
-        params: params
-      }
-    )
-    .toPromise()
-    .then(response => {
-      console.log("response", response);
-      //return response.data;
-
-      return [
-        'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
-        'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
-      ];
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
+      let params = new HttpParams();
+      return this.httpClient.get(
+        'http://localhost:4100/ah-api/getAllVenues', {
+          params: params
+        }
+      )
+      .toPromise()
+      .then(response => {
+        console.log("response", response);
+        if ( response && response["data"] ) {
+          return response["data"];
+        } else {
+          return response;
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  getVenuesData(){
-
+  getVenueData(id) {
     let params = new HttpParams();
-
+    params = params.append('venueId', id);
     return this.httpClient.get(
-      'http://localhost:4100/ah-api/getAllVenues', {
+      'http://localhost:4100/ah-api/getVenue', {
         params: params
       }
     )
@@ -59,17 +54,10 @@ export class VenuesService {
       } else {
         return response;
       }
-
-      //  return [
-      //  'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
-      //  'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
-      //];
-
     })
     .catch(error => {
       console.log(error);
     });
-
   }
 
 }

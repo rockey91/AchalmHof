@@ -9,6 +9,8 @@ import { VenuepageRoutingModule } from './venuepage-routing.module';
 import { VenuepageComponent } from './venuepage.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { SharedPipesModule } from '../../../../shared'
+
 @NgModule({
     imports: [
         CommonModule,
@@ -18,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         SlideshowModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        SharedPipesModule
     ],
     declarations: [VenuepageComponent]
 })
