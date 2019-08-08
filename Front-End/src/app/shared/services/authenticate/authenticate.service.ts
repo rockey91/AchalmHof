@@ -22,7 +22,8 @@ export class AuthenticateService {
     console.log({"service": model})
     var secureUsercreds =
     {
-      username: model.username
+      username: model.username,
+      password: model.password
     };
 
     return this.httpClient.post(
