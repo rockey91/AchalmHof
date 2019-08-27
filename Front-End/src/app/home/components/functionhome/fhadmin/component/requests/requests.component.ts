@@ -17,6 +17,7 @@ export class RequestsComponent implements OnInit {
   requestsList: any = [];
   selectedRequest: any = {};
   username : string = '';
+  userRole: number = 0;
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   meetingList: any = [];
@@ -25,6 +26,8 @@ export class RequestsComponent implements OnInit {
   meetingId: number = null;
   eventId: number = null;
 
+  actionItem: number = 0;
+
   constructor(
     private modal: NgbModal,
     private globalService: GlobalService,
@@ -32,6 +35,7 @@ export class RequestsComponent implements OnInit {
     private globals: Globals
   ) {
     this.username = this.globals.getLoginUsername();
+    this.userRole = this.globals.getLoginUserRole();
   }
 
   ngOnInit() {
@@ -42,7 +46,7 @@ export class RequestsComponent implements OnInit {
     this.inquireRequestsService.getInquireRequestsList(this.username)
     .then(
       (response:any = []) =>{
-        if ( this.globals.getLoginUserRole() == 1 ) {
+        if ( this.userRole == 1 ) {
           this.requestsList = response.data;
         } else {
           let pcname = this.username;
@@ -101,6 +105,34 @@ export class RequestsComponent implements OnInit {
 
       }
     )
+  }
+
+  isRejectable(selectedRequest): boolean {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 'pc_requested' ) ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isAcceptable(selectedRequest): boolean {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 'pc_requested' ) ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isSchedulable(selectedRequest): boolean {
+    if ( this.userRole != 1 && selectedRequest.request_status == 'admin_accepted' ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showAdminCalendar(): void {
+
   }
 
 }

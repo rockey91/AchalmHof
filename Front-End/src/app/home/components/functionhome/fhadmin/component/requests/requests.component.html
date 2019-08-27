@@ -62,8 +62,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)">Reject</button>
-        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)">Accept</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept</button>
+        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)">Schedule Appointment</button>
       </div>
     </div>
   </div>
