@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
           .then(
               (response) => {
 
-                  let body = response.data[0];
+                  let body = response.data.data[0];
 
                   if ( body.status ) {
                       this.globals.clearSessionStorage();
