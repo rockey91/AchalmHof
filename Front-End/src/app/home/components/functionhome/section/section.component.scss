@@ -2,14 +2,23 @@
   padding: 35px;
   .p {
     margin-top:10px;
+    padding:20px 0px;
   }
   .h6-title {
     border-bottom:double
   }
+  .page-header {
+    color: #575d00f0;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px #bf8500;
+  }
   .news-feed {
-    padding: 10px;
-    border: 0px solid #ccc;
-    background: #e9e9e9;
+    padding: 15px;
+    background: #71a23c;
+    color: #fff;
+    border-radius: 2px;
     .cus-ul {
       text-decoration: none;
       li {
@@ -23,9 +32,12 @@
     .venue-h5 {
       text-align: center;
       margin:15px auto;
+      font-weight: 600;
+      color: #264802;
     }
     .rounded {
       border-radius: 20px !important;
+      border: 5px solid #ecd1b4;
     }
     .cus-pad-right {
       padding-right: 5px;

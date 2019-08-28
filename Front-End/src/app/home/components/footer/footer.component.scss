@@ -1,8 +1,14 @@
-$topnav-background-color: #222;
+$topnav-background-color: #543b00;
 .main-header {
   width: 100%;
   margin: 0 auto;
   background-color: $topnav-background-color;
+}
+.main-footer {
+  width: 100%;
+  margin: 0 auto;
+  background-color: $topnav-background-color;
+  color: #fff
 }
 :host {
     .navbar {
