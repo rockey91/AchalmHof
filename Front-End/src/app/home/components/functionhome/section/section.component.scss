@@ -12,7 +12,7 @@
     text-transform: uppercase;
     font-size: 24px;
     font-weight: 600;
-    text-shadow: 1px 1px 2px #bf8500;
+    text-shadow: 1px 1px 2px #648C1C;
   }
   .news-feed {
     padding: 15px;
@@ -37,7 +37,7 @@
     }
     .rounded {
       border-radius: 20px !important;
-      border: 5px solid #ecd1b4;
+      border: 5px solid #D5DC6B;
     }
     .cus-pad-right {
       padding-right: 5px;
@@ -48,6 +48,22 @@
     }
     img.cus-height {
       height: 400px;
+    }
+  }
+}
+.table-custom {
+  tbody {
+    tr {
+      background: #71a23c82;
+      color: #00400e;
+      td:first-child {
+         font-size: 16px;
+         font-weight: 600;
+       }
+       td:nth-child(2) {
+         font-size: 14px;
+         font-weight: 600;
+       }
     }
   }
 }
