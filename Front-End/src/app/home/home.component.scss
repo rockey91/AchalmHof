@@ -3,6 +3,9 @@ $blue: #071148;
 .pad-left {
   padding-left: 10px;
 }
+.slideshow-container {
+  border-radius: 50% !important;
+}
 .home-page {
 
   background-image: url("../../assets/images/download.gif");
@@ -22,7 +25,12 @@ $blue: #071148;
       padding: 2rem 0;
     }
   }
-
+  .banner-height {
+    height: 300px;
+  }
+  .center-rouded {
+    border-radius: 50%;
+  }
   .home-tb-pad {
     padding: 2rem 5rem;
 

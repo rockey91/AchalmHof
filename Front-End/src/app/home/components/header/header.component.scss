@@ -1,4 +1,4 @@
-$topnav-background-color: #222;
+$topnav-background-color: #648C1C;
 .main-header {
   width: 100%;
   margin: 0 auto;
@@ -6,7 +6,9 @@ $topnav-background-color: #222;
 }
 :host {
     .navbar {
-        background-color: $topnav-background-color;
+        background-color: #648C1C;
+        border-right: 1px solid #648C1C;
+        border-left: 1px solid #648C1C;
         .navbar-brand {
             color: #fff;
             img {
@@ -15,7 +17,7 @@ $topnav-background-color: #222;
             }
         }
         .nav-item > a {
-            color: #999;
+            color: #fff;
             &:hover {
                 color: #fff;
             }
