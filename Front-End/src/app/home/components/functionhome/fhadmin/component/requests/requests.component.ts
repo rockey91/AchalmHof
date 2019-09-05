@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OptionsInput } from '@fullcalendar/core';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import {
   InquireRequestsService,
   Globals,
@@ -67,7 +67,6 @@ export class RequestsComponent implements OnInit {
   startTime: any;
   endTime: any;
   isSubmitSuccess: boolean = false;
-  userRole: number = 0;
   minimumTime: any = "09:00:00";
   maximumTime: any = "18:00:00";
   validRange: any = {

@@ -72,7 +72,7 @@
 </div>
 
 <!-- Request Calendar Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
+<div class="modal fade" id="exampleModal1" tabindex="-2" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -122,6 +122,22 @@
   </div>
 </div>
 
+<!-- <div class="modal fade" id="exampleModal2" tabindex="-3" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal2Label">Appointment Schedule Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Event form here...
+      </div>
+    </div>
+  </div>
+</div> -->
+
 <!-- Request Calendar Event Modal -->
 <ng-template #calEvent let-c="close" let-d="dismiss">
 
@@ -138,7 +154,7 @@
       <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
         Cool! Your schedule is updated on your calendar.
       </div>
-      <form novalidate #f="ngForm" (ngSubmit)="addEvent(f.value)" class="tab-info tab-content">
+      <form novalidate (ngSubmit)="addEvent(f.value)" class="">
         <div class="row">
 
           <div class="col-8">
@@ -147,7 +163,7 @@
               <div class="row">
                 <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
-                  <input type="text" name="schedule_title" class="form-control" ngModel>
+                  <input type="text" name="schedule_title" class="form-control">
                 </div>
               </div>
             </div>
@@ -190,6 +206,50 @@
             <hr />
             <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
             <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</ng-template>
+<ng-template #goToDate let-c="close" let-d="dismiss">
+
+  <div class="modal-container">
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> Specify a date </h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form novalidate #f1="ngForm" (ngSubmit)="goToDateEvent(f1.value)" class="tab-info tab-content">
+        <div class="row">
+
+          <div class="col-8">
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-3"> Date  <span class="pull-right"> : </span> </label>
+                <div class="col-6">
+                  <input type="date" name="goToSpecificDate" class="form-control" [(ngModel)]="startTime">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-8 align-right">
+            <hr />
+            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
+            <button type="button" class="btn btn-secondary" #closeGoToDate (click)="d('Cross click')">Close</button>
           </div>
         </div>
 
