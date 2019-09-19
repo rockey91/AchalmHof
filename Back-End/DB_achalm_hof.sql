@@ -162,7 +162,7 @@ CREATE TABLE `inquire_requests` (
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +171,7 @@ CREATE TABLE `inquire_requests` (
 
 LOCK TABLES `inquire_requests` WRITE;
 /*!40000 ALTER TABLE `inquire_requests` DISABLE KEYS */;
-INSERT INTO `inquire_requests` VALUES (1,'ABCD',NULL,'ABCD','2019-07-24 18:29:05',300,'+1-3984948','rockey91@gmail.com','Subj','Message',1,'admin_accepted','I would love to have loud speakers at the venue.','2019-07-23 15:02:40',1,'2019-07-24 18:29:05','admin',NULL,NULL),(2,'YOGESH S',NULL,'1','2019-07-23 18:30:00',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,'1',NULL,'2019-07-23 16:02:49',NULL,NULL,NULL,NULL,NULL),(3,'YOGESH S',NULL,'1','2019-07-23 18:30:00',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,'1',NULL,'2019-07-23 16:03:22',NULL,NULL,NULL,NULL,NULL),(4,'YOGESH S',NULL,'1','2019-07-24 18:30:00',21,'8971400707','yogesh24.ds@gmail.com','Party hall booking','XZ GVVGS',1,'1',NULL,'2019-07-23 16:04:32',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `inquire_requests` VALUES (11,'YOGESH S',NULL,'1','2019-07-29 07:50:21',120,'8971400707','yogesh24.ds@gmail.com','Party hall booking','party hall booking confirmation',1,'admin_accepted',NULL,'2019-07-29 07:48:55',NULL,NULL,'admin',NULL,NULL),(12,'Rakesh S',NULL,'1','2019-07-30 18:30:00',150,'8971400707','rockey91@gmail.com','Party hall booking','accepted',1,'1',NULL,'2019-07-29 07:49:59',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `inquire_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +265,7 @@ CREATE TABLE `users` (
   `deleted_by` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +274,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin',1,1,NULL,'2019-07-23 17:05:15','1',NULL,NULL,NULL,NULL),(2,'Testy','test@abc',1,1,NULL,'2019-07-24 16:52:43','1',NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'admin','admin',1,1,NULL,'2019-07-23 17:05:15','1',NULL,NULL,NULL,NULL),(15,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-07-29 07:50:21','admin',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,6 +289,7 @@ CREATE TABLE `venues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `address` tinytext NOT NULL,
+  `images` tinytext NOT NULL,
   `location_link` tinytext,
   `contact_number` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -297,8 +298,9 @@ CREATE TABLE `venues` (
   `last_updated_by` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `deleted_by` int(11) DEFAULT NULL,
+  `description` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='List of venues and their details.';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='List of venues and their details.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +309,7 @@ CREATE TABLE `venues` (
 
 LOCK TABLES `venues` WRITE;
 /*!40000 ALTER TABLE `venues` DISABLE KEYS */;
-INSERT INTO `venues` VALUES (1,'venue1','german','https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg','+91-83737890','2019-07-24 17:42:32',1,NULL,NULL,NULL,NULL);
+INSERT INTO `venues` VALUES (3,'Große Festscheune','Achalm Hof, Stettert 6, 72762 Reutlingen','https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg','https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10571.425354603814!2d9.2476951!3d48.5168186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1a3b5710bed3a1c!2sAchalm+Hof!5e0!3m2!1sde!2sde!4v1564392770315!5m2!1sde!2sde',' 07121 / 17400','2019-08-08 05:56:00',1,NULL,NULL,NULL,NULL,'Unsere große Festscheune ist mir ihren 375qm² sehr großzügig gestaltet und kann für viele verschiedene Anlässe genutzt werden. Neben Bankettbestuhlung an Rund- so wie Tafeltischen können zudem Schulungen Tagungen und verschiedenste Feierlichkeiten veranstaltet werden. Bei entsprechendem Wetter ist es zudem möglich, Ihre Veranstaltung wie etwa eine freie Trauung in den Herrlichen Außenbereich zu verlegen. In diesem ist ein Naturteich sowie einem Spielplatz für die kleinen Gäste vorhanden. '),(4,'Große Restue','Achalm Hof, Stettert 6, 72762 Reutlingen','https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg','https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10571.425354603814!2d9.2476951!3d48.5168186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1a3b5710bed3a1c!2sAchalm+Hof!5e0!3m2!1sde!2sde!4v1564392770315!5m2!1sde!2sde',' 07121 / 17400','2019-08-08 05:56:00',1,NULL,NULL,NULL,NULL,'Unsere große Festscheune ist mir ihren 375qm² sehr großzügig gestaltet und kann für viele verschiedene Anlässe genutzt werden. Neben Bankettbestuhlung an Rund- so wie Tafeltischen können zudem Schulungen Tagungen und verschiedenste Feierlichkeiten veranstaltet werden. Bei entsprechendem Wetter ist es zudem möglich, Ihre Veranstaltung wie etwa eine freie Trauung in den Herrlichen Außenbereich zu verlegen. In diesem ist ein Naturteich sowie einem Spielplatz für die kleinen Gäste vorhanden. ');
 /*!40000 ALTER TABLE `venues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,6 +326,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-25 15:52:08
-
-ALTER TABLE users ADD passwordsalt varchar(50);
+-- Dump completed on 2019-09-19 19:29:07
