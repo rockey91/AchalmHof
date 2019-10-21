@@ -27,6 +27,9 @@ export class RequestsComponent implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
   @ViewChild('closeGoToDate') closeGoToDate: ElementRef<HTMLElement>;
 
+  showReqListTable: boolean = true;
+  showCalendar: boolean = false;
+
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = false;
@@ -197,7 +200,8 @@ export class RequestsComponent implements OnInit {
   }
 
   showAdminCalendar(): void {
-
+    this.showReqListTable = false;
+    this.showCalendar = true;
   }
 
   toggleVisible() {

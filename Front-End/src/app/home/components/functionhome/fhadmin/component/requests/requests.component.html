@@ -1,78 +1,7 @@
-<!-- Request Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Request Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6">
-            <div class="row">
-              <div class="col-6">
-                <label for="">PC Name</label>
-                <span class="pull-right">:</span>
-              </div>
-              <div class="col-6">
-                {{ selectedRequest.pc_name }}
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col-6">
-                <label for=""> Event Type </label>
-                <span class="pull-right">:</span>
-              </div>
-              <div class="col-6">
-                {{ selectedRequest.event_type }}
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col-6">
-                <label for="">Event Date</label>
-                <span class="pull-right">:</span>
-              </div>
-              <div class="col-6">
-                {{ selectedRequest.event_date }}
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col-6">
-                <label for="">No Of Guests </label>
-                <span class="pull-right">:</span>
-              </div>
-              <div class="col-6">
-                {{ selectedRequest.guests_count }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
-          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText">
-          </textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject</button>
-        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept</button>
-        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)"
-        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- Request Calendar Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-2" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal1" tabindex="-2" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -87,7 +16,6 @@
 
           <div class='app-top'>
             <button (click)='toggleVisible()'>toggle visible</button>
-            <!-- <button (click)='toggleWeekends()'>toggle weekends</button> -->
             <button (click)='gotoPast(goToDate)'>go to a date in the past</button>
             (also, click a date/time to add an event)
           </div>
@@ -120,7 +48,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- <div class="modal fade" id="exampleModal2" tabindex="-3" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -154,7 +82,7 @@
       <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
         Cool! Your schedule is updated on your calendar.
       </div>
-      <form novalidate (ngSubmit)="addEvent(f.value)" class="">
+      <form novalidate #f="ngForm" (ngSubmit)="addEvent(f.value)" class="">
         <div class="row">
 
           <div class="col-8">
@@ -163,7 +91,7 @@
               <div class="row">
                 <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
-                  <input type="text" name="schedule_title" class="form-control">
+                  <input type="text" name="schedule_title" class="form-control" ngModel>
                 </div>
               </div>
             </div>
@@ -260,14 +188,16 @@
 
 </ng-template>
 
+<!-- Requests tab -->
 <div class="row">
   <div class="col col-xl-12 col-lg-12">
     <div class="card mb-12">
-      <!-- <div class="card-header">
-      Request Details
-    </div> -->
+
+
     <div class="card-body table-responsive">
-      <table class="table">
+
+      <!-- Requests list table -->
+      <table class="table" [hidden]="!showReqListTable">
         <thead>
           <tr>
             <th>#</th>
@@ -301,7 +231,112 @@
           </tr>
         </tbody>
       </table>
+
+      <!-- Calendar application -->
+      <div class='app' [hidden]="!showCalendar">
+
+        <div class='app-calendar' *ngIf="calendarVisible">
+          <full-calendar
+          #calendar
+          defaultView="dayGridMonth"
+          [header]="{
+            left: 'prev,next',
+            center: 'title',
+            right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
+          }"
+          [allDaySlot]="false"
+          [businessHours]="calendarBusinessHours"
+          [plugins]="calendarPlugins"
+          [events]="calendarEvents"
+          (dateClick)="handleDateClick($event, calEvent)"
+          [selectConstraint]="businessHours"
+          [selectable]="true"
+          [minTime]="minimumTime"
+          [maxTime]="maximumTime"
+          hiddenDays="[0,5,6]"
+          [validRange]="validRange"
+          [height]="350"
+          ></full-calendar>
+        </div>
+
+      </div>
+
     </div>
+
+
   </div>
 </div>
+</div>
+
+<!-- Request Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">PC Name</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.pc_name }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for=""> Event Type </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.event_type }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">Event Date</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.event_date }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-6">
+                <label for="">No Of Guests </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.guests_count }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
+          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText">
+          </textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept</button>
+        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)"
+        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
+      </div>
+    </div>
+  </div>
 </div>
