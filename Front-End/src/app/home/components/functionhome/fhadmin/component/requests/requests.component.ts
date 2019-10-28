@@ -33,20 +33,7 @@ export class RequestsComponent implements OnInit {
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = false;
-  calendarEvents: EventInput[] = [
-    {
-      id:    'available_hours',
-      start: '2015-1-13T8:00:00',
-      end:   '2015-1-13T19:00:00',
-      rendering: 'background'
-    },
-    {
-      id:    'work',
-      start: '2015-1-13T10:00:00',
-      end:   '2015-1-13T16:00:00',
-      constraint: 'available_hours'
-    }
-  ];
+  calendarEvents: EventInput[] = [];
   calendarBusinessHours: any = [
     {
       daysOfWeek: [ 0 ], // Monday - Thursday
@@ -122,6 +109,33 @@ export class RequestsComponent implements OnInit {
             return this.username === obj.email_address;
           });
         }
+
+        this.getCalendarEvents();
+      },
+      (error) => {
+        alert(error);
+        console.log(error);
+      }
+    );
+  }
+
+  getCalendarEvents() {
+    this.calendarService.getAdminCalendarList()
+    .then(
+      (response:any = []) =>{
+        var allEvents = response.data;
+
+        var eventObjs = allEvents.map(obj => {
+          return {
+            id: obj.id,
+            start: obj.schedule_start_time.substr(0, 19),
+            end: obj.schedule_end_time.substr(0, 19),
+            title: obj.schedule_title
+          };
+        });
+
+        this.calendarEvents = eventObjs;
+
       },
       (error) => {
         alert(error);
@@ -222,7 +236,7 @@ export class RequestsComponent implements OnInit {
 
   }
 
-  handleDateClick(arg, content) {
+  handleDateClick(arg, modalId) {
 
     if ( arg.allDay ) {
       let calendarApi = this.calendarComponent.getApi();
@@ -236,7 +250,7 @@ export class RequestsComponent implements OnInit {
       if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
         this.startTime = arg.dateStr.substr(0, 19);
         this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
-        this.modalService.open(content, {}).result.then((result) => {
+        this.modalService.open(modalId, {}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

@@ -23,20 +23,7 @@ export class CalendarViewComponent implements OnInit {
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = false;
-  calendarEvents: EventInput[] = [
-    {
-      id:    'available_hours',
-      start: '2015-1-13T8:00:00',
-      end:   '2015-1-13T19:00:00',
-      rendering: 'background'
-    },
-    {
-      id:    'work',
-      start: '2015-1-13T10:00:00',
-      end:   '2015-1-13T16:00:00',
-      constraint: 'available_hours'
-    }
-  ];
+  calendarEvents: EventInput[] = [];
   calendarBusinessHours: any = [
     {
       daysOfWeek: [ 0 ], // Monday - Thursday
@@ -57,6 +44,8 @@ export class CalendarViewComponent implements OnInit {
     }
   ];
   closeResult: any;
+  scheduleTitle: string;
+  scheduleDesc: string;
   startTime: any;
   endTime: any;
   isSubmitSuccess: boolean = false;
@@ -81,6 +70,106 @@ export class CalendarViewComponent implements OnInit {
     tomorrow.setDate( today.getDate() + 1 );
     this.validRange.start = this.globals.getFullDateTime( tomorrow ).substr(0, 10);
     this.userRole = this.globals.getLoginUserRole();
+
+    this.getCalendarEvents();
+    // this.calendarEvents = [
+    //   {
+    //     id:    '1',
+    //     start: '2019-10-24T09:00:00',
+    //     end:   '2019-10-24T09:30:00'
+    //   },
+    //   {
+    //     id:    '2',
+    //     start: '2019-10-24T09:30:00',
+    //     end:   '2019-10-24T10:00:00'
+    //   },
+    //   {
+    //     id:    '3',
+    //     start: '2019-10-24T10:00:00',
+    //     end:   '2019-10-24T10:30:00'
+    //   },
+    //   {
+    //     id:    '4',
+    //     start: '2019-10-24T10:30:00',
+    //     end:   '2019-10-24T11:00:00'
+    //   },
+    //   {
+    //     id:    '5',
+    //     start: '2019-10-24T11:00:00',
+    //     end:   '2019-10-24T11:30:00'
+    //   },
+    //   {
+    //     id:    '6',
+    //     start: '2019-10-24T11:30:00',
+    //     end:   '2019-10-24T12:00:00'
+    //   },
+    //   {
+    //     id:    '7',
+    //     start: '2019-10-24T14:00:00',
+    //     end:   '2019-10-24T14:30:00'
+    //   },
+    //   {
+    //     id:    '8',
+    //     start: '2019-10-24T14:30:00',
+    //     end:   '2019-10-24T15:00:00'
+    //   },
+    //   {
+    //     id:    '9',
+    //     start: '2019-10-24T15:00:00',
+    //     end:   '2019-10-24T15:30:00'
+    //   },
+    //   {
+    //     id:    '10',
+    //     start: '2019-10-24T15:30:00',
+    //     end:   '2019-10-24T16:00:00'
+    //   },
+    //   {
+    //     id:    '11',
+    //     start: '2019-10-24T16:00:00',
+    //     end:   '2019-10-24T16:30:00'
+    //   },
+    //   {
+    //     id:    '12',
+    //     start: '2019-10-24T16:30:00',
+    //     end:   '2019-10-24T17:00:00'
+    //   },
+    //   {
+    //     id:    '13',
+    //     start: '2019-10-24T17:00:00',
+    //     end:   '2019-10-24T17:30:00'
+    //   },
+    //   {
+    //     id:    '14',
+    //     start: '2019-10-24T17:30:00',
+    //     end:   '2019-10-24T18:00:00'
+    //   }
+    // ];
+  }
+
+  getCalendarEvents() {
+    this.calendarService.getAdminCalendarList()
+    .then(
+      (response:any = []) =>{
+        var allEvents = response.data;
+
+        var eventObjs = allEvents.map(obj => {
+          return Object.assign({}, obj, {
+            id: obj.id,
+            start: obj.schedule_start_time.substr(0, 19),
+            end: obj.schedule_end_time.substr(0, 19),
+            title: obj.schedule_title,
+            desc: obj.schedule_desc
+          });
+        });
+
+        this.calendarEvents = eventObjs;
+
+      },
+      (error) => {
+        alert(error);
+        console.log(error);
+      }
+    );
   }
 
   toggleVisible() {
@@ -158,13 +247,29 @@ export class CalendarViewComponent implements OnInit {
     let calendarApi = this.calendarComponent.getApi();
     calendarApi.changeView('timeGridDay');
     calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
-    //
-    // let el: HTMLElement = this.closeGoToDate.nativeElement;
-    // el.click();
   }
 
   selectAllow(start, end, jsEvent, view) {
 
+  }
+
+  eventClickAction($eventData, modalId){
+    let event = $eventData.event;
+    let startTimeHours = event.start.getHours();
+    let startTimeMinutes = event.start.getMinutes();
+    let startTimeInMins = (startTimeHours * 60) + startTimeMinutes;
+    if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
+      let eventObj = this.calendarEvents.find((obj) => { return obj.id == event.id; });
+      this.scheduleTitle = eventObj.schedule_title;
+      this.scheduleDesc = eventObj.schedule_desc;
+      this.startTime = this.globals.getFullDateTime( event.start ).replace(" ", "T");
+      this.endTime = this.globals.getFullDateTime( new Date( event.start.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
+      this.modalService.open(modalId, {}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
   }
 
 }
