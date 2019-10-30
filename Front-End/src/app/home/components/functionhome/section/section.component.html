@@ -1,11 +1,11 @@
 <div class="section-container row">
   <div class="col-8">
-    <h3 class="page-header"> Function Hall </h3>
+    <h3 class="page-header"> FUNKTIONSHALLE </h3>
     <p class="p">
       Unsere große Festscheune ist mir ihren 375qm² sehr großzügig gestaltet und kann für viele verschiedene Anlässe genutzt werden. Neben Bankettbestuhlung an Rund- so wie Tafeltischen können zudem Schulungen Tagungen und verschiedenste Feierlichkeiten veranstaltet werden. Bei entsprechendem Wetter ist es zudem möglich, Ihre Veranstaltung wie etwa eine freie Trauung in den Herrlichen Außenbereich zu verlegen. In diesem ist ein Naturteich sowie einem Spielplatz für die kleinen Gäste vorhanden.</p>
     </div>
     <div class="col-4 news-feed">
-      <h6 class="h6-title"> Interesting Stuff </h6>
+      <h6 class="h6-title"> Interessantes Zeug </h6>
       <ul class="cus-ul">
         <li>
           Fest Installierte Ambientbeleuchtung im Innen- sowie Außenbereich
@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-6" *ngFor="let list of venuesList; let i = index;">
           <h5 class="venue-h5"> {{list.name}} </h5>
-          <img src="{{list.location_link}}" class="rounded cus-height" alt="Venue {{i + 1}}" (click)="gotoVenuepage(list.id)">
+          <img src="{{list.location_link}}" class="rounded cus-height" alt="Tagungsort {{i + 1}}" (click)="gotoVenuepage(list.id)">
         </div>
       </div>
       <div class="row">

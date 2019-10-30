@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,OnChanges, NgModule, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +24,7 @@ export class VenuepageComponent implements OnInit {
   };
   requestId: number = null;
   venueId :any;
+  @ViewChild('inqForm') inqForm: any;
 
   constructor(
     private translate: TranslateService,
@@ -69,7 +70,7 @@ export class VenuepageComponent implements OnInit {
     }
   }
 
-  submitEnquiry(modal) {
+  submitEnquiry(modal:any) {
     modal.venue_id = '1';
     modal.request_status = 'pc_requested';
     console.log(modal);
