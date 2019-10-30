@@ -106,14 +106,20 @@ export class VenuepageComponent implements OnInit {
         "created_at" : new Date()
       }
     }
-    this.inquireRequestsService.postInquireRequest(modal)
-    .then(
-      (response) =>{
-        this.isSubmitSuccess = true;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if(modal.pc_name != undefined && modal.event_type != undefined && modal.event_date != undefined && modal.guests_count != undefined && modal.mobile_number != undefined && modal.email_address != undefined && modal.subject != undefined && modal.message != undefined ) {
+      this.inquireRequestsService.postInquireRequest(modal)
+      .then(
+        (response) =>{
+          this.isSubmitSuccess = true;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else {
+      alert("Erforderliche Felder sind Pflichtfelder")
+    }
+
   }
 }

@@ -56,20 +56,20 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Event Type <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Ereignistyp <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
                           <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
-                            <<option value="" Selected> --- Event type --- </option>
-                            <option value="1">Birthday</option>
-                            <option value="1">Wedding</option>
-                            <option value="1">Anniversary</option>
+                            <<option value="" Selected> --- Ereignistyp --- </option>
+                            <option value="1">Geburtstag</option>
+                            <option value="1">Hochzeit</option>
+                            <option value="1">Jahrestag</option>
                           </select>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Event Date <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
                           <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required>
                         </div>
@@ -77,17 +77,17 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Number Of Guests <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="guests_count" class="form-control" placeholder="Approximate number of guests" [(ngModel)]="guests_count" #guestscount="ngModel" required>
+                          <input type="number" name="guests_count" class="form-control" placeholder="nzahl der Gäste" [(ngModel)]="guests_count" #guestscount="ngModel" required>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Mobile Number <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="mobile_number" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required>
+                          <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required>
                         </div>
                       </div>
                     </div>
@@ -95,9 +95,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Email Address <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="email" name="email_address" class="form-control" placeholder="Email address" [(ngModel)]="email_address" #emailaddress="ngModel" required>
+                          <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse" [(ngModel)]="email_address" #emailaddress="ngModel" required>
                         </div>
                       </div>
                     </div>
@@ -112,18 +112,18 @@
 
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Subject <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Gegenstand <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="subject" class="form-control" placeholder="Subject" [(ngModel)]="subject" #subjectControl="ngModel" required>
+                          <input type="text" name="subject" class="form-control" placeholder="Gegenstand" [(ngModel)]="subject" #subjectControl="ngModel" required>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Message <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" placeholder="Message" required></textarea>
+                          <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" placeholder="Botschaft" required></textarea>
                         </div>
                       </div>
                     </div>
@@ -143,16 +143,19 @@
       </div>
       <div class="col-12 table-style">
         <div class="bordered-box" style="height: 250px">
-          Ein Video des Videos...
+          <video width="100%" controls>
+            <source src="./assets/images/video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
       <div class="col-12 table-style">
-        <div class="bordered-box bk-green" style="height: 150px">
+        <div class="bordered-box bk-grey-dark" style="height: 150px">
           {{ venue.address }}, {{ venue.contact_number }}
         </div>
       </div>
       <div class="col-12 table-style">
-        <div class="maps bk-green" style="height:250px">
+        <div class="maps bk-grey-dark" style="height:250px">
           <iframe [src]="venue.location_link | safe"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe>
           <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10571.425354603814!2d9.2476951!3d48.5168186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1a3b5710bed3a1c!2sAchalm+Hof!5e0!3m2!1sde!2sde!4v1564392770315!5m2!1sde!2sde"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe> -->
 
