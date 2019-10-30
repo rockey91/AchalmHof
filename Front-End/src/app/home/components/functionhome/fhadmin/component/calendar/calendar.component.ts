@@ -49,12 +49,14 @@ export class CalendarViewComponent implements OnInit {
   startTime: any;
   endTime: any;
   isSubmitSuccess: boolean = false;
+  isUpdateSuccess: boolean = false;
   userRole: number = 0;
   minimumTime: any = "09:00:00";
   maximumTime: any = "18:00:00";
   validRange: any = {
     start: '2019-08-15'
   }
+  activeCalFormEventObj: any = {};
 
   constructor(
     private modal: NgbModal,
@@ -260,6 +262,7 @@ export class CalendarViewComponent implements OnInit {
     let startTimeInMins = (startTimeHours * 60) + startTimeMinutes;
     if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
       let eventObj = this.calendarEvents.find((obj) => { return obj.id == event.id; });
+      this.activeCalFormEventObj = eventObj;
       this.scheduleTitle = eventObj.schedule_title;
       this.scheduleDesc = eventObj.schedule_desc;
       this.startTime = this.globals.getFullDateTime( event.start ).replace(" ", "T");
@@ -270,6 +273,33 @@ export class CalendarViewComponent implements OnInit {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     }
+  }
+
+  isPCReqAppointment(){
+    return (this.activeCalFormEventObj.status == "pc_requested" && this.userRole === 1);
+  }
+
+  isAdminAccepted(){
+    return this.activeCalFormEventObj.status == "admin_accepted";
+  }
+
+  updateAppointStatus(status){
+
+    var model = {
+      id: this.activeCalFormEventObj.id,
+      status: status
+    };
+
+    this.calendarService.updateAdminCalendarRequest(model)
+    .then(
+      (response) => {
+        this.isUpdateSuccess = true;
+        this.activeCalFormEventObj.status = status;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

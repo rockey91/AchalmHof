@@ -45,4 +45,19 @@ export class CalendarService {
       console.log(error);
     });
   }
+
+  updateAdminCalendarRequest(model){
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.httpClient.put(
+        'http://127.0.0.1:4100/ah-api/updateAdminCalendar',
+        model,
+        this.httpOptions
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch();
+  }
+
 }

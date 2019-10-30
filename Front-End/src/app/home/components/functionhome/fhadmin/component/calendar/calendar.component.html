@@ -52,6 +52,9 @@
           <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
             Cool! Your schedule is updated on your calendar.
           </div>
+          <div class="submit-message alert alert-success" *ngIf="isUpdateSuccess" role="alert">
+            Cool! Your response is recorded and the same will be notified to PC.
+          </div>
           <form novalidate #f="ngForm" (ngSubmit)="addEvent(f.value)" class="tab-info tab-content">
             <div class="row">
 
@@ -61,7 +64,7 @@
                   <div class="row">
                     <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
                     <div class="col-9">
-                      <input type="text" name="schedule_title" [(ngModel)]="scheduleTitle" class="form-control">
+                      <input type="text" name="schedule_title" [(ngModel)]="scheduleTitle" class="form-control" [disabled]="isAdminAccepted()">
                     </div>
                   </div>
                 </div>
@@ -70,7 +73,7 @@
                   <div class="row">
                     <label class="col-3"> Event Description  <span class="pull-right"> : </span> </label>
                     <div class="col-9">
-                      <textarea name="schedule_desc" [(ngModel)]="scheduleDesc" class="form-control" rows="3" cols="80"></textarea>
+                      <textarea name="schedule_desc" [(ngModel)]="scheduleDesc" class="form-control" rows="3" cols="80" [disabled]="isAdminAccepted()"></textarea>
                     </div>
                   </div>
                 </div>
@@ -79,7 +82,7 @@
                   <div class="row">
                     <label class="col-3"> Event Start Time  <span class="pull-right"> : </span> </label>
                     <div class="col-6">
-                      <input type="datetime-local" name="schedule_start_time" class="form-control" [(ngModel)]="startTime">
+                      <input type="datetime-local" name="schedule_start_time" class="form-control" [(ngModel)]="startTime" [disabled]="isAdminAccepted()">
                     </div>
                   </div>
                 </div>
@@ -88,7 +91,7 @@
                   <div class="row">
                     <label class="col-3"> Event End Time  <span class="pull-right"> : </span> </label>
                     <div class="col-6">
-                      <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime">
+                      <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" [disabled]="isAdminAccepted()">
                       <!-- <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" ngModel> -->
                       <!-- <input [owlDateTime]="dt" [owlDateTimeTrigger]="dt"><owl-date-time #dt></owl-date-time> -->
                     </div>
@@ -102,7 +105,9 @@
             <div class="row">
               <div class="col-8 align-right">
                 <hr />
-                <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
+                <button class="btn btn-default btn-danger pull-right" type="button" *ngIf="isPCReqAppointment()" [disabled]="isUpdateSuccess ? true : null" (click)="updateAppointStatus('admin_rejected')"> Reject </button>
+                <button class="btn btn-default btn-success pull-right" type="button" *ngIf="isPCReqAppointment()" [disabled]="isUpdateSuccess ? true : null" (click)="updateAppointStatus('admin_accepted')"> Accept </button>
+                <button class="btn btn-default btn-primary save pull-right" type="submit" *ngIf="!isPCReqAppointment()" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
                 <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
               </div>
             </div>
