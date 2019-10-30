@@ -53,11 +53,11 @@ routes.get('/ah-api/getAdminCalendar', function (req, res) {
   .where('admin_user_id', req.query.admin_user_id)
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
-  .then(function(venuesList = []){
+  .then(function(eventsList = []){
 
     global.sendResponse(req, res, {
       status: 200,
-      data: venuesList
+      data: eventsList
     });
 
   })

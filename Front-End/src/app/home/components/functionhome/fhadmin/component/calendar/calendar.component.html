@@ -31,6 +31,7 @@
         hiddenDays="[0,5,6]"
         [validRange]="validRange"
         [contentHeight]="auto"
+        (eventClick)="eventClickAction($event, calEvent)"
         ></full-calendar>
       </div>
 
@@ -60,7 +61,7 @@
                   <div class="row">
                     <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
                     <div class="col-9">
-                      <input type="text" name="schedule_title" class="form-control" ngModel>
+                      <input type="text" name="schedule_title" [(ngModel)]="scheduleTitle" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -69,7 +70,7 @@
                   <div class="row">
                     <label class="col-3"> Event Description  <span class="pull-right"> : </span> </label>
                     <div class="col-9">
-                      <textarea name="schedule_desc" class="form-control" ngModel rows="3" cols="80"></textarea>
+                      <textarea name="schedule_desc" [(ngModel)]="scheduleDesc" class="form-control" rows="3" cols="80"></textarea>
                     </div>
                   </div>
                 </div>
