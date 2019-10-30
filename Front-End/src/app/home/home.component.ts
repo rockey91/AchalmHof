@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   imageUrlArray = [
-    { url: 'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg', captionBackground : '#fff', caption: 'Achalm Hof erleben', href: '/home/functionhalls' },
-    { url: 'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'}
+    { url: './assets/images/hall1.jpg', captionBackground : '#fff', caption: 'Achalm Hof erleben', href: '/home/functionhalls' },
+    { url: './assets/images/hall2.jpg'}
   ];
   constructor(private router: Router) {}
 
