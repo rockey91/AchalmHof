@@ -16,13 +16,13 @@
             <p class="p">
               {{ venue.description }}
             </p>
-            <ul>
+            <!-- <ul>
               <li> Overview </li>
               <li> Facilities </li>
               <li> Features </li>
               <li> Technical Equipment </li>
               <li> Event Type Allowed </li>
-            </ul>
+            </ul> -->
           </div>
         </div>
       </div>
@@ -43,22 +43,23 @@
               <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
                 Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number <strong>{{ requestId }}</strong> for future communication reference.
               </div>
-              <form novalidate #f="ngForm" (ngSubmit)="submitEnquiry(f.value)" class="tab-info tab-content">
+              <form novalidate #inqForm="ngForm" (ngSubmit)="submitEnquiry(inqForm.value)" class="tab-info tab-content">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Name  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="pc_name" class="form-control" ngModel>
+                          <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Event Type  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Event Type <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <select class="form-control" name="event_type" ngModel>
+                          <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
+                            <<option value="" Selected> --- Event type --- </option>
                             <option value="1">Birthday</option>
                             <option value="1">Wedding</option>
                             <option value="1">Anniversary</option>
@@ -68,25 +69,25 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Event Date  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Event Date <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="date" name="event_date" class="form-control" ngModel>
+                          <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Number Of Guests  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Number Of Guests <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="guests_count" class="form-control" ngModel>
+                          <input type="number" name="guests_count" class="form-control" placeholder="Approximate number of guests" [(ngModel)]="guests_count" #guestscount="ngModel" required>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Mobile Number  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Mobile Number <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="mobile_number" class="form-control" ngModel>
+                          <input type="number" name="mobile_number" class="form-control" placeholder="Mobile Number" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required>
                         </div>
                       </div>
                     </div>
@@ -94,9 +95,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Email Address  <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Email Address <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="email" name="email_address" class="form-control" ngModel>
+                          <input type="email" name="email_address" class="form-control" placeholder="Email address" [(ngModel)]="email_address" #emailaddress="ngModel" required>
                         </div>
                       </div>
                     </div>
@@ -111,18 +112,18 @@
 
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Subject <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Subject <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="subject" class="form-control" ngModel>
+                          <input type="text" name="subject" class="form-control" placeholder="Subject" [(ngModel)]="subject" #subjectControl="ngModel" required>
                         </div>
                       </div>
                     </div>
 
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-5"> Message <span class="pull-right"> : </span> </label>
+                        <label class="col-md-5"> Message <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <textarea name="message" class="form-control" ngModel rows="3" cols="80"></textarea>
+                          <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" placeholder="Message" required></textarea>
                         </div>
                       </div>
                     </div>
@@ -131,8 +132,8 @@
               <div class="row">
                 <div class="col-md-12 align-right">
                   <hr />
-                  <button class="btn btn-default btn-primary save pull-right" type="submit"> Submit </button>
-                  <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
+                  <button class="btn btn-default btn-primary save pull-right" type="submit"> Einreichen </button>
+                  <button type="button" class="btn btn-secondary" (click)="d('Cross click')"> Schließen </button>
                 </div>
               </div>
 
@@ -142,7 +143,7 @@
       </div>
       <div class="col-12 table-style">
         <div class="bordered-box" style="height: 250px">
-          A video of the video...
+          Ein Video des Videos...
         </div>
       </div>
       <div class="col-12 table-style">
@@ -161,7 +162,7 @@
   </div>
   <div class="col-12 table-style">
     <div class="bordered-box" style="height: 90px">
-      Feedback and FAQs
+      Feedback und FAQs
     </div>
   </div>
 </div>

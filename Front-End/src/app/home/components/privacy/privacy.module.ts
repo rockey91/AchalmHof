@@ -5,24 +5,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SlideshowModule } from 'ng-simple-slideshow';
 
-import { VenuepageRoutingModule } from './venuepage-routing.module';
-import { VenuepageComponent } from './venuepage.component';
+import { PrivacyRoutingModule } from './privacy-routing.module';
+import { PrivacyComponent } from './privacy.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { SharedPipesModule } from '../../../../shared'
 
 @NgModule({
     imports: [
         CommonModule,
-        VenuepageRoutingModule,
+        PrivacyRoutingModule,
         TranslateModule,
         NgbDropdownModule,
         SlideshowModule,
         FormsModule,
         ReactiveFormsModule,
         NgbModule.forRoot(),
-        SharedPipesModule
     ],
-    declarations: [VenuepageComponent]
+    declarations: [PrivacyComponent]
 })
-export class VenuepageModule {}
+export class PrivacyModule {}

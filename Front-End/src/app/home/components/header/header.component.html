@@ -8,7 +8,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ah-nav-item">
                   <a class="nav-link" href="/home">
-                    HOME
+                    ZUHAUSE
                   </a>
                 </li>
                 <!-- <li class="nav-item ah-nav-item">
@@ -18,7 +18,7 @@
                 </li> -->
                 <li class="nav-item dropdown" ngbDropdown>
                     <a class="nav-link" href="javascript:void(0)" [routerLink]="['/home/functionhalls/section']" ngbDropdownToggle>
-                        VENUES <b class="caret"></b>
+                        TAGUNGSORT <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu-right messages venues" ngbDropdownMenu>
                         <li class="media venue1" *ngFor="let venue of venuesList; let i = index;">
@@ -35,7 +35,7 @@
                 </li>
                 <li *ngIf="!userLoggedIn" class="nav-item">
                   <a class="nav-link" [routerLink]="['/login']">
-                    LOGIN
+                    ANMELDUNG
                   </a>
                 </li>
                 <li *ngIf="userLoggedIn" class="nav-item dropdown" ngbDropdown>
@@ -50,7 +50,7 @@
                             <i class="fa fa-fw fa-gear"></i> {{ 'PC Portal' | translate }}
                         </a>
                         <a class="dropdown-item" [routerLink]="['/home']" (click)="onLoggedout()">
-                            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                            <i class="fa fa-fw fa-power-off"></i> {{ 'Ausloggen' | translate }}
                         </a>
                     </div>
                 </li>
