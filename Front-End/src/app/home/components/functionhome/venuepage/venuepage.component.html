@@ -43,7 +43,7 @@
               <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
                 Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number <strong>{{ requestId }}</strong> for future communication reference.
               </div>
-              <form novalidate #f="ngForm" (ngSubmit)="f.valid && submitEnquiry(f.value)" class="tab-info tab-content">
+              <form novalidate #f="ngForm" (ngSubmit)="f.valid || submitEnquiry(f.value)" class="tab-info tab-content">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
