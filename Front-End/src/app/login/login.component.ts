@@ -30,14 +30,19 @@ export class LoginComponent implements OnInit {
           .then(
               (response) => {
 
-                  let body = response.data.data[0];
+                  let body = response.data;
+                  let data = response.data.data;
+                  let user;
+                  if(Array.isArray(data) && data.length){
+                    user = data[0];
+                  }
 
-                  if ( body.status ) {
+                  if ( user !== undefined && user.status ) {
                       this.globals.clearSessionStorage();
                       sessionStorage.setItem('ili', this.globals.getLocalEncryptData({ isLoggedin: 'true' }));
-                      sessionStorage.setItem('ur', this.globals.getLocalEncryptData({ userRole: body.role }));
-                      sessionStorage.setItem('un', this.globals.getLocalEncryptData({ username: body.username }));
-                      sessionStorage.setItem('ufl', this.globals.getLocalEncryptData({ userFullName: body.username }));
+                      sessionStorage.setItem('ur', this.globals.getLocalEncryptData({ userRole: user.role }));
+                      sessionStorage.setItem('un', this.globals.getLocalEncryptData({ username: user.username }));
+                      sessionStorage.setItem('ufl', this.globals.getLocalEncryptData({ userFullName: user.username }));
 
                       this.globals.resetUserDetails();
                       this.router.navigate(['/functionhalls']);
