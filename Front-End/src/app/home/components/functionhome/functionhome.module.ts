@@ -6,18 +6,21 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './../header/header.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './../footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    FunctionhomeComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
   imports: [
     CommonModule,
     FunctionHomeRoutingModule,
     TranslateModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  declarations: [
+    FunctionhomeComponent,
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class FunctionhomeModule { }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, ViewChild } from '@angular/core';
 import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -12,10 +12,8 @@ import { InquireRequestsService, VenuesService } from '../../../../shared';
 export class VenuepageComponent implements OnInit {
   closeResult:any;
   isSubmitSuccess:boolean = false;
-  imageUrlArray: any = [
-    'https://achalmhof.de/wp-content/uploads/2017/04/Homepage-Startseite-Hofladen-300x300.jpg',
-    'https://achalmhof.de/wp-content/uploads/2016/08/events-300x300.jpg'
-  ];
+  imageUrlArray: any = [];
+  video = "";
   venue: any = {
     name: "",
     address: "",
@@ -24,7 +22,7 @@ export class VenuepageComponent implements OnInit {
   };
   requestId: number = null;
   venueId :any;
-  @ViewChild('inqForm') inqForm: any;
+  @ViewChild('f') form: any;
 
   constructor(
     private translate: TranslateService,
@@ -48,6 +46,8 @@ export class VenuepageComponent implements OnInit {
     console.log({'test here' : id});
     this.venuesService.getVenueData(id).then(result => {
       this.venue = result[0];
+      this.imageUrlArray = result[0].images.split(",");
+      this.video = result[0].video
     });
   }
 
@@ -74,7 +74,7 @@ export class VenuepageComponent implements OnInit {
     modal.venue_id = '1';
     modal.request_status = 'pc_requested';
     console.log(modal);
-
+    console.log(this.form)
     if(modal.created_by) {
       modal = {
         "pc_name": modal.pc_name,

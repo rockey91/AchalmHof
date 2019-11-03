@@ -43,14 +43,22 @@
               <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
                 Your inquiry request is submitted succesfully. We will revert to you shortly. Please note your request number <strong>{{ requestId }}</strong> for future communication reference.
               </div>
-              <form novalidate #inqForm="ngForm" (ngSubmit)="submitEnquiry(inqForm.value)" class="tab-info tab-content">
+              <form novalidate #f="ngForm" (ngSubmit)="f.valid && submitEnquiry(f.value)" class="tab-info tab-content">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="row">
                         <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required>
+                          <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required forbiddenName="" pattern="[a-zA-Z ]+" autofocus>
+                          <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
+                              <div *ngIf="pcname.errors.required">
+                                  Name is required.
+                              </div>
+                              <div *ngIf="pcname.hasError('pattern')">
+                                  Only alphabet and spaces are allowed.
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -71,7 +79,12 @@
                       <div class="row">
                         <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required>
+                          <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
+                          <div *ngIf="eventdate.invalid && (eventdate.touched)" class="alert alert-danger">
+                              <div *ngIf="eventdate.errors.required">
+                                  Veranstaltungsdatum is required.
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -79,7 +92,15 @@
                       <div class="row">
                         <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="guests_count" class="form-control" placeholder="nzahl der Gäste" [(ngModel)]="guests_count" #guestscount="ngModel" required>
+                          <input type="number" name="guests_count" class="form-control" placeholder="nzahl der Gäste" [(ngModel)]="guests_count" #guestscount="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
+                          <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
+                              <div *ngIf="guestscount.errors.required">
+                                  nzahl der Gäste is required.
+                              </div>
+                              <div *ngIf="guestscount.hasError('pattern')">
+                                  Only Zahlen are allowed.
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -87,7 +108,15 @@
                       <div class="row">
                         <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required>
+                          <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
+                          <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
+                              <div *ngIf="guestscount.errors.required">
+                                  nzahl der Gäste is required.
+                              </div>
+                              <div *ngIf="guestscount.hasError('pattern')">
+                                  Only Zahlen are allowed.
+                              </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -143,14 +172,13 @@
       </div>
       <div class="col-12 table-style">
         <div class="bordered-box" style="height: 250px">
-          <video width="100%" controls>
-            <source src="./assets/images/video.mp4" type="video/mp4">
+          <video width="100%" [src]="video" controls>
             Your browser does not support the video tag.
           </video>
         </div>
       </div>
       <div class="col-12 table-style">
-        <div class="bordered-box bk-grey-dark" style="height: 150px">
+        <div class="bordered-box bk-grey-dark" style="height: 150px;padding:10px">
           {{ venue.address }}, {{ venue.contact_number }}
         </div>
       </div>

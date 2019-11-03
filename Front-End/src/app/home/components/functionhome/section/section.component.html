@@ -26,8 +26,8 @@
     <div class="col-12 venues-list">
       <div class="row">
         <div class="col-6" *ngFor="let list of venuesList; let i = index;">
-          <h5 class="venue-h5"> {{list.name}} </h5>
-          <img src="{{list.location_link}}" class="rounded cus-height" alt="Tagungsort {{i + 1}}" (click)="gotoVenuepage(list.id)">
+          <h5 class="venue-h5 text-left"> Tagungsort {{i + 1}} : {{list.name}} </h5>
+          <img src="{{list.images.split(',')[0]}}" class="rounded cus-height img-responsive" alt="Tagungsort {{i + 1}}" (click)="gotoVenuepage(list.id)">
         </div>
       </div>
       <div class="row">
