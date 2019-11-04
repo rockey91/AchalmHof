@@ -1,6 +1,7 @@
 'use strict';
 const routes = require('express').Router();
 var global = require('../../global.js');
+const emailsender = require('../../emailsender.js');
 
 routes.use(bodyParser.json());
 routes.use(function (req, res, next){
@@ -19,45 +20,36 @@ routes.use(function (req, res, next){
   next();
 });
 
-// Add a admin calendar.
-routes.post('/ah-api/addAdminCalendar', function (req, res) {
-
-  console.log(req.body);
-  req.body.created_at = knex.fn.now();
-
-  knex("admin_calendar")
-  .insert(req.body)
-  .then(function(response = 0){
-
-    global.sendResponse(req, res, {
-      status: 200,
-      data: {
-        response: response
-      }
-    });
-
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-});
-
 // Get a admin calendar.
 routes.get('/ah-api/getAdminCalendar', function (req, res) {
 
   console.log(req.query);
 
   knex.select("*")
-  .from("admin_calendar")
-  .where('admin_user_id', req.query.admin_user_id)
+  .from("inquire_requests")
+  .whereNotNull("appointment_time")
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
-  .then(function(eventsList = []){
+  .then(function(reqsList = []){
+
+    console.log("Calendar list....");
+    console.log(reqsList);
+
+    var dataList = [];
+
+    reqsList.forEach(function(obj){
+      var tempObj = {
+        id: obj.id,
+        title: obj.appointment_title,
+        desc: obj.appointment_message,
+        start: obj.appointment_time
+      };
+      dataList.push(tempObj);
+    });
 
     global.sendResponse(req, res, {
       status: 200,
-      data: eventsList
+      data: dataList
     });
 
   })
@@ -77,6 +69,17 @@ routes.put('/ah-api/updateAdminCalendar', function (req, res) {
   .update(req.body)
   .where("id", req.body.id)
   .then(function(response = 0){
+
+    var status = req.body.status === 'admin_rejected' ? "rejected" : "accepted";
+    var mailData = {
+      'from' : 'AchalmOf-Notifications<acis.notifications.noreply@affineanalytics.com>',
+      'to' : "",
+      'cc' : "",
+      'subject': 'AchalmOf: Appointment request is '+ status +'.',
+      'html': 'Hi <br> <br> Your appointment request is '+ status +'. <br> <br>  Regards<br>' + 'Development Team'.link("acis.notifications.noreply@affineanalytics.com")
+    }
+
+    emailsender.sendEmail(mailData,{});
 
     global.sendResponse(req, res, {
       status: 200,

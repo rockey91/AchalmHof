@@ -157,10 +157,9 @@ export class CalendarViewComponent implements OnInit {
         var eventObjs = allEvents.map(obj => {
           return Object.assign({}, obj, {
             id: obj.id,
-            start: obj.schedule_start_time.substr(0, 19),
-            end: obj.schedule_end_time.substr(0, 19),
-            title: obj.schedule_title,
-            desc: obj.schedule_desc
+            start: obj.start.substr(0, 19),
+            title: obj.title,
+            desc: obj.desc
           });
         });
 

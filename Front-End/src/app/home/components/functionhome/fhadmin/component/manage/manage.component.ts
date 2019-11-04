@@ -1,10 +1,20 @@
-import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {GlobalService } from '../../../../../../shared';
 import { OptionsInput } from '@fullcalendar/core';
 import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {InquireRequestsService, Globals } from '../../../../../../shared';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {
+  InquireRequestsService,
+  Globals,
+  GlobalService,
+  CalendarService
+} from '../../../../../../shared';
+
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 @Component({
   selector: 'app-manage',
@@ -13,11 +23,51 @@ import {InquireRequestsService, Globals } from '../../../../../../shared';
 })
 export class ManageComponent implements OnInit {
 
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
+  @ViewChild('closeGoToDate') closeGoToDate: ElementRef<HTMLElement>;
+
+  showReqListTable: boolean = true;
+  showCalendar: boolean = false;
+
+  calendarVisible = true;
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+  calendarWeekends = false;
+  calendarEvents: EventInput[] = [];
+  calendarBusinessHours: any = [
+    {
+      daysOfWeek: [ 0 ], // Monday - Thursday
+      startTime: '00:00', // a start time (10am in this example)
+      endTime: '00:00', // an end time (6pm in this example)
+    },
+    {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      daysOfWeek: [ 1, 2, 3, 4 ], // Monday - Thursday
+      startTime: '09:00', // a start time (10am in this example)
+      endTime: '12:00', // an end time (6pm in this example)
+    },
+    {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      daysOfWeek: [ 1, 2, 3, 4 ], // Monday - Thursday
+      startTime: '14:00', // a start time (10am in this example)
+      endTime: '18:00', // an end time (6pm in this example)
+    }
+  ];
+  closeResult: any;
+  startTime: any;
+  endTime: any;
+  isSubmitSuccess: boolean = false;
+  minimumTime: any = "09:00:00";
+  maximumTime: any = "18:00:00";
+  validRange: any = {
+    start: '2019-08-15'
+  }
+
   replyText: string = "";
   requestsList: any = [];
   selectedRequest: any = {};
   username : string = '';
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  userRole: number = 0;
 
   meetingList: any = [];
   eventList: any = [];
@@ -25,107 +75,231 @@ export class ManageComponent implements OnInit {
   meetingId: number = null;
   eventId: number = null;
 
+  actionItem: number = 0;
+
   constructor(
-    private modal: NgbModal,
     private globalService: GlobalService,
     private inquireRequestsService: InquireRequestsService,
-    private globals: Globals
+    private globals: Globals,
+    private calendarService: CalendarService,
+    private modalService: NgbModal,
   ) {
     this.username = this.globals.getLoginUsername();
+    this.userRole = this.globals.getLoginUserRole();
   }
 
   ngOnInit() {
-    this.getMeetingList();
-    this.getEventList();
+    this.getInquireList();
+    let today = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate( today.getDate() + 1 );
+    this.validRange.start = this.globals.getFullDateTime( tomorrow ).substr(0, 10);
+    this.userRole = this.globals.getLoginUserRole();
   }
 
-getMeetingList(){
-  this.inquireRequestsService.getMeetingList()
-      .then(
-        (response:any = []) =>{
-          if ( this.globals.getLoginUserRole() == 1 ) {
-            this.meetingList = response;
-          } else {
-            let pcname = this.globals.getLoginUsername();
-            this.meetingList = response.filter(obj => {
-              return pcname === obj.Name;
-            });
-          }
-        },
-        (error) => {
-          alert(error);
-          console.log(error);
+  getInquireList() {
+    this.inquireRequestsService.getInquireRequestsList(this.username)
+    .then(
+      (response:any = []) =>{
+        if ( this.userRole == 1 ) {
+          this.requestsList = response.data;
+        } else {
+          let pcname = this.username;
+          this.requestsList = response.data.filter(obj => {
+            return this.username === obj.email_address;
+          });
         }
-      );
-}
 
-getEventList(){
-  this.inquireRequestsService.getEventList()
-  .then(
-    (response:any = []) =>{
-      if (this.globals.getLoginUserRole() == 1) {
-        this.eventList = response;
-      } else {
-        let pcname = this.globals.getLoginUsername();
-        this.eventList = response.filter(obj => {
-          return pcname === obj.name;
+        this.getCalendarEvents();
+      },
+      (error) => {
+        alert(error);
+        console.log(error);
+      }
+    );
+  }
+
+  getCalendarEvents() {
+    this.calendarService.getAdminCalendarList()
+    .then(
+      (response:any = []) =>{
+        var allEvents = response.data;
+
+        var eventObjs = allEvents.map(obj => {
+          return {
+            id: obj.id,
+            start: obj.schedule_start_time.substr(0, 19),
+            end: obj.schedule_end_time.substr(0, 19),
+            title: obj.schedule_title
+          };
+        });
+
+        this.calendarEvents = eventObjs;
+
+      },
+      (error) => {
+        alert(error);
+        console.log(error);
+      }
+    );
+  }
+
+  submitEvent(modal) {
+
+    this.inquireRequestsService.postEventRequest(modal)
+    .then(
+      (response) =>{
+        this.eventId = response[0].data.req_id[0];
+      },
+      (error) => {
+        // alert(error);
+        console.log(error);
+      }
+    );
+  }
+
+  showMoreDetails( index ): void {
+    this.selectedRequest = this.requestsList[index];
+  }
+
+  sendReply(data, acceptance) {
+    console.log(data);
+    this.inquireRequestsService.updateRequest({
+      id: data.id,
+      username: this.username,
+      email_address : data.email_address,
+      status: 1,
+      pc_name: data.pc_name,
+      mobile_number : data.mobile_number,
+      request_status: acceptance ? 2 : 'admin_rejected'
+    })
+    .then(
+      (response) => {
+        if ( acceptance ) {
+          alert("Your response with portal credentials is shared with PC to schedule the appointment.");
+
+        } else {
+          alert("Your response rejecting the request is shared with PC.");
+        }
+      },
+      (error) => {
+        console.log(error);
+
+      }
+    )
+  }
+
+  isRejectable(selectedRequest): boolean {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 1 ) ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isAcceptable(selectedRequest): boolean {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 1 ) ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isSchedulable(selectedRequest): boolean {
+    if ( this.userRole != 1 && selectedRequest.request_status == 2 ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showAdminCalendar(): void {
+    this.showReqListTable = false;
+    this.showCalendar = true;
+  }
+
+  toggleVisible() {
+    this.calendarVisible = !this.calendarVisible;
+  }
+
+  toggleWeekends() {
+    this.calendarWeekends = !this.calendarWeekends;
+  }
+
+  gotoPast(content) {
+
+    this.modalService.open(content, {}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+  }
+
+  handleDateClick(arg, modalId) {
+
+    if ( arg.allDay ) {
+      let calendarApi = this.calendarComponent.getApi();
+      calendarApi.changeView('timeGridDay');
+      calendarApi.gotoDate( arg.dateStr + "T09:00:00Z" );
+      calendarApi.setOption('slotDuration', "00:30:00");
+    } else {
+      let startTimeHours = Number(arg.dateStr.substr(11, 2));
+      let startTimeMinutes = Number(arg.dateStr.substr(11, 2));
+      let startTimeInMins = (startTimeHours * 60) + startTimeMinutes;
+      if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
+        this.startTime = arg.dateStr.substr(0, 19);
+        this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
+        this.modalService.open(modalId, {}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       }
-    },
-    (error) => {
-      alert(error);
-      console.log(error);
     }
-  );
-}
 
-submitMeeting(modal) {
-  if(modal.created_by) {
-    modal = {
-      "meeting_date": modal.meeting_date,
-      "location": modal.location,
-      "message": modal.message,
-      "name": modal.name,
-      "meeting_time": modal.meeting_time,
-      "meeting_name": modal.meeting_name,
-      "created_at" : new Date()
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
     }
   }
-  else {
-    modal = {
-      "meeting_date": modal.meeting_date,
-      "location": modal.location,
-      "message": modal.message,
-      "name": modal.name,
-      "meeting_time": modal.meeting_time,
-      "meeting_name": modal.meeting_name,
-      "created_at" : new Date()
-    }
+
+  addEvent(modal) {
+
+    console.log(modal);
+
+    modal["admin_user_id"] = 1;
+    modal["created_by"] = 1;
+
+    this.calendarService.postAdminCalendarRequest(modal)
+    .then(
+      (response) => {
+        this.isSubmitSuccess = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
   }
-  this.inquireRequestsService.postMeetingRequest(modal)
-  .then(
-    (response:any = []) =>{
-      this.meetingId = response[0].data.req_id[0];
-    },
-    (error) => {
-      // alert(error);
-      console.log(error);
-    }
-  );
-}
 
-submitEvent(modal) {
+  goToDateEvent(modal) {
+    let calendarApi = this.calendarComponent.getApi();
+    calendarApi.changeView('timeGridDay');
+    calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
+    //
+    // let el: HTMLElement = this.closeGoToDate.nativeElement;
+    // el.click();
+  }
 
-  this.inquireRequestsService.postEventRequest(modal)
-  .then(
-    (response) =>{
-      this.eventId = response[0].data.req_id[0];
-    },
-    (error) => {
-      // alert(error);
-      console.log(error);
-    }
-  );
-}
+  selectAllow(start, end, jsEvent, view) {
+
+  }
 
 }

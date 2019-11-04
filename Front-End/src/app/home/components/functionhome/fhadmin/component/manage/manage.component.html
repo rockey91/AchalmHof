@@ -1,233 +1,127 @@
+<!-- Request Calendar Event Modal -->
+<ng-template #calEvent let-c="close" let-d="dismiss">
+
+  <div class="modal-container">
+
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> Venue1 : Adress / Location </h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
+        Cool! Your schedule is updated on your calendar.
+      </div>
+      <form novalidate #f="ngForm" (ngSubmit)="addEvent(f.value)" class="">
+        <div class="row">
+
+          <div class="col-8">
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
+                <div class="col-9">
+                  <input type="text" name="schedule_title" class="form-control" ngModel>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-3"> Event Description  <span class="pull-right"> : </span> </label>
+                <div class="col-9">
+                  <textarea name="schedule_desc" class="form-control" ngModel rows="3" cols="80"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-3"> Event Start Time  <span class="pull-right"> : </span> </label>
+                <div class="col-6">
+                  <input type="datetime-local" name="schedule_start_time" class="form-control" [(ngModel)]="startTime">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-3"> Event End Time  <span class="pull-right"> : </span> </label>
+                <div class="col-6">
+                  <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime">
+                  <!-- <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" ngModel> -->
+                  <!-- <input [owlDateTime]="dt" [owlDateTimeTrigger]="dt"><owl-date-time #dt></owl-date-time> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-8 align-right">
+            <hr />
+            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
+            <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</ng-template>
+
+
+<!-- Requests tab -->
 <div class="row">
   <div class="col col-xl-12 col-lg-12">
     <div class="card mb-12">
-      <div class="card-header">
-        Meetings
-      </div>
+
       <div class="card-body table-responsive">
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Manage Add/Edit Meeting modal -->
-            <div class="modal fade" id="manageMeeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Add New Meeting </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form novalidate #f="ngForm" (ngSubmit)="submitMeeting(f.value)" class="tab-info tab-content">
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Name </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="text"  class="form-control" name="name" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Date </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="date"  class="form-control" name="date" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Location </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="text" class="form-control" name="name" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Time </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="date" class="form-control" name="date" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Message </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="text" class="form-control" name="name" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary"  type="submit" data-dismiss="modal"> Add </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#manageMeeting">
-              Add Meeting
-            </button>
-          </div>
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th> PC Name </th>
-                  <th> Date </th>
-                  <th> Time </th>
-                  <th> Location </th>
-                  <th> Message </th>
-                  <th> Action </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let meeting of meetingList; let i = index;">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ meeting.Name }}</td>
-                  <td>{{ meeting.Date }}</td>
-                  <td>{{ meeting.Time }}</td>
-                  <td>{{ meeting.Location }}</td>
-                  <td>{{ meeting.message }}</td>
-                  <td>
-                    <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageMeeting"></i>
-                    <button class="cus-btn" type="button" name="button" (click)="deleteMeeting()">  <i class="fa fa-trash" >  </i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <!-- Requests list table -->
+        <table class="table" [hidden]="!showReqListTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>PC Name</th>
+              <th>Event Type</th>
+              <th>Event Date</th>
+              <th>Guests #</th>
+              <th>Mobile Number</th>
+              <th>Email Address</th>
+              <th>Subject</th>
+              <th> Request Status </th>
+              <th>Comments</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let req of requestsList; let i = index;">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ req.pc_name }}</td>
+              <td>{{ req.event_type }}</td>
+              <td>{{ req.event_date }}</td>
+              <td>{{ req.guests_count }}</td>
+              <td>{{ req.mobile_number }}</td>
+              <td>{{ req.email_address }}</td>
+              <td>{{ req.subject }}</td>
+              <td>{{ req.request_status }}</td>
+              <td>{{ req.request_comments }}</td>
+              <td>
+                <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Manage Add/Edit Meeting modal -->
-            <div class="modal fade" id="manageEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> Add New Event </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form novalidate #f="ngForm" (ngSubmit)="submitEvent(f.value)" class="tab-info tab-content">
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Name </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="text"  class="form-control" name="name" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for="">Event Date </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="date"  class="form-control" name="date" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Event Type </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <select class="form-control" name="eventType" ngModel>
-                                <option value="BirthDay"> Birth Day </option>
-                                <option value="BirthDay"> Birth Day </option>
-                                <option value="BirthDay"> Birth Day </option>
-
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="col-4">
-                              <label for=""> Message </label>
-                              <span class="pull-right">:</span>
-                            </div>
-                            <div class="col-8">
-                              <input type="text" class="form-control" name="message" value="" ngModel>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" type="submit" data-dismiss="modal"> Add </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#manageEvent">
-              Add Event
-            </button>
-          </div>
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th> PC Name </th>
-                  <th> Event Type </th>
-                  <th> Event Date </th>
-                  <th> Message </th>
-                  <th> Action </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let event of eventList; let i = index;">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ event.name }}</td>
-                  <td>{{ event.eventType }}</td>
-                  <td>{{ event.eventDate }}</td>
-                  <td>{{ event.message }}</td>
-                  <td>
-                    <i class="fa fa-edit" (click)="showMoreDetails(1)" data-toggle="modal" data-target="#manageEvent"></i>
-                    <button class="cus-btn" type="button" name="button" (click)="deleteEvent()">  <i class="fa fa-trash" >  </i></button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
+
     </div>
   </div>
 </div>

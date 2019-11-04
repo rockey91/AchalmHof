@@ -106,7 +106,7 @@
               <div class="col-8 align-right">
                 <hr />
                 <button class="btn btn-default btn-danger pull-right" type="button" *ngIf="isPCReqAppointment()" [disabled]="isUpdateSuccess ? true : null" (click)="updateAppointStatus('admin_rejected')"> Reject </button>
-                <button class="btn btn-default btn-success pull-right" type="button" *ngIf="isPCReqAppointment()" [disabled]="isUpdateSuccess ? true : null" (click)="updateAppointStatus('admin_accepted')"> Accept </button>
+                <button class="btn btn-default btn-success pull-right" type="button" *ngIf="isPCReqAppointment()" [disabled]="isUpdateSuccess ? true : null" (click)="updateAppointStatus(2)"> Accept </button>
                 <button class="btn btn-default btn-primary save pull-right" type="submit" *ngIf="!isPCReqAppointment()" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
                 <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
               </div>

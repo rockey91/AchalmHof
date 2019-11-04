@@ -141,4 +141,21 @@ export class InquireRequestsService {
     });
   }
 
+  updateRequest1(modelData: {}) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    let url = 'http://127.0.0.1:4100/ah-api/updateRequest';
+    return this.httpClient.put(
+      url,
+      modelData,
+      this.httpOptions
+    )
+    .toPromise()
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
 }

@@ -1,71 +1,3 @@
-
-
-<!-- Request Calendar Modal -->
-<!-- <div class="modal fade" id="exampleModal1" tabindex="-2" role="dialog" aria-labelledby="exampleModal1Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal1Label">Schedule Appointment</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Calendar here...
-        <div class='app'>
-
-          <div class='app-top'>
-            <button (click)='toggleVisible()'>toggle visible</button>
-            <button (click)='gotoPast(goToDate)'>go to a date in the past</button>
-            (also, click a date/time to add an event)
-          </div>
-
-          <div class='app-calendar' *ngIf="calendarVisible">
-            <full-calendar
-            #calendar
-            defaultView="dayGridMonth"
-            [header]="{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
-            }"
-            [allDaySlot]="false"
-            [businessHours]="calendarBusinessHours"
-            [plugins]="calendarPlugins"
-            [events]="calendarEvents"
-            (dateClick)="handleDateClick($event, calEvent)"
-            [selectConstraint]="businessHours"
-            [selectable]="true"
-            [minTime]="minimumTime"
-            [maxTime]="maximumTime"
-            hiddenDays="[0,5,6]"
-            [validRange]="validRange"
-            [height]="350"
-            ></full-calendar>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- <div class="modal fade" id="exampleModal2" tabindex="-3" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal2Label">Appointment Schedule Details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Event form here...
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <!-- Request Calendar Event Modal -->
 <ng-template #calEvent let-c="close" let-d="dismiss">
 
@@ -89,7 +21,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Event Title  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Appointment Title  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
                   <input type="text" name="schedule_title" class="form-control" ngModel>
                 </div>
@@ -98,7 +30,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Event Description  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Appointment Description  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
                   <textarea name="schedule_desc" class="form-control" ngModel rows="3" cols="80"></textarea>
                 </div>
@@ -107,20 +39,18 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Event Start Time  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Appointment Start Time  <span class="pull-right"> : </span> </label>
                 <div class="col-6">
-                  <input type="datetime-local" name="schedule_start_time" class="form-control" [(ngModel)]="startTime">
+                  <input type="datetime-local" name="schedule_start_time" class="form-control" [(ngModel)]="startTime" disabled>
                 </div>
               </div>
             </div>
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Event End Time  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Appointment End Time  <span class="pull-right"> : </span> </label>
                 <div class="col-6">
-                  <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime">
-                  <!-- <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" ngModel> -->
-                  <!-- <input [owlDateTime]="dt" [owlDateTimeTrigger]="dt"><owl-date-time #dt></owl-date-time> -->
+                  <input type="datetime-local" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" disabled>
                 </div>
               </div>
             </div>
@@ -132,7 +62,7 @@
         <div class="row">
           <div class="col-8 align-right">
             <hr />
-            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
+            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Schedule </button>
             <button type="button" class="btn btn-secondary" (click)="d('Cross click')">Close</button>
           </div>
         </div>
@@ -143,6 +73,7 @@
   </div>
 
 </ng-template>
+
 <ng-template #goToDate let-c="close" let-d="dismiss">
 
   <div class="modal-container">
@@ -201,30 +132,22 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>PC Name</th>
-            <th>Event Type</th>
-            <th>Event Date</th>
-            <th>Guests #</th>
-            <th>Mobile Number</th>
-            <th>Email Address</th>
-            <th>Subject</th>
-            <th> Request Status </th>
-            <th>Comments</th>
+            <th>Venue</th>
+            <th>Date</th>
+            <th>Event</th>
+            <th>#Guests</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let req of requestsList; let i = index;">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ req.pc_name }}</td>
+            <td>{{ req.venue_id }}</td>
+            <td>{{ req.event_date | date: 'yyyy-MMM-dd' }}</td>
             <td>{{ req.event_type }}</td>
-            <td>{{ req.event_date }}</td>
             <td>{{ req.guests_count }}</td>
-            <td>{{ req.mobile_number }}</td>
-            <td>{{ req.email_address }}</td>
-            <td>{{ req.subject }}</td>
             <td>{{ req.request_status }}</td>
-            <td>{{ req.request_comments }}</td>
             <td>
               <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
             </td>
@@ -324,6 +247,41 @@
               </div>
             </div>
           </div>
+
+          <div class="col-6" *ngIf="isAppReq(selectedRequest)">
+            <div class="row">
+              <div class="col-6">
+                <label for="">Appointment Title</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.appointment_title }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6" *ngIf="isAppReq(selectedRequest)">
+            <div class="row">
+              <div class="col-6">
+                <label for="">Appointment Message</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.appointment_message }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6" *ngIf="isAppReq(selectedRequest)">
+            <div class="row">
+              <div class="col-6">
+                <label for="">Appointment Time</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-6">
+                {{ selectedRequest.appointment_time }}
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
           <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText">
@@ -332,10 +290,17 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject</button>
-        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject Inquiry</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept Inquiry</button>
         <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)"
         data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
+
+        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 6)" *ngIf="isPcAppReq(selectedRequest)">Reject Appointment</button>
+        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 5)" *ngIf="isPcAppReq(selectedRequest)">Accept Appointment</button>
+
+        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isReschedulable(selectedRequest)"
+        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Re-schedule Appointment</button>
+
       </div>
     </div>
   </div>

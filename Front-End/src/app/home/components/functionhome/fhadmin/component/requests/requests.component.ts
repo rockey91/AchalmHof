@@ -119,6 +119,13 @@ export class RequestsComponent implements OnInit {
     );
   }
 
+  getAppointmentEndTime(startTime){
+    let sTime = new Date(startTime);
+    let eTime = new Date(sTime.getTime() + (30 * 60 * 1000));
+    // "2019-11-05T09:30:00"
+    return eTime.getUTCFullYear() + "-" + ( eTime.getUTCMonth() + 1 ) + "-" + eTime.getUTCDate() + "T" + eTime.getUTCHours() + ":" + eTime.getUTCMinutes() + ":" + eTime.getUTCSeconds();
+  }
+
   getCalendarEvents() {
     this.calendarService.getAdminCalendarList()
     .then(
@@ -128,9 +135,9 @@ export class RequestsComponent implements OnInit {
         var eventObjs = allEvents.map(obj => {
           return {
             id: obj.id,
-            start: obj.schedule_start_time.substr(0, 19),
-            end: obj.schedule_end_time.substr(0, 19),
-            title: obj.schedule_title
+            start: obj.start.substr(0, 19),
+            end: this.getAppointmentEndTime(obj.start),
+            title: obj.title
           };
         });
 
@@ -171,7 +178,7 @@ export class RequestsComponent implements OnInit {
       status: 1,
       pc_name: data.pc_name,
       mobile_number : data.mobile_number,
-      request_status: acceptance ? 'admin_accepted' : 'admin_rejected'
+      request_status: acceptance ? 2 : 3
     })
     .then(
       (response) => {
@@ -190,7 +197,7 @@ export class RequestsComponent implements OnInit {
   }
 
   isRejectable(selectedRequest): boolean {
-    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 'pc_requested' ) ) {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 1 ) ) {
       return true;
     } else {
       return false;
@@ -198,7 +205,7 @@ export class RequestsComponent implements OnInit {
   }
 
   isAcceptable(selectedRequest): boolean {
-    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 'pc_requested' ) ) {
+    if ( this.userRole == 1 && ( selectedRequest.request_status == '1' || selectedRequest.request_status == 1 ) ) {
       return true;
     } else {
       return false;
@@ -206,7 +213,15 @@ export class RequestsComponent implements OnInit {
   }
 
   isSchedulable(selectedRequest): boolean {
-    if ( this.userRole != 1 && selectedRequest.request_status == 'admin_accepted' ) {
+    if ( this.userRole != 1 && selectedRequest.request_status == 2 ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isReschedulable(selectedRequest): boolean {
+    if ( this.userRole != 1 && selectedRequest.request_status == 6 ) {
       return true;
     } else {
       return false;
@@ -274,18 +289,21 @@ export class RequestsComponent implements OnInit {
 
     console.log(modal);
 
-    modal["admin_user_id"] = 1;
-    modal["created_by"] = 1;
-
-    this.calendarService.postAdminCalendarRequest(modal)
+    this.inquireRequestsService.updateRequest1({
+      id: this.selectedRequest.id,
+      request_status: 4,
+      appointment_title: modal.schedule_title,
+      appointment_message: modal.schedule_desc,
+      appointment_time: modal.schedule_start_time
+    })
     .then(
       (response) => {
-        this.isSubmitSuccess = true;
+        alert("Your appointment request is nofified to Achalm Hof. Sit back! We will notify you their response.");
       },
       (error) => {
         console.log(error);
       }
-    );
+    )
 
   }
 
@@ -300,6 +318,33 @@ export class RequestsComponent implements OnInit {
 
   selectAllow(start, end, jsEvent, view) {
 
+  }
+
+  isAppReq(selReq){
+    return selReq.request_status >= 4;
+  }
+
+  isPcAppReq(selReq){
+    return selReq.request_status == 4 && this.userRole == 1;
+  }
+
+  updateAppReq(selReq, status) {
+
+    console.log(typeof status);
+
+    this.inquireRequestsService.updateRequest1({
+      id: this.selectedRequest.id,
+      request_status: Number(status)
+    })
+    .then(
+      (response) => {
+        alert("Your response to the appointment request is updated. Sit back! We will notify the PC.");
+        this.getInquireList();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
 }

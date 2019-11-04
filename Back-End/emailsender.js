@@ -5,6 +5,8 @@ var os = require('os');
 var EMAIL_TRANSPORTER1 = nodemailer.createTransport({
   type: 'smtp',
   host: 'smtp.office365.com',
+  // service: 'gmail',
+  // host: 'smtp.gmail.com',
   port: 587,
   secure: false,
   requireTLS: true,
@@ -12,8 +14,8 @@ var EMAIL_TRANSPORTER1 = nodemailer.createTransport({
     rejectUnauthorized: false
   },
   auth: {
-    user: 'yogesh.shanmukhappa@affineanalytics.com',
-    pass: 'a2c32s@affine'
+    user: 'acis.notifications.noreply@affineanalytics.com',
+    pass: '@nalytics@ffin9'
   }
 });
 

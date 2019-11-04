@@ -72,7 +72,7 @@ export class VenuepageComponent implements OnInit {
 
   submitEnquiry(modal:any) {
     modal.venue_id = '1';
-    modal.request_status = 'pc_requested';
+    modal.request_status = 1;
     console.log(modal);
     console.log(this.form)
     if(modal.created_by) {

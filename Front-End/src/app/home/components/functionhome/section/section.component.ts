@@ -28,7 +28,9 @@ export class SectionComponent implements OnInit {
   }
 
   gotoVenuepage(venueId) {
-    this.router.navigate(['/home/functionhalls/venuepage/'+venueId]);
+    if ( venueId != 99 ) {
+      this.router.navigate(['/home/functionhalls/venuepage/'+venueId]);  
+    }
   }
 
 }
