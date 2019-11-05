@@ -36,6 +36,7 @@ export class VenuepageComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.route.params.subscribe(params => {
        this.venueId = params['id'];
        this.getVenueDetails(this.venueId);
