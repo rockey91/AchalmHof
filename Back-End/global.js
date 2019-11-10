@@ -50,3 +50,45 @@ var sendResponse = function( req, res, dataArgs ) {
 
 }
 exports.sendResponse = sendResponse;
+
+
+// Check the data to be automated automatically.
+var checkData = function(){
+  knex.select("*")
+  .from("inquire_requests")
+  .timeout(10000, {cancel: true})
+  .map(function (row) { return row; })
+  .then(function(inquireList = []){
+
+    if( inquireList.length ) {
+      inquireList.forEach(function(obj){
+
+
+        if( obj.appointment_time !== null ) {
+          var appEndTime = new Date(obj.appointment_time).getTime() + ( 30 * 1000 );
+          var nowTime = new Date().getTime();
+
+          // console.log( obj.appointment_time );
+          // console.log( appEndTime );
+          // console.log( nowTime );
+
+          if ( nowTime >= appEndTime && ( obj.request_status === 5 ) ) {
+            obj.request_status = 7;
+            knex("inquire_requests")
+            .update(obj)
+            .where("id", obj.id)
+            .then(function(response = 0){
+              console.log("Auto updated the below object.");
+              console.log(obj);
+            })
+            .then(t.commit)
+            .catch(t.rollback);
+          }
+        }
+
+      });
+    }
+
+  })
+}
+exports.checkData = checkData;

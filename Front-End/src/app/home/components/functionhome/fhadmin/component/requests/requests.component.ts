@@ -328,14 +328,28 @@ export class RequestsComponent implements OnInit {
     return selReq.request_status == 4 && this.userRole == 1;
   }
 
+  isAdminRespUpdate(selReq) {
+    return ( selReq.request_status == 7 || selReq.request_status == 9 ) && this.userRole == 1;
+  }
+
+  isAdminRespPendUpdate(selReq) {
+    return selReq.request_status == 7 && this.userRole == 1;
+  }
+
   updateAppReq(selReq, status) {
 
-    console.log(typeof status);
-
-    this.inquireRequestsService.updateRequest1({
+    var updateReqData = {
       id: this.selectedRequest.id,
       request_status: Number(status)
-    })
+    };
+
+    if ( this.replyText ) {
+      updateReqData.request_comments = this.replyText;
+    }
+
+    this.inquireRequestsService.updateRequest1(
+      updateReqData
+    )
     .then(
       (response) => {
         alert("Your response to the appointment request is updated. Sit back! We will notify the PC.");

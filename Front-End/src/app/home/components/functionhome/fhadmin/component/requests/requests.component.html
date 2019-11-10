@@ -284,7 +284,7 @@
 
         </div>
         <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
-          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText">
+          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText" placeholder="[Optional comments...]">
           </textarea>
         </div>
       </div>
@@ -292,6 +292,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject Inquiry</button>
         <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept Inquiry</button>
+
         <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)"
         data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
 
@@ -300,6 +301,10 @@
 
         <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isReschedulable(selectedRequest)"
         data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Re-schedule Appointment</button>
+
+        <button type="button" class="btn btn-danger" (click)="updateAppReq(selectedRequest, 10)" *ngIf="isAdminRespUpdate(selectedRequest)">Cancelled</button>
+        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 9)" *ngIf="isAdminRespPendUpdate(selectedRequest)">Pending</button>
+        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 8)" *ngIf="isAdminRespUpdate(selectedRequest)">Confirmed</button>
 
       </div>
     </div>
