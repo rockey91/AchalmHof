@@ -6,20 +6,11 @@ import { FHAdminComponent } from './fhadmin.component';
 import { FHAdminRoutingModule } from './fhadmin-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { RequestsComponent } from './component/requests/requests.component';
-import { ManageComponent } from './component/manage/manage.component';
-import { CalendarViewComponent } from './component/calendar/calendar.component';
-
-import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
-// import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
     FHAdminComponent,
-    RequestsComponent,
-    ManageComponent,
-    CalendarViewComponent
   ],
   imports: [
     CommonModule,
@@ -30,9 +21,6 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     ReactiveFormsModule,
     NgbModule.forRoot(),
     FullCalendarModule,
-    // OwlDateTimeModule,
-    // OwlNativeDateTimeModule,
-    // BrowserAnimationsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -344,7 +344,7 @@ export class RequestsComponent implements OnInit {
     };
 
     if ( this.replyText ) {
-      updateReqData.request_comments = this.replyText;
+      updateReqData['request_comments'] = this.replyText;
     }
 
     this.inquireRequestsService.updateRequest1(
