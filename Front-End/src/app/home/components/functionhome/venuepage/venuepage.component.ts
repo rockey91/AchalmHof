@@ -13,6 +13,7 @@ export class VenuepageComponent implements OnInit {
   closeResult:any;
   isSubmitSuccess:boolean = false;
   imageUrlArray: any = [];
+  guestsCountArray: any = [];
   video = "";
   venue: any = {
     name: "",
@@ -54,6 +55,7 @@ export class VenuepageComponent implements OnInit {
 
   open(content) {
     this.isSubmitSuccess = false;
+    guestsCountArray = ["50", "50-80"];
     this.modalService.open(content, {}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

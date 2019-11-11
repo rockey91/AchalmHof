@@ -67,7 +67,7 @@
                         <label class="col-md-5"> Ereignistyp <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
                           <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
-                            <<option value="" Selected> --- Ereignistyp --- </option>
+                            <option value="" Selected> --- Ereignistyp --- </option>
                             <option value="1">Geburtstag</option>
                             <option value="1">Hochzeit</option>
                             <option value="1">Jahrestag</option>
@@ -92,7 +92,12 @@
                       <div class="row">
                         <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
-                          <input type="number" name="guests_count" class="form-control" placeholder="nzahl der Gäste" [(ngModel)]="guests_count" #guestscount="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
+                          <select class="form-control" name="guests_count" [(ngModel)]="guests_count" placeholder="nzahl der Gäste" #guestscount="ngModel" required forbiddenName="" autofocus>
+                            <option value="" Selected> --- 50 --- </option>
+                            <option value="1">50</option>
+                            <option value="1">51-80</option>
+                            <option value="1">81-100</option>
+                          </select>
                           <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
                               <div *ngIf="guestscount.errors.required">
                                   nzahl der Gäste is required.
@@ -109,11 +114,11 @@
                         <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                         <div class="col-md-7">
                           <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
-                          <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
-                              <div *ngIf="guestscount.errors.required">
+                          <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
+                              <div *ngIf="mobilenumber.errors.required">
                                   nzahl der Gäste is required.
                               </div>
-                              <div *ngIf="guestscount.hasError('pattern')">
+                              <div *ngIf="mobilenumber.hasError('pattern')">
                                   Only Zahlen are allowed.
                               </div>
                           </div>
