@@ -49,6 +49,9 @@
     img.cus-height {
       height: 400px;
     }
+    img[src="./assets/images/coming_soon.jpg"] {
+      cursor: default;
+    }
   }
 }
 .table-custom {

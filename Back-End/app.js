@@ -51,3 +51,8 @@ http.createServer(app).listen(4100, function() {
   console.log(`App listening with http on port 4100. Started at ${nowDateTime}`);
 });
 /* Above block of code for starting API */
+
+
+setInterval(function(){
+  global.checkData();
+}, 3000);
