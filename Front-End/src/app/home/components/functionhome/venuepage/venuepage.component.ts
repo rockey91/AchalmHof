@@ -55,7 +55,7 @@ export class VenuepageComponent implements OnInit {
 
   open(content) {
     this.isSubmitSuccess = false;
-    guestsCountArray = ["50", "50-80"];
+    this.guestsCountArray = ["50", "50-80"];
     this.modalService.open(content, {}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
