@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  NavigateFunctionHall() {
+  NavigateToFunctionHalls() {
       this.router.navigate(['/home/functionhalls']);
   }
 
