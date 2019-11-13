@@ -263,8 +263,8 @@ export class RequestsComponent implements OnInit {
       let startTimeMinutes = Number(arg.dateStr.substr(11, 2));
       let startTimeInMins = (startTimeHours * 60) + startTimeMinutes;
       if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
-        this.startTime = arg.dateStr.substr(0, 19);
-        this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
+        this.startTime = this.globals.getFullDateTime( arg.date ); //arg.dateStr.substr(0, 19).replace("T", " ");
+        this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) );
         this.modalService.open(modalId, {}).result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
