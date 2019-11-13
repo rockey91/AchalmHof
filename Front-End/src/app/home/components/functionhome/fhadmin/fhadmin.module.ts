@@ -8,9 +8,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { CalendarViewComponent } from './component/calendar/calendar.component';
+import { RequestsComponent } from './component/requests/requests.component';
+
+
 @NgModule({
   declarations: [
     FHAdminComponent,
+    CalendarViewComponent,
+    RequestsComponent
   ],
   imports: [
     CommonModule,
