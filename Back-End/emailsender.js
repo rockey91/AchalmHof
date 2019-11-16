@@ -27,7 +27,7 @@ function getMailOptionForDevEnv(mailOptions) {
   var hrisEmails = [];
 
   if( username && username.toLowerCase().indexOf("kotresh") !== -1 ) {
-    hrisEmails = ['rakesh.roshan@affineanalytics.com'];
+    hrisEmails = ['rockey91@gmail.com'];
   } else if( username && username.toLowerCase().indexOf("yogesh") !== -1 ) {
     hrisEmails = ['yogesh24.ds@gmail.com'];
   } else {
