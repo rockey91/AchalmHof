@@ -53,12 +53,17 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
 
 // Get a inquire request.
 routes.get('/ah-api/getInquireRequest', function (req, res) {
-  knex.select("*")
-  .from("inquire_requests")
+  knex.raw(`SELECT
+      ir.*, st.status_text, ven.*
+  FROM
+  achalm_hof.inquire_requests ir
+  	LEFT JOIN
+  achalm_hof.venues ven ON ir.venue_id = ven.id
+  	LEFT JOIN
+  achalm_hof.ah_status st ON ir.request_status = st.status_id`)
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
   .then(function(inquireList = []){
-    console.log(inquireList);
     global.sendResponse(req, res, {
       status: 200,
       data: inquireList

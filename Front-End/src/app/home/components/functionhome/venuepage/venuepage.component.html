@@ -17,189 +17,195 @@
               {{ venue.description }}
             </p>
             <!-- <ul>
-              <li> Overview </li>
-              <li> Facilities </li>
-              <li> Features </li>
-              <li> Technical Equipment </li>
-              <li> Event Type Allowed </li>
-            </ul> -->
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="row">
-        <div class="col-12">
-          <button class="btn btn-primary full-width enquire btn-lg" type="button" name="button" (click)="open(marketing)"> Inquire </button>
-
-          <ng-template #marketing let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> {{ venue.name }} : {{ venue.address }} </h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
-                Your inquiry request is submitted succesfully. We will revert to you shortly.
-              </div>
-              <form novalidate #f="ngForm" (ngSubmit)="f.valid && submitEnquiry(f.value)" class="tab-info tab-content">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required forbiddenName="" pattern="[a-zA-Z ]+" autofocus>
-                          <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
-                              <div *ngIf="pcname.errors.required">
-                                  Name is required.
-                              </div>
-                              <div *ngIf="pcname.hasError('pattern')">
-                                  Only alphabet and spaces are allowed.
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Ereignistyp <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
-                            <option value="" Selected> --- Ereignistyp --- </option>
-                            <option value="1">Geburtstag</option>
-                            <option value="1">Hochzeit</option>
-                            <option value="1">Jahrestag</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
-                          <div *ngIf="eventdate.invalid && (eventdate.touched)" class="alert alert-danger">
-                              <div *ngIf="eventdate.errors.required">
-                                  Veranstaltungsdatum is required.
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <select class="form-control" name="guests_count" [(ngModel)]="guests_count" placeholder="nzahl der Gäste" #guestscount="ngModel" required forbiddenName="" autofocus>
-                            <option value="" Selected> --- 50 --- </option>
-                            <option value="1">50</option>
-                            <option value="1">51-80</option>
-                            <option value="1">81-100</option>
-                          </select>
-                          <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
-                              <div *ngIf="guestscount.errors.required">
-                                  nzahl der Gäste is required.
-                              </div>
-                              <div *ngIf="guestscount.hasError('pattern')">
-                                  Only Zahlen are allowed.
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
-                          <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
-                              <div *ngIf="mobilenumber.errors.required">
-                                  nzahl der Gäste is required.
-                              </div>
-                              <div *ngIf="mobilenumber.hasError('pattern')">
-                                  Only Zahlen are allowed.
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse" [(ngModel)]="email_address" #emailaddress="ngModel" required>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5">Captcha<span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="email" name="captcha" class="form-control" ngModel>
-                        </div>
-                      </div>
-                    </div> -->
-
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Gegenstand <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <input type="text" name="subject" class="form-control" placeholder="Gegenstand" [(ngModel)]="subject" #subjectControl="ngModel" required>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="row">
-                        <label class="col-md-5"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
-                        <div class="col-md-7">
-                          <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" placeholder="Botschaft" required></textarea>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <div class="row">
-                <div class="col-md-12 align-right">
-                  <hr />
-                  <button class="btn btn-default btn-primary save pull-right" type="submit"> Einreichen </button>
-                  <button type="button" class="btn btn-secondary" (click)="d('Cross click')"> Schließen </button>
-                </div>
-              </div>
-
-            </form>
-          </div>
-        </ng-template>
-      </div>
-      <div class="col-12 table-style">
-        <div class="bordered-box" style="height: 250px">
-          <video width="100%" [src]="video" controls>
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      <div class="col-12 table-style">
-        <div class="bordered-box bk-grey-dark" style="height: 150px;padding:10px">
-          {{ venue.address }}, {{ venue.contact_number }}
-        </div>
-      </div>
-      <div class="col-12 table-style">
-        <div class="maps bk-grey-dark" style="height:250px">
-          <iframe [src]="venue.location_link | safe"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe>
-          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10571.425354603814!2d9.2476951!3d48.5168186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1a3b5710bed3a1c!2sAchalm+Hof!5e0!3m2!1sde!2sde!4v1564392770315!5m2!1sde!2sde"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe> -->
-
+            <li> Overview </li>
+            <li> Facilities </li>
+            <li> Features </li>
+            <li> Technical Equipment </li>
+            <li> Event Type Allowed </li>
+          </ul> -->
         </div>
       </div>
     </div>
   </div>
-  <!-- <div class="col-12 table-style">
-    <div class="bordered-box" style="height: 90px">
-      Feedback und FAQs
+  <div class="col-4">
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary full-width enquire btn-lg" type="button" name="button" (click)="open(marketing)"> Inquire </button>
+
+        <ng-template #marketing let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <div>
+            <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> {{ venue.name }} : {{ venue.address }} </h4>
+
+            </div>
+            <div style="clear:both; display:block">
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h6 class="pull-right text-right mandatory"> <i class="fa fa-star-o danger" aria-hidden="true"></i>  are mandatory </h6>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
+              Your inquiry request is submitted succesfully. We will revert to you shortly.
+            </div>
+            <form novalidate #f="ngForm" (ngSubmit)="f.valid && submitEnquiry(f.value)" class="tab-info tab-content">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required forbiddenName="" pattern="[a-zA-Z ]+" autofocus>
+                        <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
+                          <div *ngIf="pcname.errors.required">
+                            Name is required.
+                          </div>
+                          <div *ngIf="pcname.hasError('pattern')">
+                            Only alphabet and spaces are allowed.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> Ereignistyp <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
+                          <option value="" Selected> --- Ereignistyp --- </option>
+                          <option value="Geburtstag">Geburtstag</option>
+                          <option value="Hochzeit">Hochzeit</option>
+                          <option value="Jahrestag">Jahrestag</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
+                        <div *ngIf="eventdate.invalid && (eventdate.touched)" class="alert alert-danger">
+                          <div *ngIf="eventdate.errors.required">
+                            Veranstaltungsdatum is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <select class="form-control" name="guests_count" [(ngModel)]="guests_count" placeholder="nzahl der Gäste" #guestscount="ngModel" required forbiddenName="" autofocus>
+                          <option value="" Selected> --- 50 --- </option>
+                          <option value="50">50</option>
+                          <option value="51-80">51-80</option>
+                          <option value="81-100">81-100</option>
+                        </select>
+                        <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
+                          <div *ngIf="guestscount.errors.required">
+                            nzahl der Gäste is required.
+                          </div>
+                          <div *ngIf="guestscount.hasError('pattern')">
+                            Only Zahlen are allowed.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
+                        <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
+                          <div *ngIf="mobilenumber.errors.required">
+                            nzahl der Gäste is required.
+                          </div>
+                          <div *ngIf="mobilenumber.hasError('pattern')">
+                            Only Zahlen are allowed.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <div class="row">
+                      <label class="col-md-5"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-7">
+                        <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse" [(ngModel)]="email_address" #emailaddress="ngModel" required>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                  <div class="row">
+                  <label class="col-md-5">Captcha<span class="pull-right"> : </span> </label>
+                  <div class="col-md-7">
+                  <input type="email" name="captcha" class="form-control" ngModel>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-md-5"> Gegenstand <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                <div class="col-md-7">
+                  <input type="text" name="subject" class="form-control" placeholder="Gegenstand" [(ngModel)]="subject" #subjectControl="ngModel" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-md-5"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                <div class="col-md-7">
+                  <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" placeholder="Botschaft" required></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 align-right">
+            <hr />
+            <button class="btn btn-default btn-primary save pull-right" type="submit"> Einreichen </button>
+            <button type="button" class="btn btn-secondary" (click)="d('Cross click')"> Schließen </button>
+          </div>
+        </div>
+
+      </form>
     </div>
-  </div> -->
+  </ng-template>
+</div>
+<div class="col-12 table-style">
+  <div class="bordered-box" style="height: 250px">
+    <video width="100%" [src]="video" controls>
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+<div class="col-12 table-style">
+  <div class="bordered-box bk-grey-dark" style="height: 150px;padding:10px">
+    {{ venue.address }}, {{ venue.contact_number }}
+  </div>
+</div>
+<div class="col-12 table-style">
+  <div class="maps bk-grey-dark" style="height:250px">
+    <iframe [src]="venue.location_link | safe"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe>
+    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10571.425354603814!2d9.2476951!3d48.5168186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1a3b5710bed3a1c!2sAchalm+Hof!5e0!3m2!1sde!2sde!4v1564392770315!5m2!1sde!2sde"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe> -->
+
+  </div>
+</div>
+</div>
+</div>
+<!-- <div class="col-12 table-style">
+<div class="bordered-box" style="height: 90px">
+Feedback und FAQs
+</div>
+</div> -->
 </div>
 </div>

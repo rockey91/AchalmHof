@@ -133,23 +133,27 @@
           <tr>
             <th>#</th>
             <th>Venue</th>
-            <th>Date</th>
+            <th> PC Name </th>
             <th>Event</th>
+            <th>Date</th>
             <th>#Guests</th>
+            <th> Mobile Number </th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let req of requestsList; let i = index;">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ req.venue_id }}</td>
-            <td>{{ req.event_date | date: 'yyyy-MMM-dd' }}</td>
+            <td scope="row">{{ i + 1 }}</td>
+            <td>{{ req.name}}</td>
+            <td>{{ req.pc_name  }}  </td>
             <td>{{ req.event_type }}</td>
+            <td>{{ req.event_date | date: 'yyyy-MMM-dd' }}</td>
             <td>{{ req.guests_count }}</td>
-            <td>{{ req.request_status }}</td>
+            <td>{{ req.mobile_number}}  </td>
+            <td>{{ req.status_text }}</td>
             <td>
-              <i class="fa fa-fw fa-bars" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
+              <i class="fa fa-fw fa-edit" (click)="showMoreDetails(i)" data-toggle="modal" data-target="#exampleModal"></i>
             </td>
           </tr>
         </tbody>
@@ -157,7 +161,6 @@
 
       <!-- Calendar application -->
       <div class='app' [hidden]="!showCalendar">
-
         <div class='app-calendar' *ngIf="calendarVisible">
           <full-calendar
           #calendar
@@ -181,18 +184,14 @@
           [height]="400"
           ></full-calendar>
         </div>
-
       </div>
-
     </div>
-
-
   </div>
 </div>
 </div>
 
 <!-- Request Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -205,87 +204,130 @@
         <div class="row">
           <div class="col-6">
             <div class="row">
-              <div class="col-6">
-                <label for="">PC Name</label>
+              <div class="col-5 left-heading">
+                <label for="" > Venue Name </label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
+                {{ selectedRequest.name }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12"></div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-5 left-heading">
+                <label for="" >PC Name</label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-7">
                 {{ selectedRequest.pc_name }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for=""> Event Type </label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 {{ selectedRequest.event_type }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for="">Event Date</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
-                {{ selectedRequest.event_date }}
+              <div class="col-7">
+                {{ selectedRequest.event_date | date: 'dd-MMM-y' }}
               </div>
             </div>
           </div>
           <div class="col-6">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for="">No Of Guests </label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 {{ selectedRequest.guests_count }}
               </div>
             </div>
           </div>
-
+          <div class="col-6">
+            <div class="row">
+              <div class="col-5 left-heading">
+                <label for=""> Mobile Number </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-7">
+                {{ selectedRequest.mobile_number }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-5 left-heading">
+                <label for=""> Email Address </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-7">
+                {{ selectedRequest.email_address }}
+              </div>
+            </div>
+          </div>
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for="">Appointment Title</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 {{ selectedRequest.appointment_title }}
               </div>
             </div>
           </div>
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for="">Appointment Message</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 {{ selectedRequest.appointment_message }}
               </div>
             </div>
           </div>
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
-              <div class="col-6">
+              <div class="col-5 left-heading">
                 <label for="">Appointment Time</label>
                 <span class="pull-right">:</span>
               </div>
-              <div class="col-6">
+              <div class="col-7">
                 {{ selectedRequest.appointment_time }}
               </div>
             </div>
           </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col-5 left-heading">
+                <label for=""> Add Comments </label>
+                <span class="pull-right">:</span>
+              </div>
+              <div class="col-7">
+                <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
+                  <textarea class="p-2" name="replyText"  value="" rows="4" cols="50" [(ngModel)]="replyText" placeholder="Optional comments...">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        </div>
-        <div class="reply-text" *ngIf="!isSchedulable(selectedRequest)">
-          <textarea name="replyText" value="" rows="4" cols="80" [(ngModel)]="replyText" placeholder="[Optional comments...]">
-          </textarea>
         </div>
       </div>
       <div class="modal-footer">
