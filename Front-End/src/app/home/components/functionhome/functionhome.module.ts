@@ -7,6 +7,7 @@ import { HeaderComponent } from './../header/header.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './../footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SharedPipesModule } from '../../../shared';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     TranslateModule,
     NgbDropdownModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedPipesModule
   ],
   declarations: [
     FunctionhomeComponent,

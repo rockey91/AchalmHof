@@ -102,14 +102,13 @@ export class RequestsComponent implements OnInit {
     .then(
       (response:any = []) =>{
         if ( this.userRole == 1 ) {
-          this.requestsList = response.data;
+          this.requestsList = response.data[0];
         } else {
           let pcname = this.username;
-          this.requestsList = response.data.filter(obj => {
+          this.requestsList = response.data[0].filter(obj => {
             return this.username === obj.email_address;
           });
         }
-
         this.getCalendarEvents();
       },
       (error) => {
@@ -157,6 +156,7 @@ export class RequestsComponent implements OnInit {
     .then(
       (response) =>{
         this.eventId = response[0].data.req_id[0];
+        this.getInquireList();
       },
       (error) => {
         // alert(error);
@@ -188,6 +188,7 @@ export class RequestsComponent implements OnInit {
         } else {
           alert("Your response rejecting the request is shared with PC.");
         }
+        this.getInquireList();
       },
       (error) => {
         console.log(error);
