@@ -14,6 +14,7 @@ export class VenuepageComponent implements OnInit {
   isSubmitSuccess:boolean = false;
   imageUrlArray: any = [];
   guestsCountArray: any = [];
+  eventTypeArray: any = [];
   video = "";
   venue: any = {
     name: "",
@@ -49,13 +50,16 @@ export class VenuepageComponent implements OnInit {
     this.venuesService.getVenueData(id).then(result => {
       this.venue = result[0];
       this.imageUrlArray = result[0].images.split(",");
+      this.guestsCountArray = result[0].guests_count.split(",");
+      this.eventTypeArray = result[0].event_types.split(",");
       this.video = result[0].video
     });
   }
 
   open(content) {
     this.isSubmitSuccess = false;
-    this.guestsCountArray = ["50", "50-80"];
+    console.log({'guestSCount' : this.guestsCountArray});
+    console.log({'event_types' : this.eventTypeArray});
     this.modalService.open(content, {}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
