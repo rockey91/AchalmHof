@@ -46,7 +46,6 @@ export class VenuepageComponent implements OnInit {
   }
 
   getVenueDetails(id) {
-    console.log({'test here' : id});
     this.venuesService.getVenueData(id).then(result => {
       this.venue = result[0];
       this.imageUrlArray = result[0].images.split(",");
@@ -58,8 +57,6 @@ export class VenuepageComponent implements OnInit {
 
   open(content) {
     this.isSubmitSuccess = false;
-    console.log({'guestSCount' : this.guestsCountArray});
-    console.log({'event_types' : this.eventTypeArray});
     this.modalService.open(content, {}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

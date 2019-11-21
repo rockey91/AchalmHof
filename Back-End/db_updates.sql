@@ -4,7 +4,7 @@ CHANGE COLUMN `guests_count` `guests_count` VARCHAR(20) NOT NULL ;
 ALTER TABLE `achalm_hof`.`venues`
 ADD COLUMN `guests_count` tinytext;
 
-ALTER TABLE `testspringboot`.`venues`
+ALTER TABLE `achalm_hof`.`venues`
 ADD COLUMN `event_types` tinytext;
 
 
