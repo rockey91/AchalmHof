@@ -62,6 +62,37 @@ routes.get('/ah-api/getVenue', function (req, res) {
 
 });
 
+//Venue related event types, guest count
+
+
+routes.get('/ah-api/getVenueRelatedData', function (req, res) {
+  var sql =
+      `SELECT * FROM achalm_hof.event_type where venue_id = '${req.query.venueId}';
+       SELECT * FROM achalm_hof.guests_count_list where venue_id = '${req.query.venueId}';
+      `;
+      con.query(sql, function(err, rows, fields) {
+        if (!err){
+          var response = [], dataObj = {};
+          if (rows.length != 0) {
+            dataObj['event_types'] = rows[0];
+            dataObj['guests_count'] = rows[1];
+            response.push({'result' : 'success', 'data' : dataObj});
+          } else {
+            response.push({'result' : 'error', 'msg' : 'No Results Found'});
+          }
+          res.setHeader('Content-Type', 'application/json');
+          // res.status(200).send(response);
+          global.sendResponse(req, res, {
+            status: 200,
+            data: response
+          });
+        } else {
+          res.status(400).send(err);
+        }
+      });
+
+});
+
 //Get all Venues
 routes.get('/ah-api/getAllVenues', function (req, res) {
   knex.select("*")

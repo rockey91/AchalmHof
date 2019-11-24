@@ -15,6 +15,7 @@ export class VenuepageComponent implements OnInit {
   imageUrlArray: any = [];
   guestsCountArray: any = [];
   eventTypeArray: any = [];
+  venueRelatedDetails: any = [];
   video = "";
   venue: any = {
     name: "",
@@ -41,7 +42,16 @@ export class VenuepageComponent implements OnInit {
     window.scrollTo(0, 0);
     this.route.params.subscribe(params => {
        this.venueId = params['id'];
+       this.getVenueRelatedDetails(this.venueId);
        this.getVenueDetails(this.venueId);
+    });
+  }
+
+  getVenueRelatedDetails(id) {
+    this.venuesService.getVenueRelatedData(id).then(result => {
+      this.venueRelatedDetails = result[0];
+      this.guestsCountArray = result[0].data.guests_count;
+      this.eventTypeArray = result[0].data.event_types;
     });
   }
 
@@ -49,8 +59,6 @@ export class VenuepageComponent implements OnInit {
     this.venuesService.getVenueData(id).then(result => {
       this.venue = result[0];
       this.imageUrlArray = result[0].images.split(",");
-      this.guestsCountArray = result[0].guests_count.split(",");
-      this.eventTypeArray = result[0].event_types.split(",");
       this.video = result[0].video
     });
   }

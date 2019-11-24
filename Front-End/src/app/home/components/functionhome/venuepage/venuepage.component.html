@@ -74,9 +74,9 @@
                       <div class="col-md-7">
                         <select class="form-control" name="event_type" [(ngModel)]="event_type" #eventtype="ngModel" required>
                           <option value="" Selected> --- Ereignistyp --- </option>
-                          <option value="Geburtstag">Geburtstag</option>
-                          <option value="Hochzeit">Hochzeit</option>
-                          <option value="Jahrestag">Jahrestag</option>
+                          <option *ngFor="let eventType of eventTypeArray"  value="{{ eventType.event_type_id }}">
+                              {{ eventType.event_type_name }}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -100,9 +100,9 @@
                       <div class="col-md-7">
                         <select class="form-control" name="guests_count" [(ngModel)]="guests_count" placeholder="nzahl der Gäste" #guestscount="ngModel" required forbiddenName="" autofocus>
                           <option value="" Selected> --- 50 --- </option>
-                          <option value="50">50</option>
-                          <option value="51-80">51-80</option>
-                          <option value="81-100">81-100</option>
+                          <option *ngFor="let guesTCount of guestsCountArray"  value="{{ guesTCount.id }}">
+                              {{ guesTCount.value }}
+                          </option>
                         </select>
                         <div *ngIf="guestscount.invalid && (guestscount.touched)" class="alert alert-danger">
                           <div *ngIf="guestscount.errors.required">

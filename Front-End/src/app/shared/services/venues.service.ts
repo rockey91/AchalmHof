@@ -60,4 +60,26 @@ export class VenuesService {
     });
   }
 
+  getVenueRelatedData(id) {
+    let params = new HttpParams();
+    params = params.append('venueId', id);
+    return this.httpClient.get(
+      'http://localhost:4100/ah-api/getVenueRelatedData', {
+        params: params
+      }
+    )
+    .toPromise()
+    .then(response => {
+      console.log("response", response);
+      if ( response && response["data"] ) {
+        return response["data"];
+      } else {
+        return response;
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
 }
