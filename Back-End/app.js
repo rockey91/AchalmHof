@@ -55,4 +55,4 @@ http.createServer(app).listen(4100, function() {
 
 setInterval(function(){
   global.checkData();
-}, 3000);
+}, 3000); // 30 minutes

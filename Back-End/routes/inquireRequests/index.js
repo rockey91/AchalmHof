@@ -54,7 +54,9 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
 // Get a inquire request.
 routes.get('/ah-api/getInquireRequest', function (req, res) {
   knex.raw(`SELECT
-      ir.*, st.status_text, ven.*
+      ir.*,
+      st.status_text,
+      ven.id AS ven_id, ven.name, ven.address, ven.location_link
   FROM
   achalm_hof.inquire_requests ir
   	LEFT JOIN

@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <a class="btn rounded-btn" (click)="onLoggedin(loginForm.value)">{{ 'Log in' | translate }}</a>
+                <a i18n="Login Button | Login button on login page below username and password." class="btn rounded-btn" (click)="onLoggedin(loginForm.value)">{{ 'Log in' | translate }}</a>
 
                 &nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/home/functionhalls/section']">{{ 'Go Back' }}</a>
