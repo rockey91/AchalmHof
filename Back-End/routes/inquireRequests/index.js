@@ -22,18 +22,19 @@ routes.use(function (req, res, next){
 
 // Add a inquire request.
 routes.post('/ah-api/addInquireRequest', function (req, res) {
-
   req.body.created_at = knex.fn.now();
-
   knex("inquire_requests")
   .insert(req.body)
   .then(function(response = 0) {
+
+    var content = `<tr><td>`+req.body.pc_name+ `</td> <td>`+req.body.event_type+`</td><td>` +req.body.event_date+ `</td> <td>`+req.body.guests_count+ `</td> <td>` +req.body.mobile_number+ `</td> <td> ` +req.body.email_address+ `</td> <td>` +req.body.subject+ `</td> <td>` +req.body.message+ `</td> </tr>`;
+
     var mailData = {
       // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
-      'to' : "yogesh24.ds@gmail.com",
-      'cc' : "",
+      'to' : "kontakt@achalmhof.de",
+      'cc' : "kontakt@achalmhof.de",
       'subject': 'AchalmOf: Inquire Status',
-      'html': 'Hi <br> <br> '+req.body.subject+'. <br> <br>  Regards<br>' + 'Development Team'.link("")
+      'html': 'Hi  <br> <br> User has inquired for the below information, <br> <br> <table><tr> Name </tr> <tr> Event Type  </tr> <tr> Event Date </tr> <tr> Number of Guests </tr> <tr> Mobile Number </tr> <tr> Email </tr> <tr> Subject </tr> <tr> Message  </tr>'+content+' </table> <br> <br> Regards <br> Development Team'
     }
 
     emailsender.sendEmail(mailData,{});
@@ -54,13 +55,17 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
 // Get a inquire request.
 routes.get('/ah-api/getInquireRequest', function (req, res) {
   knex.raw(`SELECT
-      ir.*, st.status_text, ven.*
-  FROM
-  achalm_hof.inquire_requests ir
-  	LEFT JOIN
-  achalm_hof.venues ven ON ir.venue_id = ven.id
-  	LEFT JOIN
-  achalm_hof.ah_status st ON ir.request_status = st.status_id`)
+    ir.*, st.status_text, ven.*, eve.event_type_name AS event_type_name, gue.value AS guest_count_list
+FROM
+    achalm_hof.inquire_requests ir
+        LEFT JOIN
+    achalm_hof.venues ven ON ir.venue_id = ven.id
+        LEFT JOIN
+    achalm_hof.ah_status st ON ir.request_status = st.status_id
+		LEFT JOIN
+    achalm_hof.event_type eve ON ir.event_type = eve.event_type_id
+		LEFT JOIN
+    achalm_hof.guests_count_list gue ON ir.guests_count = gue.id`)
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
   .then(function(inquireList = []){

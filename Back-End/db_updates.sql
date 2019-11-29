@@ -22,3 +22,8 @@ CREATE TABLE `achalm_hof`.`event_type` (
 INSERT INTO `achalm_hof`.`guests_count_list` (`value`, `venue_id`, `created_at`, `created_by`) VALUES ('50', '1', now(), 'Yogesh');
 INSERT INTO `achalm_hof`.`guests_count_list` (`value`, `venue_id`, `created_at`, `created_by`) VALUES ('51-80', '1', now(), 'Yogesh');
 INSERT INTO `achalm_hof`.`guests_count_list` (`value`, `venue_id`, `created_at`, `created_by`) VALUES ('81-100', '1', now(), 'Yogesh');
+
+
+ALTER TABLE `achalm_hof`.`inquire_requests`
+CHANGE COLUMN `event_type` `event_type` INT NOT NULL ,
+CHANGE COLUMN `guests_count` `guests_count` INT NOT NULL ;

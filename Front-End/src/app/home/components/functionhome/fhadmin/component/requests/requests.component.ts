@@ -151,7 +151,6 @@ export class RequestsComponent implements OnInit {
   }
 
   submitEvent(modal) {
-
     this.inquireRequestsService.postEventRequest(modal)
     .then(
       (response) =>{
@@ -171,11 +170,12 @@ export class RequestsComponent implements OnInit {
 
   sendReply(data, acceptance) {
     console.log(data);
+
     this.inquireRequestsService.updateRequest({
       id: data.id,
       username: this.username,
       email_address : data.email_address,
-      status: 1,
+      status: data.request_status,
       pc_name: data.pc_name,
       mobile_number : data.mobile_number,
       request_status: acceptance ? 2 : 3
@@ -192,7 +192,6 @@ export class RequestsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-
       }
     )
   }

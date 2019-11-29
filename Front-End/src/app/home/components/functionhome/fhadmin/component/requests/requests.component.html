@@ -147,9 +147,9 @@
             <td scope="row">{{ i + 1 }}</td>
             <td>{{ req.name}}</td>
             <td>{{ req.pc_name  }}  </td>
-            <td>{{ req.event_type }}</td>
+            <td>{{ req.event_type_name }}</td>
             <td>{{ req.event_date | date: 'yyyy-MMM-dd' }}</td>
-            <td>{{ req.guests_count }}</td>
+            <td>{{ req.guest_count_list }}</td>
             <td>{{ req.mobile_number}}  </td>
             <td>{{ req.status_text }}</td>
             <td>
@@ -232,7 +232,7 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
-                {{ selectedRequest.event_type }}
+                {{ selectedRequest.event_type_name }}
               </div>
             </div>
           </div>
@@ -254,7 +254,7 @@
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
-                {{ selectedRequest.guests_count }}
+                {{ selectedRequest.guest_count_list }}
               </div>
             </div>
           </div>
