@@ -121,7 +121,6 @@ export class RequestsComponent implements OnInit {
   getAppointmentEndTime(startTime){
     let sTime = new Date(startTime);
     let eTime = new Date(sTime.getTime() + (30 * 60 * 1000));
-    // "2019-11-05T09:30:00"
     return eTime.getUTCFullYear() + "-" + ( eTime.getUTCMonth() + 1 ) + "-" + eTime.getUTCDate() + "T" + eTime.getUTCHours() + ":" + eTime.getUTCMinutes() + ":" + eTime.getUTCSeconds();
   }
 
@@ -158,7 +157,6 @@ export class RequestsComponent implements OnInit {
         this.getInquireList();
       },
       (error) => {
-        // alert(error);
         console.log(error);
       }
     );
@@ -311,9 +309,6 @@ export class RequestsComponent implements OnInit {
     let calendarApi = this.calendarComponent.getApi();
     calendarApi.changeView('timeGridDay');
     calendarApi.gotoDate( modal.goToSpecificDate + "T09:00:00Z" );
-    //
-    // let el: HTMLElement = this.closeGoToDate.nativeElement;
-    // el.click();
   }
 
   selectAllow(start, end, jsEvent, view) {

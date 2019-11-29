@@ -40,6 +40,60 @@ INSERT INTO `ah_status` VALUES (1,'pc_requested_inquiry'),(2,'admin_accepted_inq
 UNLOCK TABLES;
 
 --
+-- Table structure for table `event_type`
+--
+
+DROP TABLE IF EXISTS `event_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event_type` (
+  `event_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `event_type_name` varchar(100) DEFAULT NULL,
+  `venue_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`event_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `event_type`
+--
+
+LOCK TABLES `event_type` WRITE;
+/*!40000 ALTER TABLE `event_type` DISABLE KEYS */;
+INSERT INTO `event_type` VALUES (1,'Geburtstag',1,'2019-11-26 19:30:53','Yogesh'),(2,'Hochzeit',1,'2019-11-26 19:30:53','Yogesh'),(3,'Jahrestag',1,'2019-11-26 19:30:53','Yogesh');
+/*!40000 ALTER TABLE `event_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `guests_count_list`
+--
+
+DROP TABLE IF EXISTS `guests_count_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `guests_count_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `value` varchar(50) DEFAULT NULL,
+  `venue_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `guests_count_list`
+--
+
+LOCK TABLES `guests_count_list` WRITE;
+/*!40000 ALTER TABLE `guests_count_list` DISABLE KEYS */;
+INSERT INTO `guests_count_list` VALUES (1,'50',1,'2019-11-26 19:30:53','Yogesh'),(2,'51-80',1,'2019-11-26 19:30:53','Yogesh'),(3,'81-100',1,'2019-11-26 19:30:53','Yogesh');
+/*!40000 ALTER TABLE `guests_count_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `inquire_requests`
 --
 
@@ -71,7 +125,7 @@ CREATE TABLE `inquire_requests` (
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +134,7 @@ CREATE TABLE `inquire_requests` (
 
 LOCK TABLES `inquire_requests` WRITE;
 /*!40000 ALTER TABLE `inquire_requests` DISABLE KEYS */;
-INSERT INTO `inquire_requests` VALUES (1,'ABCD',NULL,'ABCD','2019-11-10 08:44:30',300,'+1-3984948','rockey91@gmail.com','Subj','Message',1,'Title 1','2019-11-05 09:30:00','rtyuiop',8,'I would love to have loud speakers at the venue.','2019-07-23 15:02:40',1,'2019-11-10 08:44:30','admin',NULL,NULL),(2,'YOGESH S',NULL,'1','2019-11-03 12:18:49',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,NULL,NULL,NULL,2,NULL,'2019-07-23 16:02:49',NULL,NULL,'admin',NULL,NULL),(3,'YOGESH S',NULL,'1','2019-11-03 12:27:28',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,NULL,NULL,NULL,2,NULL,'2019-07-23 16:03:22',NULL,NULL,'admin',NULL,NULL),(4,'YOGESH S',NULL,'1','2019-07-24 18:30:00',21,'8971400707','yogesh24.ds@gmail.com','Party hall booking','XZ GVVGS',1,NULL,NULL,NULL,1,NULL,'2019-07-23 16:04:32',NULL,NULL,NULL,NULL,NULL),(5,'Rakesh',NULL,'1','2019-11-03 12:10:23',100,'98889666492','faridaakram2013@gmail.com','Subject1','msg1',1,NULL,NULL,NULL,2,NULL,'2019-08-27 07:15:59',NULL,NULL,'admin',NULL,NULL),(6,'Testy',NULL,'1','2019-11-04 14:24:56',100,'1234567890','rockey91@gmail.com','Subject1','Message',1,'AT 1','2019-11-11 09:30:00','AM 1',6,NULL,'2019-10-21 02:11:10',NULL,'2019-11-04 14:24:56','admin',NULL,NULL),(7,'Rakesh',NULL,'1','2019-11-04 13:55:17',100,'14141414141','rockey91@gmail.com','Subject','MEssg',1,NULL,NULL,NULL,2,NULL,'2019-11-03 11:36:58',NULL,NULL,'admin',NULL,NULL),(8,'Rakesh',NULL,'1','2019-11-19 18:30:00',100,'14141414141','rockey91@gmail.com','Subject','',1,NULL,NULL,NULL,1,NULL,'2019-11-03 11:40:14',NULL,NULL,NULL,NULL,NULL),(9,'Rakesh',NULL,'1','2019-11-13 09:16:01',100,'9880279471','r91@gmail.com','Subj','Mesg',1,NULL,NULL,NULL,2,NULL,'2019-11-03 16:18:52',NULL,NULL,'admin',NULL,NULL);
+INSERT INTO `inquire_requests` VALUES (1,'ABCD',NULL,'ABCD','2019-11-25 14:50:43',300,'+1-3984948','rockey91@gmail.com','Subj','Message',1,'Venue Visit','2019-11-05 09:30:00','Hopw to see you soon',3,'I would love to have loud speakers at the venue.','2019-07-23 15:02:40',1,'2019-11-18 14:29:35','admin',NULL,NULL),(2,'YOGESH S',NULL,'1','2019-11-03 12:18:49',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,NULL,NULL,NULL,2,NULL,'2019-07-23 16:02:49',NULL,NULL,'admin',NULL,NULL),(3,'YOGESH S',NULL,'1','2019-11-03 12:27:28',12,'8971400707','yogesh24.ds@gmail.com','Party hall booking','aASASAS ASASAS',1,NULL,NULL,NULL,2,NULL,'2019-07-23 16:03:22',NULL,NULL,'admin',NULL,NULL),(4,'YOGESH S',NULL,'1','2019-07-24 18:30:00',21,'8971400707','yogesh24.ds@gmail.com','Party hall booking','XZ GVVGS',1,NULL,NULL,NULL,1,NULL,'2019-07-23 16:04:32',NULL,NULL,NULL,NULL,NULL),(5,'Rakesh',NULL,'1','2019-11-03 12:10:23',100,'98889666492','faridaakram2013@gmail.com','Subject1','msg1',1,NULL,NULL,NULL,2,NULL,'2019-08-27 07:15:59',NULL,NULL,'admin',NULL,NULL),(6,'Testy',NULL,'1','2019-11-04 14:24:56',100,'1234567890','rockey91@gmail.com','Subject1','Message',1,'AT 1','2019-11-11 09:30:00','AM 1',6,NULL,'2019-10-21 02:11:10',NULL,'2019-11-04 14:24:56','admin',NULL,NULL),(7,'Rakesh',NULL,'1','2019-11-04 13:55:17',100,'14141414141','rockey91@gmail.com','Subject','MEssg',1,NULL,NULL,NULL,2,NULL,'2019-11-03 11:36:58',NULL,NULL,'admin',NULL,NULL),(8,'Rakesh',NULL,'1','2019-11-19 18:30:00',100,'14141414141','rockey91@gmail.com','Subject','',1,NULL,NULL,NULL,1,NULL,'2019-11-03 11:40:14',NULL,NULL,NULL,NULL,NULL),(9,'Rakesh',NULL,'1','2019-11-13 09:16:01',100,'9880279471','r91@gmail.com','Subj','Mesg',1,NULL,NULL,NULL,2,NULL,'2019-11-03 16:18:52',NULL,NULL,'admin',NULL,NULL),(10,'KRR',NULL,'1','2019-11-25 16:12:05',1,'123','rockey91@gmail.com','Test','Test',1,NULL,NULL,NULL,3,NULL,'2019-11-16 01:00:45',NULL,NULL,'admin',NULL,NULL),(11,'Nikhil',NULL,'Geburtstag','2019-11-18 14:35:32',50,'4915175783402','nikhilsuryam@gmail.com','Birthday at your location','I would like to celebratre birthdat',1,NULL,NULL,NULL,9,NULL,'2019-11-18 14:16:47',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `inquire_requests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +161,7 @@ CREATE TABLE `users` (
   `passwordsalt` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +170,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin',1,1,NULL,'2019-07-23 17:05:15','1',NULL,NULL,NULL,NULL,NULL),(2,'Testy','test@abc',2,1,NULL,'2019-08-27 07:32:08','1',NULL,NULL,NULL,NULL,NULL),(3,'faridaakram2013@gmail.com','98889666492@achalm',2,1,NULL,'2019-08-27 10:49:26','admin',NULL,NULL,NULL,NULL,NULL),(4,'rockey91@gmail.com','+1-3984948@achalm',2,1,NULL,'2019-08-27 10:49:45','admin',NULL,NULL,NULL,NULL,NULL),(5,'rockey91@gmail.com','1234567890@achalm',2,1,NULL,'2019-10-21 02:11:33','admin',NULL,NULL,NULL,NULL,NULL),(6,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:18:49','admin',NULL,NULL,NULL,NULL,NULL),(7,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:27:28','admin',NULL,NULL,NULL,NULL,NULL),(8,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:27:56','admin',NULL,NULL,NULL,NULL,NULL),(9,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:28:59','admin',NULL,NULL,NULL,NULL,NULL),(10,'rockey91@gmail.com','14141414141@achalm',2,1,NULL,'2019-11-03 12:46:39','admin',NULL,NULL,NULL,NULL,NULL),(11,'r91@gmail.com','14141414141@achalm',2,1,NULL,'2019-11-03 16:34:46','admin',NULL,NULL,NULL,NULL,NULL),(12,'r91@gmail.com','9880279471@achalm',2,1,NULL,'2019-11-13 09:16:01','admin',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'admin','admin',1,1,NULL,'2019-07-23 17:05:15','1',NULL,NULL,NULL,NULL,NULL),(2,'Testy','test@abc',2,1,NULL,'2019-08-27 07:32:08','1',NULL,NULL,NULL,NULL,NULL),(3,'faridaakram2013@gmail.com','98889666492@achalm',2,1,NULL,'2019-08-27 10:49:26','admin',NULL,NULL,NULL,NULL,NULL),(4,'rockey91@gmail.com','+1-3984948@achalm',2,1,NULL,'2019-08-27 10:49:45','admin',NULL,NULL,NULL,NULL,NULL),(5,'rockey91@gmail.com','1234567890@achalm',2,1,NULL,'2019-10-21 02:11:33','admin',NULL,NULL,NULL,NULL,NULL),(6,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:18:49','admin',NULL,NULL,NULL,NULL,NULL),(7,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:27:28','admin',NULL,NULL,NULL,NULL,NULL),(8,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:27:56','admin',NULL,NULL,NULL,NULL,NULL),(9,'yogesh24.ds@gmail.com','8971400707@achalm',2,1,NULL,'2019-11-03 12:28:59','admin',NULL,NULL,NULL,NULL,NULL),(10,'rockey91@gmail.com','14141414141@achalm',2,1,NULL,'2019-11-03 12:46:39','admin',NULL,NULL,NULL,NULL,NULL),(11,'r91@gmail.com','14141414141@achalm',2,1,NULL,'2019-11-03 16:34:46','admin',NULL,NULL,NULL,NULL,NULL),(12,'r91@gmail.com','9880279471@achalm',2,1,NULL,'2019-11-13 09:16:01','admin',NULL,NULL,NULL,NULL,NULL),(13,'nikhilsuryam@gmail.com','4915175783402@achalm',2,1,NULL,'2019-11-18 14:20:51','admin',NULL,NULL,NULL,NULL,NULL),(14,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 14:50:43','admin',NULL,NULL,NULL,NULL,NULL),(15,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 15:53:13','admin',NULL,NULL,NULL,NULL,NULL),(16,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 16:00:14','admin',NULL,NULL,NULL,NULL,NULL),(17,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 16:02:53','admin',NULL,NULL,NULL,NULL,NULL),(18,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 16:03:10','admin',NULL,NULL,NULL,NULL,NULL),(19,'rockey91@gmail.com','123@achalm',2,1,NULL,'2019-11-25 16:12:05','admin',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-16  6:15:04
+-- Dump completed on 2019-11-26 19:33:43
