@@ -103,6 +103,7 @@ export class RequestsComponent implements OnInit {
       (response:any = []) =>{
         if ( this.userRole == 1 ) {
           this.requestsList = response.data[0];
+
         } else {
           let pcname = this.username;
           this.requestsList = response.data[0].filter(obj => {
@@ -164,6 +165,8 @@ export class RequestsComponent implements OnInit {
 
   showMoreDetails( index ): void {
     this.selectedRequest = this.requestsList[index];
+    console.log(this.selectedRequest);
+
   }
 
   sendReply(data, acceptance) {
