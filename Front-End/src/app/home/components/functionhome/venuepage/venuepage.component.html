@@ -118,7 +118,8 @@
                     <div class="row">
                       <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="number" name="mobile_number" class="form-control" placeholder="Handynummer" [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName="" pattern="[0-9]+" autofocus>
+                        <input type="tel" name="mobile_number" class="form-control" placeholder="Handynummer" pattern="^\d{10}$"
+                         [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName=""  autofocus>
                         <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
                           <div *ngIf="mobilenumber.errors.required">
                             nzahl der Gäste is required.
@@ -136,7 +137,16 @@
                     <div class="row">
                       <label class="col-md-5"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse" [(ngModel)]="email_address" #emailaddress="ngModel" required>
+                        <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse"
+                         [(ngModel)]="email_address" #emailaddress="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                         <div *ngIf="emailaddress.invalid && (emailaddress.touched)" class="alert alert-danger">
+                           <div *ngIf="emailaddress.errors.required">
+                             E-Mail-Addresse is required.
+                           </div>
+                           <div *ngIf="emailaddress.hasError('pattern')">
+                             Only valid E-Mail-Addresse are allowed.
+                           </div>
+                         </div>
                       </div>
                     </div>
                   </div>
