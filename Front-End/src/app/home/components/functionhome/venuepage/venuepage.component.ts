@@ -1,5 +1,5 @@
-import { Component, Input, Output, OnInit, ViewChild } from '@angular/core';
-import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, Input, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { InquireRequestsService, VenuesService } from '../../../../shared';
@@ -25,7 +25,10 @@ export class VenuepageComponent implements OnInit {
   };
   requestId: number = null;
   venueId :any;
+
   @ViewChild('f') form: any;
+  modalReference: any;
+  @ViewChild('closeAddExpenseModal') closeAddExpenseModal: ElementRef;
 
   constructor(
     private translate: TranslateService,
@@ -63,9 +66,15 @@ export class VenuepageComponent implements OnInit {
     });
   }
 
+  closeRequestModal(){
+    this.modalReference.close();
+  }
+
   open(content) {
     this.isSubmitSuccess = false;
-    this.modalService.open(content, {}).result.then((result) => {
+    this.modalReference = this.modalService.open(content, {});
+
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -123,6 +132,9 @@ export class VenuepageComponent implements OnInit {
       .then(
         (response) =>{
           this.isSubmitSuccess = true;
+          setTimeout(() => {
+            this.closeRequestModal();
+          }, 2000);
         },
         (error) => {
           console.log(error);

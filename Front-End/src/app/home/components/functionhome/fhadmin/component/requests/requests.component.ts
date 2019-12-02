@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OptionsInput } from '@fullcalendar/core';
 import { Subject } from 'rxjs';
@@ -76,6 +76,7 @@ export class RequestsComponent implements OnInit {
   eventId: number = null;
 
   actionItem: number = 0;
+  modalReference: any;
 
   constructor(
     private globalService: GlobalService,
@@ -156,6 +157,7 @@ export class RequestsComponent implements OnInit {
       (response) =>{
         this.eventId = response[0].data.req_id[0];
         this.getInquireList();
+        this.closeRequestModal();
       },
       (error) => {
         console.log(error);
@@ -185,11 +187,11 @@ export class RequestsComponent implements OnInit {
       (response) => {
         if ( acceptance ) {
           alert("Your response with portal credentials is shared with PC to schedule the appointment.");
-
         } else {
           alert("Your response rejecting the request is shared with PC.");
         }
         this.getInquireList();
+        this.closeRequestModal();
       },
       (error) => {
         console.log(error);
@@ -242,14 +244,22 @@ export class RequestsComponent implements OnInit {
     this.calendarWeekends = !this.calendarWeekends;
   }
 
-  gotoPast(content) {
+  // gotoPast(content) {
+  //
+  //   this.modalService.open(content, {}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  //
+  // }
 
-    this.modalService.open(content, {}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-
+  @ViewChild('closeBtn') closeBtn: ElementRef;
+  closeRequestModal(){
+    this.closeBtn.nativeElement.click();
+  }
+  closeRequestModal1(){
+    this.modalReference.close();
   }
 
   handleDateClick(arg, modalId) {
@@ -266,11 +276,21 @@ export class RequestsComponent implements OnInit {
       if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
         this.startTime = this.globals.getFullDateTime( arg.date ); //arg.dateStr.substr(0, 19).replace("T", " ");
         this.endTime = this.globals.getFullDateTime( new Date( arg.date.getTime() + ( 30 * 60 * 1000 ) ) );
-        this.modalService.open(modalId, {}).result.then((result) => {
+
+        // this.modalService.open(modalId, {}).result.then((result) => {
+        //   this.closeResult = `Closed with: ${result}`;
+        // }, (reason) => {
+        //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        // });
+
+        this.modalReference = this.modalService.open(modalId, {});
+
+        this.modalReference.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
+
       }
     }
 
@@ -300,6 +320,7 @@ export class RequestsComponent implements OnInit {
     .then(
       (response) => {
         alert("Your appointment request is nofified to Achalm Hof. Sit back! We will notify you their response.");
+        this.closeRequestModal1();
       },
       (error) => {
         console.log(error);
@@ -352,6 +373,7 @@ export class RequestsComponent implements OnInit {
       (response) => {
         alert("Your response to the appointment request is updated. Sit back! We will notify the PC.");
         this.getInquireList();
+        this.closeRequestModal();
       },
       (error) => {
         console.log(error);
