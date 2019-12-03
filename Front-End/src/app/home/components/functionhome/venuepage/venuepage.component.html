@@ -98,7 +98,7 @@
                       <label class="col-md-5"> nzahl der Gäste <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
                         <select class="form-control" name="guests_count" [(ngModel)]="guests_count" placeholder="nzahl der Gäste" #guestscount="ngModel" required forbiddenName="" autofocus>
-                          <option value="" Selected> --- 50 --- </option>
+                          <option value="" Selected> --select-- </option>
                           <option *ngFor="let guesTCount of guestsCountArray"  value="{{ guesTCount.id }}">
                               {{ guesTCount.value }}
                           </option>
