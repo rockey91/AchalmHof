@@ -266,8 +266,8 @@ export class CalendarViewComponent implements OnInit {
     if ( !(startTimeInMins >= 720 && startTimeInMins < 840) ) {
       let eventObj = this.calendarEvents.find((obj) => { return obj.id == event.id; });
       this.activeCalFormEventObj = eventObj;
-      this.scheduleTitle = eventObj.schedule_title;
-      this.scheduleDesc = eventObj.schedule_desc;
+      this.scheduleTitle = eventObj.title;
+      this.scheduleDesc = eventObj.desc;
       this.startTime = this.globals.getFullDateTime( event.start ).replace(" ", "T");
       this.endTime = this.globals.getFullDateTime( new Date( event.start.getTime() + ( 30 * 60 * 1000 ) ) ).replace(" ", "T");
       this.modalService.open(modalId, {}).result.then((result) => {
