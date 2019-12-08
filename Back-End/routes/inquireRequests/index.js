@@ -92,50 +92,81 @@ routes.put('/ah-api/updateInquireRequest', function (req, res) {
     request_status: req.body.request_status,
     last_updated_by : req.body.username
   }
-  knex.transaction(function (t) {
-    knex("inquire_requests")
-    .update(updateData)
-    .where("id", req.body.id)
-    .then(function(response = 0){
-      var defPwd = req.body.mobile_number + "@achalm";
-      return knex('users')
-      .transacting(t)
-      .insert({
-        username: req.body.email_address,
-        password: defPwd,
-        role: 2,
-        status: 1,
-        created_at: knex.fn.now(),
-        created_by: req.body.username
-      }).
-      then(function(response){
-        console.log("Details saved to users table.");
+
+  var reqId = req.body.id;
+  if ( updateData.request_status == 2 ) {
+    knex.transaction(function (t) {
+      knex("inquire_requests")
+      .update(updateData)
+      .where("id", req.body.id)
+      .then(function(response = 0){
+        var defPwd = req.body.mobile_number + "@achalm";
+        return knex('users')
+        .transacting(t)
+        .insert({
+          username: req.body.email_address,
+          password: defPwd,
+          role: 2,
+          status: 1,
+          created_at: knex.fn.now(),
+          created_by: req.body.username
+        }).
+        then(function(response){
+          console.log(`Inquire request with id ${reqId} is accepted.`);
+          var mailData = {
+            // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
+            'to' : req.body.email_address,
+            'cc' : "",
+            'subject': 'AchalmOf: Inquire Status Approved : User Credentials',
+            'html': 'Hi <br> <br> Please find the below login credentials to access AchalmOf <br> <br> Username : '+req.body.email_address+'. <br> <br> Password : '+defPwd+'<br><br>  Regards<br>' + 'Development Team'.link("https://achalmhof.de/")
+          }
+          emailsender.sendEmail(mailData,{});
+        })
+      })
+      .then(t.commit)
+      .catch(t.rollback)
+    })
+    .then(function (success) {
+      global.sendResponse(req, res, {
+        status: 200,
+        data: success
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  } else {
+    knex.transaction(function (t) {
+      knex("inquire_requests")
+      .update(updateData)
+      .where("id", req.body.id)
+      .then(function(response = 0){
+
+        console.log(`Inquire request with id ${reqId} is rejected`);
+
         var mailData = {
           // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
           'to' : req.body.email_address,
           'cc' : "",
-          'subject': 'AchalmOf: Inquire Status Approved : User Credentials',
-          'html': 'Hi <br> <br> Please find the below login credentials to access AchalmOf <br> <br> Username : '+req.body.email_address+'. <br> <br> Password : '+defPwd+'<br><br>  Regards<br>' + 'Development Team'.link("yogesh.shanmukhappa@affineanalytics.com")
+          'subject': 'AchalmOf: Your inquire request is rejected.',
+          'html': 'Hi <br> <br> We are sorry to inform that your inquire request is rejected. <br> <br> <br>  Regards<br>' + 'Team'.link("https://achalmhof.de/")
         }
         emailsender.sendEmail(mailData,{});
       })
+      .then(t.commit)
+      .catch(t.rollback)
     })
-    .then(t.commit)
-    .catch(t.rollback)
-  })
-  .then(function (success) {
-    // result.data = req.body;
-    // result.result = 'success';
-    // result.message = 'Inquire status updated successfully!';
-    // res.setHeader('Content-Type', 'application/json');
-    global.sendResponse(req, res, {
-      status: 200,
-      data: success
+    .then(function (success) {
+      global.sendResponse(req, res, {
+        status: 200,
+        data: success
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  }
+
 });
 
 // Updating a requuest.
