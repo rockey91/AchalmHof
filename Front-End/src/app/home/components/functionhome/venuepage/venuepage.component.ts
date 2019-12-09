@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { InquireRequestsService, VenuesService } from '../../../../shared';
+declare var $:any;
 
 @Component({
   selector: 'app-venuepage',
@@ -72,6 +73,8 @@ export class VenuepageComponent implements OnInit {
 
   open(content) {
     this.isSubmitSuccess = false;
+    var today = new Date().toISOString().split('T')[0];
+    $( "#txt_date" ).attr("min", today);
     this.modalReference = this.modalService.open(content, {});
 
     this.modalReference.result.then((result) => {

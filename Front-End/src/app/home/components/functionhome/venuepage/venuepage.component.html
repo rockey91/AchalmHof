@@ -55,7 +55,8 @@
                     <div class="row">
                       <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required forbiddenName="" pattern="[a-zA-Z ]+" autofocus>
+                        <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name"
+                         #pcname="ngModel" required forbiddenName="" pattern="[A-Za-z]{3,}" title="Username should only contain alphabets. e.g. john" autofocus>
                         <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
                           <div *ngIf="pcname.errors.required">
                             Name is required.
@@ -84,7 +85,7 @@
                     <div class="row">
                       <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
+                        <input type="date" id="txt_date" min="2019-12-09" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
                         <div *ngIf="eventdate.invalid && (eventdate.touched)" class="alert alert-danger">
                           <div *ngIf="eventdate.errors.required">
                             Veranstaltungsdatum is required.
@@ -118,7 +119,7 @@
                     <div class="row">
                       <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="tel" name="mobile_number" class="form-control" placeholder="Handynummer" pattern="^\d{10}$"
+                        <input type="tel" name="mobile_number" class="form-control" placeholder="Handynummer" pattern="[0-9]{10,13}"
                          [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName=""  autofocus>
                         <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
                           <div *ngIf="mobilenumber.errors.required">
@@ -172,7 +173,7 @@
               <div class="row">
                 <label class="col-md-5"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
                 <div class="col-md-7">
-                  <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" maxlength="200" placeholder="Botschaft" required></textarea>
+                  <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" maxlength="400" placeholder="Botschaft" required></textarea>
                 </div>
               </div>
             </div>
