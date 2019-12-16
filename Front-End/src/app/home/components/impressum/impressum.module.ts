@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from './../footer/footer.component';
 
 import { ImpressumRoutingModule } from './impressum-routing.module';
 import { ImpressumComponent } from './impressum.component';
@@ -18,8 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         SlideshowModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule.forRoot(),
+        NgbModule.forRoot()
     ],
-    declarations: [ImpressumComponent]
+    declarations: [ImpressumComponent, HeaderComponent, FooterComponent]
 })
 export class ImpressumModule {}
