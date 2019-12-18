@@ -56,7 +56,7 @@
                       <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
                         <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name"
-                         #pcname="ngModel" required forbiddenName="" pattern="[A-Za-z]{3,}" title="Username should only contain alphabets. e.g. john" autofocus>
+                         #pcname="ngModel" required forbiddenName="" pattern="[A-Za-z\s]{3,}" title="Username should only contain alphabets. e.g. john" autofocus>
                         <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
                           <div *ngIf="pcname.errors.required">
                             Name is required.
