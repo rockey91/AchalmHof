@@ -73,7 +73,7 @@ export class VenuepageComponent implements OnInit {
 
   open(content) {
     this.isSubmitSuccess = false;
-    var today = new Date().toISOString().split('T')[0];
+    var today = "2019-12-30";
     $( "#txt_date" ).attr("min", today);
     this.modalReference = this.modalService.open(content, {});
 
