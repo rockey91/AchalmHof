@@ -180,6 +180,14 @@
           hiddenDays="[0,5,6]"
           [validRange]="validRange"
           [height]="400"
+          [hour]="numeric"
+          [slotLabelFormat]="{
+              hour: '2-digit',
+              minute: '2-digit',
+              omitZeroMinute: false,
+              meridiem: 'long',
+              hour12: false
+          }"
           ></full-calendar>
         </div>
       </div>
