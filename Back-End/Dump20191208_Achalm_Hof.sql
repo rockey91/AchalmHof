@@ -110,7 +110,7 @@ CREATE TABLE `inquire_requests` (
   `mobile_number` varchar(20) NOT NULL,
   `email_address` varchar(200) NOT NULL,
   `subject` tinytext NOT NULL,
-  `message` tinytext NOT NULL,
+  `message` text NOT NULL,
   `venue_id` int(11) NOT NULL,
   `appointment_title` varchar(45) DEFAULT NULL,
   `appointment_time` datetime DEFAULT NULL,

@@ -5,15 +5,14 @@
         <div class="col-12">
           <h1 class="cus-h1 venue-h5">
             <strong> {{ venue.name }}</strong>
-            {{venue.address}}
           </h1>
         </div>
         <div class="col-12" style="height: 350px">
           <slideshow [imageUrls]="imageUrlArray"></slideshow>
         </div>
         <div class="col-12">
-          <div class="venue-details" style="height: 350px">
-            <p class="p">
+          <div class="venue-details" style="height: auto">
+            <p class="p-desc">
               {{ venue.description }}
             </p>
             <!-- <ul>
@@ -30,11 +29,11 @@
   <div class="col-4">
     <div class="row">
       <div class="col-12">
-        <button class="btn btn-primary full-width enquire btn-lg" type="button" name="button" (click)="open(marketing)"> Inquire </button>
+        <button class="btn btn-primary full-width enquire btn-lg" type="button" name="button" (click)="open(marketing)"> Anfrage </button>
         <ng-template #marketing let-c="close" let-d="dismiss">
           <div class="modal-header">
             <div>
-            <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> {{ venue.name }} : {{ venue.address }} </h4>
+            <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> {{ venue.name }} </h4>
 
             </div>
             <div style="clear:both; display:block">
@@ -55,7 +54,8 @@
                     <div class="row">
                       <label class="col-md-5"> Name <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name" #pcname="ngModel" required forbiddenName="" pattern="[a-zA-Z ]+" autofocus>
+                        <input type="text" name="pc_name" class="form-control" placeholder="Name" [(ngModel)]="pc_name"
+                         #pcname="ngModel" required forbiddenName="" pattern="[A-Za-z\s]{3,}" title="Username should only contain alphabets. e.g. john" autofocus>
                         <div *ngIf="pcname.invalid && (pcname.touched)" class="alert alert-danger">
                           <div *ngIf="pcname.errors.required">
                             Name is required.
@@ -84,7 +84,7 @@
                     <div class="row">
                       <label class="col-md-5"> Veranstaltungsdatum <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="date" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
+                        <input type="date" id="txt_date" min="2019-12-09" name="event_date" class="form-control" [(ngModel)]="event_date" #eventdate="ngModel" required autofocus >
                         <div *ngIf="eventdate.invalid && (eventdate.touched)" class="alert alert-danger">
                           <div *ngIf="eventdate.errors.required">
                             Veranstaltungsdatum is required.
@@ -118,7 +118,7 @@
                     <div class="row">
                       <label class="col-md-5"> Handynummer <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
                       <div class="col-md-7">
-                        <input type="tel" name="mobile_number" class="form-control" placeholder="Handynummer" pattern="^\d{10}$"
+                        <input type="tel" name="mobile_number" class="form-control" placeholder="Handynummer" pattern="[0-9]{10,13}"
                          [(ngModel)]="mobile_number" #mobilenumber="ngModel" required forbiddenName=""  autofocus>
                         <div *ngIf="mobilenumber.invalid && (mobilenumber.touched)" class="alert alert-danger">
                           <div *ngIf="mobilenumber.errors.required">
@@ -135,8 +135,8 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <div class="row">
-                      <label class="col-md-5"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
-                      <div class="col-md-7">
+                      <label class="col-md-4"> E-Mail-Addresse <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup>  <span class="pull-right"> : </span> </label>
+                      <div class="col-md-8">
                         <input type="email" name="email_address" class="form-control" placeholder="E-Mail-Addresse"
                          [(ngModel)]="email_address" #emailaddress="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                          <div *ngIf="emailaddress.invalid && (emailaddress.touched)" class="alert alert-danger">
@@ -161,8 +161,8 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-md-5"> Gegenstand <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
-                <div class="col-md-7">
+                <label class="col-md-4"> Gegenstand <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                <div class="col-md-8">
                   <input type="text" name="subject" class="form-control" maxlength="50" placeholder="Gegenstand" [(ngModel)]="subject" #subjectControl="ngModel" required>
                 </div>
               </div>
@@ -170,9 +170,9 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-md-5"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
-                <div class="col-md-7">
-                  <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="3" cols="80" maxlength="200" placeholder="Botschaft" required></textarea>
+                <label class="col-md-4"> Botschaft <sup>  <i class="fa fa-star-o danger" aria-hidden="true"></i> </sup> <span class="pull-right"> : </span> </label>
+                <div class="col-md-8">
+                  <textarea name="message" class="form-control"  [(ngModel)]="message" #messageControl="ngModel"  rows="8" cols="80" maxlength="400" placeholder="Botschaft" required></textarea>
                 </div>
               </div>
             </div>
@@ -197,11 +197,11 @@
     </video>
   </div>
 </div>
-<div class="col-12 table-style">
+<!-- <div class="col-12 table-style">
   <div class="bordered-box bk-grey-dark" style="height: 150px;padding:10px">
     {{ venue.address }}, {{ venue.contact_number }}
   </div>
-</div>
+</div> -->
 <div class="col-12 table-style">
   <div class="maps bk-grey-dark" style="height:250px">
     <iframe [src]="venue.location_link | safe"  frameborder="0" style="width:100%; height:100%; border:0" allowfullscreen></iframe>
