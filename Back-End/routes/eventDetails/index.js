@@ -22,7 +22,7 @@ routes.use(function (req, res, next){
 // Add a event request.
 routes.post('/ah-api/addEventRequest', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.created_at = knex.fn.now();
 
   knex("event_details")
@@ -46,7 +46,7 @@ routes.post('/ah-api/addEventRequest', function (req, res) {
 // Get a event request.
 routes.get('/ah-api/getEventRequest', function (req, res) {
 
-  console.log(req.query);
+  // console.log(req.query);
 
   knex.select("*")
   .from("event_details")
@@ -93,7 +93,7 @@ routes.put('/ah-api/updateEventRequest', function (req, res) {
 // Delete a event request.
 routes.delete('/ah-api/deleteEventRequest', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.deleted_at = knex.fn.now();
 
   knex("event_details")

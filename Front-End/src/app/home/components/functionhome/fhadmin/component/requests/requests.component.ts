@@ -231,9 +231,14 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  showAdminCalendar(): void {
-    this.showReqListTable = false;
-    this.showCalendar = true;
+  showAdminCalendar(show): void {
+    if( show ) {
+      this.showReqListTable = false;
+      this.showCalendar = true;
+    } else {
+      this.showCalendar = false;
+      this.showReqListTable = true;
+    }
   }
 
   toggleVisible() {

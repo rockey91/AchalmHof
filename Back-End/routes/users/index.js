@@ -22,7 +22,7 @@ routes.use(function (req, res, next){
 // Authenticate the user.
 routes.post('/ah-api/authenticate', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   //var hashPassword = saltHashPassword(req.body.password);
   knex.select('*')
   .from('users')
@@ -93,7 +93,7 @@ routes.post('/ah-api/authenticate', function (req, res) {
 // Add a user.
 routes.post('/ah-api/addUser', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
 
   req.body.created_at = knex.fn.now();
   var hashPwdData = saltHashPassword(req.body.password);
@@ -121,7 +121,7 @@ routes.post('/ah-api/addUser', function (req, res) {
 // Get a user.
 routes.get('/ah-api/getUser', function (req, res) {
 
-  console.log(req.query);
+  // console.log(req.query);
 
   knex.select("*")
   .from("users")
@@ -145,7 +145,7 @@ routes.get('/ah-api/getUser', function (req, res) {
 // Update a user.
 routes.put('/ah-api/updateUser', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.last_updated_at = knex.fn.now();
 
   knex("users")
@@ -170,7 +170,7 @@ routes.put('/ah-api/updateUser', function (req, res) {
 // Delete a user.
 routes.delete('/ah-api/deleteUser', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.deleted_at = knex.fn.now();
 
   knex("users")

@@ -4,18 +4,17 @@ var os = require('os');
 
 var EMAIL_TRANSPORTER1 = nodemailer.createTransport({
   type: 'smtp',
-  host: 'smtp.office365.com',
-  // service: 'gmail',
-  // host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  host: 'smtp.achalmhof.de',
+  service: 'webmail.df.eu',
+  port: 465,
+  secure: true,
   requireTLS: true,
   tls: {
     rejectUnauthorized: false
   },
   auth: {
-    user: 'acis.notifications.noreply@affineanalytics.com',
-    pass: '@nalytics@ffin9'
+    user: 'kontakt@achalmhof.de',
+    pass: 'Defined@789'
   }
 });
 
@@ -26,15 +25,15 @@ function getMailOptionForDevEnv(mailOptions) {
   var username = os.userInfo().username;
   var hrisEmails = [];
 
-  if( username && username.toLowerCase().indexOf("kotresh") !== -1 ) {
-    hrisEmails = ['rockey91@gmail.com'];
-  } else if( username && username.toLowerCase().indexOf("yogesh") !== -1 ) {
-    hrisEmails = ['yogesh24.ds@gmail.com'];
-  } else {
+  // if( username && username.toLowerCase().indexOf("kotresh") !== -1 ) {
+  //   hrisEmails = ['rockey91@gmail.com'];
+  // } else if( username && username.toLowerCase().indexOf("yogesh") !== -1 ) {
+  //   hrisEmails = ['yogesh24.ds@gmail.com'];
+  // } else {
     hrisEmails = [
-      'yogesh24.ds@gmail.com'
+      'yogesh24.ds@gmail.com', 'satish.g08@gmail.com', 'rockey91@gmail.com', 'nikhilsuryam@gmail.com'
     ];
-  }
+  // }
 
   updatedMailOptions.to = hrisEmails.join(",");
   updatedMailOptions.cc = "";

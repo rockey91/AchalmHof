@@ -22,7 +22,7 @@ routes.use(function (req, res, next){
 // Add a venue.
 routes.post('/ah-api/addVenue', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.created_at = knex.fn.now();
 
   knex("venues")
@@ -116,7 +116,7 @@ routes.get('/ah-api/getAllVenues', function (req, res) {
 // Update a venue.
 routes.put('/ah-api/updateVenue', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.last_updated_at = knex.fn.now();
 
   knex("venues")
@@ -141,7 +141,7 @@ routes.put('/ah-api/updateVenue', function (req, res) {
 // Delete a venue.
 routes.delete('/ah-api/deleteVenue', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.deleted_at = knex.fn.now();
 
   knex("venues")

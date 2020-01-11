@@ -27,14 +27,29 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
   .insert(req.body)
   .then(function(response = 0) {
 
-    var content = `<tr><td>`+req.body.pc_name+ `</td> <td>`+req.body.event_type+`</td><td>` +req.body.event_date+ `</td> <td>`+req.body.guests_count+ `</td> <td>` +req.body.mobile_number+ `</td> <td> ` +req.body.email_address+ `</td> <td>` +req.body.subject+ `</td> <td>` +req.body.message+ `</td> </tr>`;
+    // var content = `<tr><td>`+req.body.pc_name+ `</td> <td>`+req.body.event_type+`</td><td>` +req.body.event_date+ `</td> <td>`+req.body.guests_count+ `</td> <td>` +req.body.mobile_number+ `</td> <td> ` +req.body.email_address+ `</td> <td>` +req.body.subject+ `</td> <td>` +req.body.message+ `</td> </tr>`;
 
     var mailData = {
       // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
       'to' : "kontakt@achalmhof.de",
-      'cc' : "kontakt@achalmhof.de",
+      'cc' : "n.fischer@achalmhof.de, s.hausch@achalm-lamm.de, yogesh24.ds@gmail.com, satish.g08@gmail.com, rockey91@gmail.com, nikhilsuryam@gmail.com",
       'subject': 'AchalmOf: Inquire Status',
-      'html': 'Hi  <br> <br> User has inquired for the below information, <br> <br> <table><tr> Name </tr> <tr> Event Type  </tr> <tr> Event Date </tr> <tr> Number of Guests </tr> <tr> Mobile Number </tr> <tr> Email </tr> <tr> Subject </tr> <tr> Message  </tr>'+content+' </table> <br> <br> Regards <br> Development Team'
+      'html': `Hi <br><br>
+               A new inquire request is received with the below information,
+               <br> <br>
+               <table>
+                <tr><th>Name</th><th>:</th><td>${req.body.pc_name}</td></tr>
+                <tr><th>Type</th><th>:</th><td>${req.body.event_type}</td></tr>
+                <tr><th>Date</th><th>:</th><td>${req.body.event_date}</td></tr>
+                <tr><th>Guests</th><th>:</th><td>${req.body.guests_count}</td></tr>
+                <tr><th>Mobile</th><th>:</th><td>${req.body.email_address}</td></tr>
+                <tr><th>Email</th><th>:</th><td>${req.body.mobile_number}</td></tr>
+                <tr><th>Subject</th><th>:</th><td>${req.body.subject}</td></tr>
+                <tr><th>Message</th><th>:</th><td>${req.body.message}</td></tr>
+               </<table>
+               <br> <br>
+               Regards <br>
+               Achalm Hof`
     }
 
     emailsender.sendEmail(mailData,{});
