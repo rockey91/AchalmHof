@@ -22,7 +22,7 @@ routes.use(function (req, res, next){
 // Add a pc calendar.
 routes.post('/ah-api/addPCCalendar', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.created_at = knex.fn.now();
 
   knex("pc_calendar")
@@ -46,7 +46,7 @@ routes.post('/ah-api/addPCCalendar', function (req, res) {
 // Get a pc calendar.
 routes.get('/ah-api/getPCCalendar', function (req, res) {
 
-  console.log(req.query);
+  // console.log(req.query);
 
   knex.select("*")
   .from("pc_calendar")
@@ -70,7 +70,7 @@ routes.get('/ah-api/getPCCalendar', function (req, res) {
 // Update a pc calendar.
 routes.put('/ah-api/updatePCCalendar', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.last_updated_at = knex.fn.now();
 
   knex("pc_calendar")
@@ -95,7 +95,7 @@ routes.put('/ah-api/updatePCCalendar', function (req, res) {
 // Delete a pc calendar.
 routes.delete('/ah-api/deletePCCalendar', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.deleted_at = knex.fn.now();
 
   knex("pc_calendar")

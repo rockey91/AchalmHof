@@ -23,7 +23,7 @@ routes.use(function (req, res, next){
 // Get a admin calendar.
 routes.get('/ah-api/getAdminCalendar', function (req, res) {
 
-  console.log(req.query);
+  // console.log(req.query);
 
   knex.select("*")
   .from("inquire_requests")
@@ -32,8 +32,8 @@ routes.get('/ah-api/getAdminCalendar', function (req, res) {
   .map(function (row) { return row; })
   .then(function(reqsList = []){
 
-    console.log("Calendar list....");
-    console.log(reqsList);
+    // console.log("Calendar list....");
+    // console.log(reqsList);
 
     var dataList = [];
 
@@ -62,7 +62,7 @@ routes.get('/ah-api/getAdminCalendar', function (req, res) {
 // Update a admin calendar.
 routes.put('/ah-api/updateAdminCalendar', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.last_updated_at = knex.fn.now();
 
   knex("admin_calendar")
@@ -98,7 +98,7 @@ routes.put('/ah-api/updateAdminCalendar', function (req, res) {
 // Delete a admin calendar.
 routes.delete('/ah-api/deleteAdminCalendar', function (req, res) {
 
-  console.log(req.body);
+  // console.log(req.body);
   req.body.deleted_at = knex.fn.now();
 
   knex("admin_calendar")

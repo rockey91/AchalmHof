@@ -190,6 +190,11 @@
           }"
           ></full-calendar>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-md btn-primary btn-default margin-top-20 pull-right" name="button" (click)="showAdminCalendar(false)">Go Back To Requests List</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -351,13 +356,13 @@
         <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject Inquiry</button>
         <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept Inquiry</button>
 
-        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isSchedulable(selectedRequest)"
+        <button type="button" class="btn btn-primary" (click)="showAdminCalendar(true)" *ngIf="isSchedulable(selectedRequest)"
         data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
 
         <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 6)" *ngIf="isPcAppReq(selectedRequest)">Reject Appointment</button>
         <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 5)" *ngIf="isPcAppReq(selectedRequest)">Accept Appointment</button>
 
-        <button type="button" class="btn btn-primary" (click)="showAdminCalendar()" *ngIf="isReschedulable(selectedRequest)"
+        <button type="button" class="btn btn-primary" (click)="showAdminCalendar(true)" *ngIf="isReschedulable(selectedRequest)"
         data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Re-schedule Appointment</button>
 
         <button type="button" class="btn btn-danger" (click)="updateAppReq(selectedRequest, 10)" *ngIf="isAdminRespUpdate(selectedRequest)">Cancelled</button>
