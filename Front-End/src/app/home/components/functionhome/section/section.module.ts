@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderModule } from './../../header/header.module';
+import { FooterModule } from './../../footer/footer.module';
 
 import { SectionRoutingModule } from './section-routing.module';
 import { SectionComponent } from './section.component';
@@ -11,7 +13,9 @@ import { SectionComponent } from './section.component';
         CommonModule,
         SectionRoutingModule,
         TranslateModule,
-        NgbDropdownModule
+        NgbDropdownModule,
+        HeaderModule,
+        FooterModule
     ],
     declarations: [SectionComponent]
 })

@@ -3,32 +3,34 @@
     <h3 class="page-header"> Achalm Hof – Die Eventlocation im Gebiet Neckar-Alb </h3>
     <p class="p">
       Der Achalm Hof in Reutlingen zählt zu den außergewöhnlichsten Eventlocations im Gebiet Neckar-Alb. Freuen Sie sich auf ein naturnahes Ambiente, wenn Sie hier Familienfeiern, Hochzeiten oder Business-Events wie Tagungen und Schulungen verbringen</p>
-      <p> Die barrierefreie Location verteilt sich auf die Almhütte und eine große Eventscheune. Letztere ist über 355 m² groß und bietet somit beinahe unbegrenzte Gestaltungsmöglichkeiten. Bei entsprechender Witterung ist es zudem möglich, Ihre Veranstaltung wie etwa eine Freie Trauung in den herrlichen Außenbereich zu verlegen. Dieser ist mit einem Naturteich und einem Spielplatz für die kleinen Gäste bestückt, außerdem befindet sich direkt angrenzend ein Wald. </p>
+      <p class="p1"> Die barrierefreie Location verteilt sich auf die Almhütte und eine große Eventscheune. Letztere ist über 355 m² groß und bietet somit beinahe unbegrenzte Gestaltungsmöglichkeiten. Bei entsprechender Witterung ist es zudem möglich, Ihre Veranstaltung wie etwa eine Freie Trauung in den herrlichen Außenbereich zu verlegen. Dieser ist mit einem Naturteich und einem Spielplatz für die kleinen Gäste bestückt, außerdem befindet sich direkt angrenzend ein Wald. </p>
     </div>
-    <div class="col-4 news-feed">
-      <h6 class="h6-title"> Unsere Besonderheiten </h6>
-      <ul class="cus-ul">
-        <li>
-          Fest Installierte Ambientbeleuchtung im Innen- sowie Außenbereich
-        </li>
-        <li>
-          Vorbereitungsküche, Geschirr und Beteck vorhanden
-        </li>
-        <li>
-          Naturumgeben
-        </li>
-        <li>Kinderspielplatz			</li>
-        <li> Beamer + Leinwand			</li>
-        <li>Kühlmöglichkeiten 			 </li>
-        <li>Großzügiger Außenbereich mit Naturteich			 </li>
-        <li>Kraftstrom vorhanden			 </li>
-      </ul>
+    <div class="col-4">
+      <div class="news-feed">
+        <h6 class="h6-title"> Unsere Besonderheiten </h6>
+        <ul class="cus-ul">
+          <li>
+            Fest Installierte Ambientbeleuchtung im Innen- sowie Außenbereich
+          </li>
+          <li>
+            Vorbereitungsküche, Geschirr und Beteck vorhanden
+          </li>
+          <li>
+            Naturumgeben
+          </li>
+          <li>Kinderspielplatz			</li>
+          <li> Beamer + Leinwand			</li>
+          <li>Kühlmöglichkeiten 			 </li>
+          <li>Großzügiger Außenbereich mit Naturteich			 </li>
+          <li>Kraftstrom vorhanden			 </li>
+        </ul>
+      </div>
     </div>
     <div class="col-12 venues-list">
       <div class="row">
         <div class="col-6" *ngFor="let list of venuesList; let i = index;">
-          <h5 class="venue-h5 text-left"> {{list.name}} </h5>
-          <img src="{{list.images.split(',')[0]}}" class="rounded cus-height img-responsive" alt="Räumlichkeiten {{i + 1}}" (click)="gotoVenuepage(list.id)">
+            <h5 class="venue-h5 text-left" style="height:20px"> {{list.name}} </h5>
+            <img src="{{list.images.split(',')[0]}}" class="rounded cus-height img-responsive" alt="Räumlichkeiten {{i + 1}}" (click)="gotoVenuepage(list.id)">
         </div>
       </div>
       <div class="row">

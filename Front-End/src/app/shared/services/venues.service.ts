@@ -26,7 +26,6 @@ export class VenuesService {
       )
       .toPromise()
       .then(response => {
-        console.log("response", response);
         if ( response && response["data"] ) {
           return response["data"];
         } else {
@@ -48,7 +47,6 @@ export class VenuesService {
     )
     .toPromise()
     .then(response => {
-      console.log("response", response);
       if ( response && response["data"] ) {
         return response["data"];
       } else {
@@ -70,7 +68,6 @@ export class VenuesService {
     )
     .toPromise()
     .then(response => {
-      console.log("response", response);
       if ( response && response["data"] ) {
         return response["data"];
       } else {

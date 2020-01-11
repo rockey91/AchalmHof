@@ -2,7 +2,11 @@
   padding: 35px;
   .p {
     margin-top:10px;
-    padding:20px 0px;
+    padding:20px 5px 20px 0px ;
+  }
+  .p1 {
+    margin-top:10px;
+    padding:0px 5px 0px 0px ;  
   }
   .h6-title {
     border-bottom:double
@@ -69,4 +73,7 @@
        }
     }
   }
+}
+.news-feed {
+  margin-top:60px;
 }

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FunctionhomeComponent } from './functionhome.component';
 import { FunctionHomeRoutingModule } from './functionhome-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './../header/header.component';
+import { HeaderModule } from './../header/header.module';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { FooterComponent } from './../footer/footer.component';
+import { FooterModule } from './../footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedPipesModule } from '../../../shared';
 
@@ -17,12 +17,12 @@ import { SharedPipesModule } from '../../../shared';
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedPipesModule
+    SharedPipesModule,
+    HeaderModule,
+    FooterModule
   ],
   declarations: [
-    FunctionhomeComponent,
-    HeaderComponent,
-    FooterComponent
+    FunctionhomeComponent
   ]
 })
 export class FunctionhomeModule { }
