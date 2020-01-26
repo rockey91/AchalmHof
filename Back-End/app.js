@@ -46,9 +46,9 @@ app.use('/', admEventRoutes);
 
 
 /* Below block of code for starting API */
-let nowDateTime = new Date();
-http.createServer(app).listen(4100, function() {
-  console.log(`App listening with http on port 4100. Started at ${nowDateTime}`);
+let nowDateTime = new Date(), port = 4200;
+http.createServer(app).listen(port, function() {
+  console.log(`App listening with http on port ${port}. Started at ${nowDateTime}`);
 });
 /* Above block of code for starting API */
 

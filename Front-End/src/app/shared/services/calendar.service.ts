@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Globals } from '../global'; //private globals: Globals
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class CalendarService {
   };
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private globals: Globals
   ){
 
   }
@@ -19,7 +21,7 @@ export class CalendarService {
   postAdminCalendarRequest(model){
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://127.0.0.1:4100/ah-api/addAdminCalendar',
+        this.globals.apiBaseURL + '/ah-api/addAdminCalendar',
         model,
         this.httpOptions
     )
@@ -33,7 +35,7 @@ export class CalendarService {
   getAdminCalendarList(){
     let params = new HttpParams();
     return this.httpClient.get(
-        'http://127.0.0.1:4100/ah-api/getAdminCalendar?admin_user_id=1', {
+        this.globals.apiBaseURL + '/ah-api/getAdminCalendar?admin_user_id=1', {
           params: params
         }
     )
@@ -49,7 +51,7 @@ export class CalendarService {
   updateAdminCalendarRequest(model){
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.put(
-        'http://127.0.0.1:4100/ah-api/updateAdminCalendar',
+        this.globals.apiBaseURL + '/ah-api/updateAdminCalendar',
         model,
         this.httpOptions
     )

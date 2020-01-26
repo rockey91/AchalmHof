@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Globals } from '../global'; //private globals: Globals
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class InquireRequestsService {
   };
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private globals: Globals
   ){
 
   }
@@ -21,7 +23,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://127.0.0.1:4100/ah-api/addInquireRequest',
+        this.globals.apiBaseURL + '/ah-api/addInquireRequest',
         model,
         this.httpOptions
     )
@@ -37,7 +39,7 @@ export class InquireRequestsService {
     let params = new HttpParams();
     params = params.append('pc_name',pcName);
     return this.httpClient.get(
-        'http://127.0.0.1:4100/ah-api/getInquireRequest', {
+        this.globals.apiBaseURL + '/ah-api/getInquireRequest', {
           params: params
         }
     )
@@ -54,7 +56,7 @@ export class InquireRequestsService {
 
     let params = new HttpParams();
     return this.httpClient.get(
-        'http://127.0.0.1:4100/ah-api/getMeetingRequest', {
+        this.globals.apiBaseURL + '/ah-api/getMeetingRequest', {
           params: params
         }
     )
@@ -76,7 +78,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://127.0.0.1:4100/ah-api/addMeetingRequest',
+        this.globals.apiBaseURL + '/ah-api/addMeetingRequest',
         model,
         this.httpOptions
     )
@@ -91,7 +93,7 @@ export class InquireRequestsService {
 
     let params = new HttpParams();
     return this.httpClient.get(
-        'http://127.0.0.1:4100/ah-api/getEventRequest', {
+        this.globals.apiBaseURL + '/ah-api/getEventRequest', {
           params: params
         }
     )
@@ -113,7 +115,7 @@ export class InquireRequestsService {
 
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.httpClient.post(
-        'http://127.0.0.1:4100/ah-api/addEventRequest',
+        this.globals.apiBaseURL + '/ah-api/addEventRequest',
         model,
         this.httpOptions
     )
@@ -126,7 +128,7 @@ export class InquireRequestsService {
 
   updateRequest(modelData: {}) {
     const headers = new Headers({'Content-Type': 'application/json'});
-    let url = 'http://127.0.0.1:4100/ah-api/updateInquireRequest';
+    let url = this.globals.apiBaseURL + '/ah-api/updateInquireRequest';
     return this.httpClient.put(
       url,
       modelData,
@@ -143,7 +145,7 @@ export class InquireRequestsService {
 
   updateRequest1(modelData: {}) {
     const headers = new Headers({'Content-Type': 'application/json'});
-    let url = 'http://127.0.0.1:4100/ah-api/updateRequest';
+    let url = this.globals.apiBaseURL + '/ah-api/updateRequest';
     return this.httpClient.put(
       url,
       modelData,

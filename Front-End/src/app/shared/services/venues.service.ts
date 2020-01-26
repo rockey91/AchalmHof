@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Globals } from '../global'; //private globals: Globals
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class VenuesService {
   };
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private globals: Globals
   ){
 
   }
@@ -20,7 +22,7 @@ export class VenuesService {
   getVenuesList(){
       let params = new HttpParams();
       return this.httpClient.get(
-        'http://localhost:4100/ah-api/getAllVenues', {
+        this.globals.apiBaseURL + '/ah-api/getAllVenues', {
           params: params
         }
       )
@@ -41,7 +43,7 @@ export class VenuesService {
     let params = new HttpParams();
     params = params.append('venueId', id);
     return this.httpClient.get(
-      'http://localhost:4100/ah-api/getVenue', {
+      this.globals.apiBaseURL + '/ah-api/getVenue', {
         params: params
       }
     )
@@ -62,7 +64,7 @@ export class VenuesService {
     let params = new HttpParams();
     params = params.append('venueId', id);
     return this.httpClient.get(
-      'http://localhost:4100/ah-api/getVenueRelatedData', {
+      this.globals.apiBaseURL + '/ah-api/getVenueRelatedData', {
         params: params
       }
     )

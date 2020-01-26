@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiServerURL: 'https://hris-api.affineanalytics.co.in:3200',
+  apiServerURL: 'http://3.134.112.186:80',
   uiApiEncPwd: '#$AffineHRI5@!&*',
   uiApiDecPwd: '#$AffineH615&%$#',
   locEncDecPwd: '%^&*AffineHRIS!@#$',
