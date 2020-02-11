@@ -39,7 +39,7 @@ function getMailOptionForDevEnv(mailOptions) {
   updatedMailOptions.cc = "";
   updatedMailOptions.bcc = "";
 
-  updatedMailOptions.subject = "["+ username +": HRIS-Development] " + updatedMailOptions.subject;
+  updatedMailOptions.subject =  updatedMailOptions.subject;
 
   return updatedMailOptions;
 }
