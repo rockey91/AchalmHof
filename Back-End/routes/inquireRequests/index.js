@@ -33,7 +33,7 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
       // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
       'to' : "kontakt@achalmhof.de",
       'cc' : "n.fischer@achalmhof.de, s.hausch@achalm-lamm.de, yogesh24.ds@gmail.com, satish.g08@gmail.com, rockey91@gmail.com, nikhilsuryam@gmail.com",
-      'subject': 'AchalmOf: Inquire Status',
+      'subject': 'Achalm Hof: Inquire Status',
       'html': `Hi <br><br>
                A new inquire request is received with the below information,
                <br> <br>
@@ -42,8 +42,8 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
                 <tr><th>Type</th><th>:</th><td>${req.body.event_type}</td></tr>
                 <tr><th>Date</th><th>:</th><td>${req.body.event_date}</td></tr>
                 <tr><th>Guests</th><th>:</th><td>${req.body.guests_count}</td></tr>
-                <tr><th>Mobile</th><th>:</th><td>${req.body.email_address}</td></tr>
-                <tr><th>Email</th><th>:</th><td>${req.body.mobile_number}</td></tr>
+                <tr><th>Mobile</th><th>:</th><td>${req.body.mobile_number}</td></tr>
+                <tr><th>Email</th><th>:</th><td>${req.body.email_address}</td></tr>
                 <tr><th>Subject</th><th>:</th><td>${req.body.subject}</td></tr>
                 <tr><th>Message</th><th>:</th><td>${req.body.message}</td></tr>
                </<table>
