@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ah-nav-item">
-                  <a class="nav-link" href="/home">
+                  <a class="nav-link" href="/">
                     Startseite
                   </a>
                 </li>
@@ -49,7 +49,7 @@
                         <a class="dropdown-item" *ngIf="!isAdmin" [routerLink]="['/home/functionhalls/fhadmin']">
                             <i class="fa fa-fw fa-gear"></i> {{ 'Kunden Portal' | translate }}
                         </a>
-                        <a class="dropdown-item" [routerLink]="['/home']" (click)="onLoggedout()">
+                        <a class="dropdown-item" [routerLink]="['/']" (click)="onLoggedout()">
                             <i class="fa fa-fw fa-power-off"></i> {{ 'Ausloggen' | translate }}
                         </a>
                     </div>
