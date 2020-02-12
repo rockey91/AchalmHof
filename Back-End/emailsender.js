@@ -65,7 +65,7 @@ var emailsender = {
       } else {
         console.log("Yes, I am the production server. Sending mails as specified.");
       }
-
+      console.log(mailOptions);
       EMAIL_TRANSPORTER1.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);

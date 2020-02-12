@@ -72,11 +72,11 @@ routes.put('/ah-api/updateAdminCalendar', function (req, res) {
 
     var status = req.body.status === 'admin_rejected' ? "rejected" : "accepted";
     var mailData = {
-      'from' : 'AchalmOf-Notifications<acis.notifications.noreply@affineanalytics.com>',
+      'from' : 'AchalmOf-Notifications<kontakt@achalmhof.de>',
       'to' : "",
       'cc' : "",
-      'subject': 'AchalmOf: Appointment request is '+ status +'.',
-      'html': 'Hi <br> <br> Your appointment request is '+ status +'. <br> <br>  Regards<br>' + 'Development Team'.link("acis.notifications.noreply@affineanalytics.com")
+      'subject': 'AchalmOf: Terminanfrage ist'+ status +'.',
+      'html': 'Hallo <br> <br> Ihre Terminanfrage ist '+ status +'. <br> <br>  Grube<br>' + 'Entwicklungsteam'.link("https://achalmhof.de/")
     }
 
     emailsender.sendEmail(mailData,{});
