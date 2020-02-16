@@ -30,25 +30,25 @@ routes.post('/ah-api/addInquireRequest', function (req, res) {
     // var content = `<tr><td>`+req.body.pc_name+ `</td> <td>`+req.body.event_type+`</td><td>` +req.body.event_date+ `</td> <td>`+req.body.guests_count+ `</td> <td>` +req.body.mobile_number+ `</td> <td> ` +req.body.email_address+ `</td> <td>` +req.body.subject+ `</td> <td>` +req.body.message+ `</td> </tr>`;
 
     var mailData = {
-      // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
+       'from' : 'AchalmOf-Notifications<kontakt@achalmhof.de>',
       'to' : "kontakt@achalmhof.de",
       'cc' : "n.fischer@achalmhof.de, s.hausch@achalm-lamm.de, yogesh24.ds@gmail.com, satish.g08@gmail.com, rockey91@gmail.com, nikhilsuryam@gmail.com",
-      'subject': 'AchalmOf: Inquire Status',
-      'html': `Hi <br><br>
-               A new inquire request is received with the below information,
+      'subject': 'Achalm Hof: Status abfragen',
+      'html': `Hallo <br><br>
+                Eine neue Anfrage wird mit den folgenden Informationen empfangen,
                <br> <br>
                <table>
                 <tr><th>Name</th><th>:</th><td>${req.body.pc_name}</td></tr>
-                <tr><th>Type</th><th>:</th><td>${req.body.event_type}</td></tr>
-                <tr><th>Date</th><th>:</th><td>${req.body.event_date}</td></tr>
-                <tr><th>Guests</th><th>:</th><td>${req.body.guests_count}</td></tr>
-                <tr><th>Mobile</th><th>:</th><td>${req.body.email_address}</td></tr>
-                <tr><th>Email</th><th>:</th><td>${req.body.mobile_number}</td></tr>
-                <tr><th>Subject</th><th>:</th><td>${req.body.subject}</td></tr>
-                <tr><th>Message</th><th>:</th><td>${req.body.message}</td></tr>
+                <tr><th>Art</th><th>:</th><td>${req.body.event_type}</td></tr>
+                <tr><th>Datum</th><th>:</th><td>${req.body.event_date}</td></tr>
+                <tr><th>Gäste</th><th>:</th><td>${req.body.guests_count}</td></tr>
+                <tr><th> Mobiltelefon</th><th>:</th><td>${req.body.mobile_number}</td></tr>
+                <tr><th>Email</th><th>:</th><td>${req.body.email_address}</td></tr>
+                <tr><th>Gegenstand</th><th>:</th><td>${req.body.subject}</td></tr>
+                <tr><th>Botschaft</th><th>:</th><td>${req.body.message}</td></tr>
                </<table>
                <br> <br>
-               Regards <br>
+               Grüße <br>
                Achalm Hof`
     }
 
@@ -82,7 +82,8 @@ routes.get('/ah-api/getInquireRequest', function (req, res) {
     LEFT JOIN
  achalm_hof.event_type et ON ir.event_type = et.event_type_id
     LEFT JOIN
-    achalm_hof.guests_count_list gcl ON ir.guests_count = gcl.id`)
+    achalm_hof.guests_count_list gcl ON ir.guests_count = gcl.id
+ order by id DESC;`)
   .timeout(10000, {cancel: true})
   .map(function (row) { return row; })
   .then(function(inquireList = []){
@@ -129,11 +130,11 @@ routes.put('/ah-api/updateInquireRequest', function (req, res) {
         then(function(response){
           console.log(`Inquire request with id ${reqId} is accepted.`);
           var mailData = {
-            // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
+            'from' : 'AchalmOf-Notifications<kontakt@achalmhof.de>',
             'to' : req.body.email_address,
             'cc' : "",
-            'subject': 'AchalmOf: Inquire Status Approved : User Credentials',
-            'html': 'Hi <br> <br> Please find the below login credentials to access AchalmOf <br> <br> Username : '+req.body.email_address+'. <br> <br> Password : '+defPwd+'<br><br>  Regards<br>' + 'Development Team'.link("https://achalmhof.de/")
+            'subject': 'AchalmOf: Status anfragen genehmigt: Benutzeranmeldeinformationen',
+            'html': 'Hallo <br> <br> Hier finden Sie die folgenden Anmeldeinformationen für den Zugriff AchalmOf <br> <br> Nutzername : '+req.body.email_address+'. <br> <br> Passwort : '+defPwd+'<br><br>  Grüße<br>' + 'Entwicklungsteam'.link("https://achalmhof.de/")
           }
           emailsender.sendEmail(mailData,{});
         })
@@ -163,8 +164,8 @@ routes.put('/ah-api/updateInquireRequest', function (req, res) {
           // 'from' : 'AchalmOf-Notifications<yogesh.shanmukhappa@affineanalytics.com>',
           'to' : req.body.email_address,
           'cc' : "",
-          'subject': 'AchalmOf: Your inquire request is rejected.',
-          'html': 'Hi <br> <br> We are sorry to inform that your inquire request is rejected. <br> <br> <br>  Regards<br>' + 'Team'.link("https://achalmhof.de/")
+          'subject': 'AchalmOf: Ihre Anfrage wird abgelehnt.',
+          'html': 'Hallo <br> <br> Es tut uns leid, Ihnen mitteilen zu müssen, dass Ihre Anfrage abgelehnt wurde. <br> <br> <br>  Grube<br>' + 'Entwicklungsteam'.link("https://achalmhof.de/")
         }
         emailsender.sendEmail(mailData,{});
       })

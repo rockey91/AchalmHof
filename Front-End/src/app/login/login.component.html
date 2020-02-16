@@ -2,22 +2,22 @@
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <img src="assets/images/logo_browser.png" width="150px" class="user-avatar" />
-            <h1 i18n="Login Header | Top header on the login page.">Welcome to Achalm Hof</h1>
+            <h1 i18n="Login Header | Top header on the login page.">Willkommen auf dem Achalmh Hof</h1>
             <form role="form" #loginForm="ngForm">
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" name="username" ngModel class="form-control input-underline input-lg" id="login_username" placeholder="{{ 'Username / Email / Mobile No.' | translate }}">
+                        <input type="text" name="username" ngModel class="form-control input-underline input-lg" id="login_username" placeholder="{{ 'Benutzername / Email / Mobil Nummer' | translate }}">
                     </div>
 
                     <div class="form-group">
-                        <input type="password" name="password" ngModel class="form-control input-underline input-lg" id="login_password" placeholder="{{ 'Password' | translate }}">
+                        <input type="password" name="password" ngModel class="form-control input-underline input-lg" id="login_password" placeholder="{{ 'Passwort' | translate }}">
                     </div>
                 </div>
 
-                <a i18n="Login Button | Login button on login page below username and password." class="btn rounded-btn" (click)="onLoggedin(loginForm.value)">{{ 'Log in' | translate }}</a>
+                <a i18n="Login Button | Login button on login page below username and password." class="btn rounded-btn" (click)="onLoggedin(loginForm.value)">{{ 'Anmelden' | translate }}</a>
 
                 &nbsp;
-                <a class="btn rounded-btn" [routerLink]="['/home/functionhalls/section']">{{ 'Go Back' }}</a>
+                <a class="btn rounded-btn" [routerLink]="['/home/functionhalls/section']">{{ 'zurück' }}</a>
             </form>
         </div>
     </div>

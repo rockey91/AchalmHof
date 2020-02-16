@@ -26,6 +26,8 @@ export class VenuepageComponent implements OnInit {
   };
   requestId: number = null;
   venueId :any;
+  actualEventType:any;
+  actualGuestCount:any;
 
   @ViewChild('f') form: any;
   modalReference: any;
@@ -70,6 +72,17 @@ export class VenuepageComponent implements OnInit {
   closeRequestModal(){
     this.modalReference.close();
   }
+
+  getActualEventType(id){
+    this.actualEventType = this.eventTypeArray[id];
+    return this.actualEventType;
+  }
+
+  getActualGuestCount(id){
+    this.actualGuestCount = this.guestsCountArray[id];
+    return this.actualGuestCount;
+  }
+
 
   open(content) {
     this.isSubmitSuccess = false;
