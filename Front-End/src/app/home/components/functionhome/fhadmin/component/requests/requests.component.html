@@ -12,14 +12,14 @@
 
     <div class="modal-body">
       <div class="submit-message alert alert-success" *ngIf="isSubmitSuccess" role="alert">
-        Cool! Your schedule is updated on your calendar.
+      Ihr Termin wurde im Kalender eingetragen.
       </div>
       <form novalidate #f="ngForm" (ngSubmit)="addEvent(f.value)" class="">
         <div class="row">
           <div class="col-8">
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Appointment Title  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Termin  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
                   <input type="text" name="schedule_title" class="form-control" ngModel>
                 </div>
@@ -28,7 +28,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Appointment Description  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Terminbeschreibung  <span class="pull-right"> : </span> </label>
                 <div class="col-9">
                   <textarea name="schedule_desc" class="form-control" ngModel rows="3" cols="80"></textarea>
                 </div>
@@ -37,7 +37,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Appointment Start Time  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Termin beginn  <span class="pull-right"> : </span> </label>
                 <div class="col-6">
                   <input type="datetime" name="schedule_start_time" class="form-control" [(ngModel)]="startTime" readonly >
                 </div>
@@ -46,7 +46,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Appointment End Time  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Termin ende  <span class="pull-right"> : </span> </label>
                 <div class="col-6">
                   <input type="datetime" name="schedule_end_time" class="form-control" [(ngModel)]="endTime" readonly >
                 </div>
@@ -60,8 +60,8 @@
         <div class="row">
           <div class="col-8 align-right">
             <hr />
-            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Schedule </button>
-            <button type="button" class="btn btn-secondary">Close</button>
+            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Terminplanung </button>
+            <button type="button" class="btn btn-secondary">schließen</button>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
   <div class="modal-container">
 
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i> Specify a date </h4>
+      <h4 class="modal-title" id="modal-basic-title"> <i class="fa fa-home"> </i>Datumsauswahl </h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -91,7 +91,7 @@
 
             <div class="form-group">
               <div class="row">
-                <label class="col-3"> Date  <span class="pull-right"> : </span> </label>
+                <label class="col-3"> Datum:  <span class="pull-right"> : </span> </label>
                 <div class="col-6">
                   <input type="date" name="goToSpecificDate" class="form-control" [(ngModel)]="startTime">
                 </div>
@@ -105,8 +105,8 @@
         <div class="row">
           <div class="col-8 align-right">
             <hr />
-            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Submit </button>
-            <button type="button" class="btn btn-secondary" #closeGoToDate (click)="d('Cross click')">Close</button>
+            <button class="btn btn-default btn-primary save pull-right" type="submit" [disabled]="isSubmitSuccess ? true : null"> Absenden </button>
+            <button type="button" class="btn btn-secondary" #closeGoToDate (click)="d('Cross click')">schließen</button>
           </div>
         </div>
 
@@ -206,7 +206,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Request Details</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Anfrage Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -216,7 +216,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="" > Venue Name </label>
+                <label for="" > Name der Location </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -228,7 +228,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="" >PC Name</label>
+                <label for="" >Kunden Name</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -239,7 +239,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for=""> Event Type </label>
+                <label for=""> Veranstaltungstyp </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -250,7 +250,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="">Event Date</label>
+                <label for="">Wunschdatum</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -261,7 +261,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="">No Of Guests </label>
+                <label for="">geplante Gästeanzahl </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -272,7 +272,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for=""> Mobile Number </label>
+                <label for=""> Handynummer </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -283,7 +283,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for=""> Email Address </label>
+                <label for=""> E-Mail Adresse </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -294,7 +294,7 @@
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="">Appointment Title</label>
+                <label for="">Termin</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -305,7 +305,7 @@
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="">Appointment Message</label>
+                <label for="">Termin Nachricht</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -316,7 +316,7 @@
           <div class="col-6" *ngIf="isAppReq(selectedRequest)">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for="">Appointment Time</label>
+                <label for="">Zeitpunkt des Termins</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -327,7 +327,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for=""> Add Comments </label>
+                <label for="">Kommentar </label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -341,7 +341,7 @@
           <div class="col-6">
             <div class="row">
               <div class="col-5 left-heading">
-                <label for=""> Supported Document</label>
+                <label for=""> Datei anhängen</label>
                 <span class="pull-right">:</span>
               </div>
               <div class="col-7">
@@ -352,22 +352,22 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Close</button>
-        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Reject Inquiry</button>
-        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Accept Inquiry</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>schließen</button>
+        <button type="button" class="btn btn-warning" (click)="sendReply(selectedRequest, false)" *ngIf="isRejectable(selectedRequest)">Anfrage ablehnen</button>
+        <button type="button" class="btn btn-success" (click)="sendReply(selectedRequest, true)" *ngIf="isAcceptable(selectedRequest)">Anfrage annehmen</button>
 
         <button type="button" class="btn btn-primary" (click)="showAdminCalendar(true)" *ngIf="isSchedulable(selectedRequest)"
-        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Schedule Appointment</button>
+        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Termin vereinbaren</button>
 
-        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 6)" *ngIf="isPcAppReq(selectedRequest)">Reject Appointment</button>
-        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 5)" *ngIf="isPcAppReq(selectedRequest)">Accept Appointment</button>
+        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 6)" *ngIf="isPcAppReq(selectedRequest)">Termin ablehnen</button>
+        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 5)" *ngIf="isPcAppReq(selectedRequest)">Termin annehmen</button>
 
         <button type="button" class="btn btn-primary" (click)="showAdminCalendar(true)" *ngIf="isReschedulable(selectedRequest)"
-        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Re-schedule Appointment</button>
+        data-toggle="modal" data-target="#exampleModal1" data-dismiss="modal">Neuen Terminvorschlag senden</button>
 
-        <button type="button" class="btn btn-danger" (click)="updateAppReq(selectedRequest, 10)" *ngIf="isAdminRespUpdate(selectedRequest)">Cancelled</button>
-        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 9)" *ngIf="isAdminRespPendUpdate(selectedRequest)">Pending</button>
-        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 8)" *ngIf="isAdminRespUpdate(selectedRequest)">Confirmed</button>
+        <button type="button" class="btn btn-danger" (click)="updateAppReq(selectedRequest, 10)" *ngIf="isAdminRespUpdate(selectedRequest)">Abgesagt</button>
+        <button type="button" class="btn btn-warning" (click)="updateAppReq(selectedRequest, 9)" *ngIf="isAdminRespPendUpdate(selectedRequest)">Wartend</button>
+        <button type="button" class="btn btn-success" (click)="updateAppReq(selectedRequest, 8)" *ngIf="isAdminRespUpdate(selectedRequest)">Angenommen</button>
 
       </div>
     </div>
