@@ -10,11 +10,24 @@
     <div class="col-md-4">
       <ul class="navbar-nav ml-auto">
           <li class="nav-item ah-nav-item">
-            <a class="nav-link" class="privacy" href="/privacy-policy">
+            <!-- <a class="nav-link" class="privacy" href="/privacy-policy">
               Datenschutz
             </a> | <a class="nav-link" class="privacy" href="/impressum">
               Impressum
             </a> | <a class="nav-link" class="privacy" href="/faq">
+              FAQ
+            </a> | <a class="nav-link" class="fa fa-instagram privacy" title="Follow us on Instagram" target="_blank"
+             href="https://www.instagram.com/achalmhof/">
+            </a> | <a class="nav-link" class="fa fa-facebook privacy" title="Follow us on Facebook" target="_blank"
+            href="https://www.facebook.com/achalmhof/">
+            </a> | <a class="nav-link" class="fa fa-youtube-play privacy" title="Subscribe us on Youtube" target="_blank"
+            href="https://www.youtube.com/channel/UC6Cv9UoNfg8S_u8QFPJ1DWQ">
+            </a> -->
+            <a class="nav-link" class="privacy" (click)="NavigateToPrivacyPolicy()" href="javascript:void(0)">
+              Datenschutz
+            </a> | <a class="nav-link" class="privacy" (click)="NavigateToImpressum()" href="javascript:void(0)">
+              Impressum
+            </a> | <a class="nav-link" class="privacy" (click)="NavigateToFaq()" href="javascript:void(0)">
               FAQ
             </a> | <a class="nav-link" class="fa fa-instagram privacy" title="Follow us on Instagram" target="_blank"
              href="https://www.instagram.com/achalmhof/">

@@ -17,4 +17,16 @@ export class  FooterComponent implements OnInit {
     ngOnInit() {
     }
 
+    NavigateToPrivacyPolicy(){
+      this.router.navigate(['/privacy-policy']);
+    }
+
+    NavigateToImpressum(){
+      this.router.navigate(['/impressum']);
+    }
+
+    NavigateToFaq(){
+      this.router.navigate(['/faq']);
+    }
+
 }
